@@ -1,15 +1,19 @@
 @import "modern-normalize";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;0,700;1,100&display=swap");
 
 :root {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  --font-regular: "Roboto", sans-serif;
+  --font-medium: "Roboto Medium", sans-serif;
+  --font-bold: "Roboto Bold", sans-serif;
 
-  --main-text: #323f47;
-  --second-text: #2f2f2f;
-  --accent-color: #082f3f;
-  --background-color: #f0eff4;
-  --main-white: #fff;
+  --primary-color-black: #2f2f2f;
+  --primary-color-white: #fff;
+  --primary-color-blue: #407bff;
+  --secondary-color-1: #ecf2ff;
+  --secondary-color-2: #ef5050;
+  --secondary-color-3: #9ebbff;
+  --secondary-color-4: #ff9d43;
+  --secondary-color-5: #d7e3ff;
 }
 body {
   margin: 16px 0;
@@ -31,7 +35,6 @@ body {
 
 header {
   padding: 0 16px;
-  width: 320px;
   width: 100%;
   margin: 0 auto;
   display: flex;
