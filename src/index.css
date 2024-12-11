@@ -30,7 +30,7 @@
 
 @media (min-width: 1440px) {
   .container {
-    min-width: 1440px;
+    width: 1216px;
     padding: 18px 12px;
   }
 }

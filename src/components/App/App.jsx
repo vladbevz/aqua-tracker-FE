@@ -5,7 +5,7 @@ import { Header } from "../Header/Header.jsx";
 import "..//..//index.css";
 export const App = () => {
   return (
-    <div className="container">
+    <div>
       <Header />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
