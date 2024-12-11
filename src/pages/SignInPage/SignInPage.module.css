@@ -4,6 +4,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  margin-top: 24px;
 }
 
 @media only screen and (min-resolution: 192dpi) {
