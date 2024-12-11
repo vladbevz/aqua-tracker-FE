@@ -1,4 +1,4 @@
-.signUp {
+.signIn {
   height: 100vh;
   background-image: url("/images/SignIn/Mobile-Sign-In.png");
   background-size: cover;
@@ -7,29 +7,29 @@
 }
 
 @media only screen and (min-resolution: 192dpi) {
-  .container {
+  .signIn {
     background-image: url("/images/SignIn/Mobile-Sign-In-2x.png");
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .signUp {
+  .signIn {
     background-image: url("/images/SignIn/Tablet-Sign-In.png");
   }
   @media only screen and (min-resolution: 192dpi) {
-    .signUp {
+    .signIn {
       background-image: url("/images/SignIn/Tablet-Sign-In-x2.png");
     }
   }
 }
 
 @media (min-width: 1440px) {
-  .signUp {
+  .signIn {
     height: 800px;
     background-image: url("/images/SignIn/Desc-Sign-In.png");
   }
   @media only screen and (min-resolution: 192dpi) {
-    .signUp {
+    .signIn {
       background-image: url("/images/SignIn/Desc-Sign-In-x2.png");
     }
   }
