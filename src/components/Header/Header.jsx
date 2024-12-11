@@ -5,9 +5,11 @@ import "../../index.css";
 
 export const Header = () => {
   return (
-    <header className={css.header}>
-      <Logo />
-      <UserAuth />
-    </header>
+    <div className="container">
+      <header className={css.header}>
+        <Logo />
+        <UserAuth />
+      </header>
+    </div>
   );
 };
