@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import css from "./SignUpForm.module.css";
+import styles from "./SignUpForm.module.css";
 
 const initialValues = {
   email: "",
@@ -25,41 +25,41 @@ export const SignUpForm = () => {
   });
 
   return (
-    <div className={css.container}>
+    <div className={styles.container}>
       <Formik
         initialValues={initialValues}
         onSubmit={{}}
         validationSchema={inputSchema}
       >
-        <Form className={css.form} autoComplete="off">
-          <label className={css.label}>
+        <Form className={styles.form} autoComplete="off">
+          <label className={styles.label}>
             Enter your email
             <Field type="email" name="email" />
             <ErrorMessage
               name="email"
               component="span"
-              className={css.errorMessage}
+              className={styles.errorMessage}
             />
           </label>
-          <label className={css.label}>
+          <label className={styles.label}>
             Enter your password
             <Field type="password" name="password" />
             <ErrorMessage
               name="password"
               component="span"
-              className={css.errorMessage}
+              className={styles.errorMessage}
             />
           </label>
-          <label className={css.label}>
+          <label className={styles.label}>
             Confirm Password
             <Field type="password" name="confirmPassword" />
             <ErrorMessage
               name="confirmPassword"
               component="span"
-              className={css.errorMessage}
+              className={styles.errorMessage}
             />
           </label>
-          <button className={css.btn} type="submit">
+          <button className={styles.btn} type="submit">
             Sign Up
           </button>
         </Form>
