@@ -1,0 +1,44 @@
+.signUp {
+  height: 100vh;
+  background-image: url("/images/SignIn/SignUp/mob-signup-back-1x.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+.bottle {
+    height: 680px;
+    width: 916px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+@media only screen and (min-resolution: 192dpi) {
+  .container {
+    background-image: url("/images/SignIn/SignUp/mob-signup-back-2x.png");
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .signUp {
+    background-image: url("/images/SignIn/SignUp/tab-signup-back-1x.png");
+  }
+  @media only screen and (min-resolution: 192dpi) {
+    .signUp {
+      background-image: url("/images/SignIn/SignUp/tab-signup-back-2x.png");
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .signUp {
+    height: 800px;
+    background-image: url("/images/SignIn/SignUp/lap-signup-back-1x.png");
+  }
+  @media only screen and (min-resolution: 192dpi) {
+    .signUp {
+      background-image: url("/images/SignIn/SignUp/lap-signup-back-2x.png");
+    }
+  }
+}
