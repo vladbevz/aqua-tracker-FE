@@ -1,3 +1,10 @@
+.title {
+  font-family: var(--font-medium);
+  font-size: 26px;
+  line-height: 123%;
+  color: var(--primary-color-black);
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -79,5 +86,8 @@ span {
 @media only screen and (min-width: 768px) {
   .form {
     width: 336px;
+  }
+  .btn {
+    height: 44px;
   }
 }
