@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 import css from "./SignInForm.module.css";
 import { useState } from "react";
+
 const initialValues = {
   email: "",
   password: "",
@@ -28,6 +29,7 @@ export const SignInForm = () => {
 
   return (
     <div>
+      <h3 className={css.title}>Sign In</h3>
       <Formik
         initialValues={initialValues}
         onSubmit={{}}

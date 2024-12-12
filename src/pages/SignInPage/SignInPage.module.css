@@ -10,6 +10,7 @@
 .wrapper {
   padding: 8px 20px;
 }
+
 @media only screen and (min-resolution: 192dpi) {
   .signIn {
     background-image: url("/images/SignIn/Mobile-Sign-In-2x.png");
