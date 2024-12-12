@@ -9,10 +9,55 @@
 }
 
 .label {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
   text-align: left;
+  font-family: var(--font-regular);
+  font-size: 18px;
+  line-height: 133%;
+  color: var(--primary-color-black);
+}
+
+.field {
+  border: 1px solid var(--secondary-color-1);
+  border-radius: 6px;
+  padding: 12px 10px;
+  margin-top: 8px;
+}
+
+.field::placeholder {
+  font-family: var(--font-regular);
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--secondary-color-3);
+}
+
+span {
+  color: red;
+  margin-top: 4px;
+  font-family: var(--font-regular);
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--secondary-color-2);
+}
+
+.eyeBtn {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 4px;
+  top: 60%;
+  /* transform: translateY(-50%); */
+}
+
+.pwdIcons {
+  color: var(--secondary-color-3);
+  width: 18px;
+  height: 16px;
 }
 
 .btn {
