@@ -41,6 +41,8 @@ span {
   font-size: 14px;
   line-height: 129%;
   color: var(--secondary-color-2);
+  display: block;
+  position: relative;
 }
 
 .eyeBtn {
@@ -49,9 +51,10 @@ span {
   background-color: transparent;
   border: none;
   position: absolute;
-  right: 4px;
-  top: 60%;
-  /* transform: translateY(-50%); */
+  right: 10px;
+  top: 47px;
+
+  cursor: pointer;
 }
 
 .pwdIcons {
