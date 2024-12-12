@@ -1,13 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import css from "./LoginForm.module.css";
-
+import css from "./SignInForm.module.css";
 const initialValues = {
   email: "",
   password: "",
 };
 
-export const LoginForm = () => {
+export const SignInForm = () => {
   const inputSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email format")
@@ -20,7 +19,7 @@ export const LoginForm = () => {
   });
 
   return (
-    <div className={css.container}>
+    <div>
       <Formik
         initialValues={initialValues}
         onSubmit={{}}

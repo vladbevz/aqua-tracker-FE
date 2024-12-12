@@ -1,35 +1,43 @@
-.signUp {
+.signIn {
   height: 100vh;
   background-image: url("/images/SignIn/Mobile-Sign-In.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  padding-top: 24px;
 }
 
+.wrapper {
+  padding: 8px 20px;
+}
 @media only screen and (min-resolution: 192dpi) {
-  .container {
+  .signIn {
     background-image: url("/images/SignIn/Mobile-Sign-In-2x.png");
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .signUp {
+  .signIn {
     background-image: url("/images/SignIn/Tablet-Sign-In.png");
+    padding-top: 40px;
   }
+
   @media only screen and (min-resolution: 192dpi) {
-    .signUp {
+    .signIn {
       background-image: url("/images/SignIn/Tablet-Sign-In-x2.png");
     }
   }
 }
 
 @media (min-width: 1440px) {
-  .signUp {
+  .signIn {
     height: 800px;
     background-image: url("/images/SignIn/Desc-Sign-In.png");
+    padding-top: 40px;
   }
+
   @media only screen and (min-resolution: 192dpi) {
-    .signUp {
+    .signIn {
       background-image: url("/images/SignIn/Desc-Sign-In-x2.png");
     }
   }

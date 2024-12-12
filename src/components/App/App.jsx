@@ -1,14 +1,20 @@
 import { Routes, Route } from "react-router-dom";
-import { LoginPage } from "../../pages/LoginPage/LoginPage.jsx";
+import { SignInPage } from "../../pages/SignInPage/SignInPage.jsx";
 import { SignUpPage } from "../../pages/SignUpPage/SignUpPage.jsx";
+import { WelcomePage } from "../../pages/WelcomePage/WelcomePage.jsx";
+import { Header } from "../Header/Header.jsx";
 
+import "..//..//index.css";
 export const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<h1>HomePage</h1>} />
-      <Route path="/register" element={<SignUpPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/user" element={<h2>UserPage</h2>} />
-    </Routes>
+    <div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/home" element={<h2>HomePage</h2>} />
+      </Routes>
+    </div>
   );
 };
