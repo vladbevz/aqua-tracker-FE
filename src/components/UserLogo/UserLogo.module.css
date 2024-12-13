@@ -6,15 +6,15 @@
  .profileInfo {
    display: flex;
    align-items: center;
-   cursor: pointer;
    gap: 8px;
  }
  
  .avatar {
-   width: 40px;
-   height: 40px;
+   width: 50px;
+   height: 50px;
    border-radius: 50%;
    object-fit: cover;
+   cursor: pointer;
  }
  
  .username {
@@ -27,8 +27,19 @@
    font-size: 18px;
    color: #407BFF;
    padding: 0;
+   
  }
-
+ .arrowButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #407BFF;
+}
  .modalBackdrop {
    position: fixed;
   top: 0;
