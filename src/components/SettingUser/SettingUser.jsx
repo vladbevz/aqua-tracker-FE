@@ -12,7 +12,7 @@ const initialValues = {
   repeatNewPassword: "",
 };
 
-export const SettingUser = () => {
+export const SettingUser = ({onCancel}) => {
   const usernameFieldId = useId();
   const emailFieldId = useId();
   const outdatedPasswordFielId = useId();
@@ -27,7 +27,7 @@ export const SettingUser = () => {
     <div>
       <div>
         <h1>Setting</h1>
-        <button type="button">
+        <button type="button" onClick={onCancel}>
           <IoCloseOutline />
         </button>
       </div>
