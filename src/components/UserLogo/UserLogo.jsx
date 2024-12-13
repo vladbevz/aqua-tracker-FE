@@ -21,16 +21,17 @@ const UserLogo = () => {
 
   return (
     <div className = {css.profileDropdown}>
-      <div className = {css.profileInfo} onClick={toggleBackdrop}>
-        <span className = {css.username}>UserName</span>
+      
+      <div className = {css.profileInfo} >
+      <span className = {css.username}>UserName</span>
         <img
           src = "https://via.placeholder.com/40"
           alt = "User Avatar"
           className = {css.avatar}
         />
-        <span className = {css.arrow}>
-          {isBackdropOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-        </span>
+        <button className = {css.arrowButton} onClick = {toggleBackdrop}>
+          {isBackdropOpen ? <IoIosArrowUp className = {css.arrow} /> : <IoIosArrowDown className = {css.arrow} />}
+        </button>
       </div>
 
       {isBackdropOpen && (
