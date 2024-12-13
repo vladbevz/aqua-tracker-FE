@@ -58,7 +58,7 @@ export const SettingUser = () => {
             <div className={css.avatarWrap}>
               <img
                 className={css.avatar}
-                src="../../../public/images/no avatar/no-avatar.png"
+                src="images/noAvatar/no-avatar.png"
                 alt="avatar"
               />
               <HiOutlineArrowUpTray className={css.arrowUpIcon} />
