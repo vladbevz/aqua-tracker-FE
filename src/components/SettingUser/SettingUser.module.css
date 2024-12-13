@@ -1,0 +1,186 @@
+.container {
+  border-radius: 10px;
+  width: 280px;
+  padding: 32px 12px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.headerWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header {
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 123%;
+}
+
+.closeBtn {
+  background-color: transparent;
+  border: none;
+  color: #407bff;
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+}
+
+.closeIcon {
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 111%;
+}
+
+.photoWrap {
+  margin-bottom: 24px;
+}
+
+.avatarWrap {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+
+.arrowUpIcon {
+  width: 16px;
+  height: 16px;
+  color: #407bff;
+}
+
+.genderWrap {
+  margin-bottom: 24px;
+}
+
+.genderWrap .title {
+  margin-bottom: 12px;
+}
+
+.genderRadioWrap {
+  display: flex;
+  gap: 24px;
+}
+
+.genderLabelWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Roboto", sans-serif;
+}
+
+.genderLabelWrap input[type="radio"] {
+  accent-color: #407bff;
+}
+
+.genderText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+}
+
+.credentialsWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.credentialsLabel {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 111%;
+}
+
+.credentialsInput {
+  border: 1px solid #d7e3ff;
+  border-radius: 6px;
+  padding: 12px 10px;
+  width: 256px;
+  height: 44px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.errorMessage {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--secondary-color-2);
+}
+
+.passwordWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.passwordLabel {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+}
+
+.passwordInput {
+  border: none;
+  outline: none;
+}
+
+.passwordInputWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #d7e3ff;
+  border-radius: 6px;
+  padding: 12px 10px;
+  width: 256px;
+  height: 44px;
+}
+
+.passwordInput::placeholder {
+  color: #9ebbff;
+}
+
+.passwordIcon {
+  color: #407bff;
+}
+
+.saveBtn {
+  border-radius: 10px;
+  border: none;
+  padding: 8px 30px;
+  width: 256px;
+  height: 36px;
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+  background: #407bff;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding: 16px 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: 1216px;
+    padding: 18px 12px;
+  }
+}
