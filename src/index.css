@@ -2,9 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;0,700;1,100&display=swap");
 
 :root {
-  --font-regular: "Roboto", sans-serif;
-  --font-medium: "Roboto Medium", sans-serif;
-  --font-bold: "Roboto Bold", sans-serif;
+  --font-regular: "Roboto", sans-serif; /* 400 */
+  --font-medium: "Roboto Medium", sans-serif; /* 500 */
+  --font-bold: "Roboto Bold", sans-serif; /* 700 */
 
   --primary-color-black: #2f2f2f;
   --primary-color-white: #fff;

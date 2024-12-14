@@ -1,8 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Link } from "react-router-dom";
+
 import * as Yup from "yup";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
-import css from "./SignInForm.module.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/operations";
+import css from "./SignInForm.module.css";
 
 const initialValues = {
   email: "",
@@ -10,6 +14,11 @@ const initialValues = {
 };
 
 export const SignInForm = () => {
+  const dispatch = useDispatch();
+  const handleSubmit = (values, actions) => {
+    actions.resetForm();
+    dispatch(logIn(values));
+  };
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -28,11 +37,11 @@ export const SignInForm = () => {
   });
 
   return (
-    <div>
+    <div className={css.container}>
       <h3 className={css.title}>Sign In</h3>
       <Formik
         initialValues={initialValues}
-        onSubmit={{}}
+        onSubmit={handleSubmit}
         validationSchema={inputSchema}
       >
         <Form className={css.form} autoComplete="off">
@@ -78,9 +87,11 @@ export const SignInForm = () => {
           <button className={css.btn} type="submit">
             Sign In
           </button>
+          <Link to="/signup" className={css.link}>
+            Sign Up
+          </Link>
         </Form>
       </Formik>
-      <a>Sign up</a>
     </div>
   );
 };

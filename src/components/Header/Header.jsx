@@ -5,7 +5,7 @@ import "../../index.css";
 
 export const Header = () => {
   return (
-    <div className="container">
+    <div>
       <header className={css.header}>
         <Logo />
         <UserAuth />

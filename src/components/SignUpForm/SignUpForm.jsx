@@ -1,6 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./SignUpForm.module.css";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations";
 
 const initialValues = {
   email: "",
@@ -9,6 +11,22 @@ const initialValues = {
 };
 
 export const SignUpForm = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    dispatch(
+      register({
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
+
+    form.reset();
+  };
+
   const inputSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email format")
@@ -20,8 +38,8 @@ export const SignUpForm = () => {
       .required("Password is required"),
 
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required'),
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required"),
   });
 
   return (
@@ -31,7 +49,11 @@ export const SignUpForm = () => {
         onSubmit={{}}
         validationSchema={inputSchema}
       >
-        <Form className={styles.form} autoComplete="off">
+        <Form
+          className={styles.form}
+          onSubmit={handleSubmit}
+          autoComplete="off"
+        >
           <label className={styles.label}>
             Enter your email
             <Field type="email" name="email" />

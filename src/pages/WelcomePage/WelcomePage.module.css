@@ -1,0 +1,214 @@
+.main-page {
+  font-family: "Roboto", sans-serif;
+  background-color: #f9fafe;
+  background-image: url(/public/images/MainPage/mob-1x.png),
+    url(/public/images/MainPage/mob-2x.png);
+  color: #333;
+  padding: 0;
+  width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-size: cover;
+}
+
+.main-paige-info {
+  margin-bottom: 20px;
+}
+
+.main-paige-title {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.14;
+  color: #2f2f2f;
+  margin-bottom: 16px;
+}
+
+.main-paige-text {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.25;
+  color: #2f2f2f;
+  margin-bottom: 24px;
+}
+
+.main-benefits-title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.11;
+  color: #2f2f2f;
+  margin-bottom: 12px;
+}
+
+.main-benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.main-benefits-list li {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #2f2f2f;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.try-main-button {
+  font-family: "Roboto", sans-serif;
+  background-color: #407bff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+  padding: 8px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 280px;
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+}
+
+.why-drink-water {
+  background-color: #ecf2ff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 320px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.why-drink-title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.11;
+  color: #2f2f2f;
+  margin-bottom: 12px;
+}
+
+.why-drink-list li {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #2f2f2f;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .main-page {
+    width: 768px;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 32px;
+    background-image: url(/public/images/MainPage/tab-1x.png),
+      url(/public/images/MainPage/tab-2x.png);
+  }
+
+  .main-paige-info {
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .main-paige-title {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.17;
+    color: #2f2f2f;
+    margin-bottom: 16px;
+  }
+
+  .main-paige-text {
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.23077;
+    color: #2f2f2f;
+    margin-bottom: 24px;
+  }
+
+  .main-benefits-title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.11111;
+    color: #2f2f2f;
+  }
+
+  .main-benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .main-benefits-list li {
+    margin-right: 120px;
+    white-space: nowrap;
+  }
+
+  .main-benefits-list li:last-child {
+    margin-right: 0;
+  }
+
+  .try-main-button {
+    border-radius: 10px;
+    padding: 8px 30px;
+    width: 100%;
+    height: 36px;
+    background-color: var(--primary-color-blue);
+    color: var(--primary-color-white);
+    font-family: var(--font-medium);
+    font-size: 16px;
+    line-height: 125%;
+    text-align: center;
+    border: none;
+    margin-bottom: 60px;
+    box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+    max-width: 336px;
+  }
+
+  .why-drink-water {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex: 1;
+    background-color: #ecf2ff;
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 496px;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .why-drink-title {
+    font-weight: 500;
+    font-size: 18px;
+
+    line-height: 1.11111;
+    color: #2f2f2f;
+  }
+
+  .why-drink-list li {
+    font-weight: 400;
+    font-size: 16px;
+
+    /* line-height: 20px; */
+    line-height: 1.25;
+    color: #2f2f2f;
+    margin-bottom: 16px;
+  }
+}
