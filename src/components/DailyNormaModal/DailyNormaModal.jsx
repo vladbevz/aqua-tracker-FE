@@ -11,7 +11,7 @@ export const DailyNormaModal = (closeModal) => {
   return (
     <div className={css.modal}>
       <div className={css.head}>
-        <h1 className={css.title}>My daily water norm</h1>
+        <h1 className={css.title}>My daily norma</h1>
         <button onClick={closeModal} className={css.closeButton}>
           <MdClose className={css.closeButton} />
         </button>
@@ -20,11 +20,11 @@ export const DailyNormaModal = (closeModal) => {
       <ul className={css.normaList}>
         <li className={css.normaItem}>
           For girl:
-          <span className={css.normaSpan}> V = (M * 0.03) + (T * 0.4)</span>
+          <span className={css.normaSpan}> V=(M*0.03) + (T*0.4)</span>
         </li>
         <li className={css.normaItem}>
           For man:
-          <span className={css.normaSpan}>V = (M * 0.04) + (T * 0.6)</span>
+          <span className={css.normaSpan}> V=(M*0.04) + (T*0.6)</span>
         </li>
       </ul>
 
@@ -69,12 +69,12 @@ export const DailyNormaModal = (closeModal) => {
             defaultValue={0}
           />
         </label>
-
-        <p className={css.result}>
-          The required amount of water in liters per day:
-          <span className={css.waterAmount}> 1.5 L</span>
-        </p>
-
+        <div className={css.resultContainer}>
+          <p className={css.result}>
+            The required amount of water in liters per day:
+          </p>
+          <span className={css.waterAmount}>1.5 L</span>
+        </div>
         <h2 className={css.subheading1}>
           Write down how much water you will drink:
         </h2>

@@ -8,7 +8,10 @@ span {
   border-radius: 10px;
   padding: 32px 24px;
   width: 592px;
-  height: 100%;
+  height: 712px;
+}
+
+@media (max-width: 768px) {
 }
 .head {
   display: flex;
@@ -117,13 +120,14 @@ span {
   border: 1px solid #d7e3ff;
   border-radius: 6px;
   padding: 12px 10px;
-  width: 544px;
+  width: 100%;
   height: 44px;
   color: #407bff;
 }
-
+.resultContainer {
+  display: flex;
+}
 .result {
-  margin-top: 8px;
   margin-bottom: 24px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -138,6 +142,7 @@ span {
   font-size: 18px;
   line-height: 1.33333;
   color: #407bff;
+  margin-left: 6px;
 }
 
 .subheading1 {
@@ -165,4 +170,53 @@ span {
   color: #fff;
   margin-top: 8px;
   justify-self: end;
+}
+
+@media screen and (max-width: 1439px) {
+  .modal {
+    border-radius: 10px;
+    padding: 32px 24px;
+    width: 704px;
+    height: 696px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modal {
+    border-radius: 10px;
+    padding: 24px 12px;
+    width: 280px;
+    height: 816px;
+  }
+
+  .normaList {
+    display: block;
+  }
+
+  .normaItem {
+    display: block;
+  }
+  .normaItem:last-child {
+    margin-top: 16px;
+  }
+
+  .result {
+    width: 190px;
+    margin: 0;
+  }
+  .resultContainer {
+    display: flex;
+    margin-bottom: 24px;
+    align-items: center;
+  }
+
+  .waterAmount {
+    margin-left: 6px;
+  }
+
+  .saveButton {
+    padding: 8px 30px;
+    width: 256px;
+    height: 36px;
+  }
 }
