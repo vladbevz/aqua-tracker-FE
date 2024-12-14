@@ -89,3 +89,25 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+
+/*
+ * PATCH @ /update
+ * headers: Authorization: Bearer token
+ */
+export const updateUser = createAsyncThunk(
+  "auth/update",
+  async (multipartFormData, thunkAPI) => {
+    const authHeader = "Bearer " + thunkAPI.getState().auth.token;
+    try {
+      const res = await axios.post(URL + "/users/update", multipartFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: authHeader, //CHECK: Is it need?
+        },
+      });
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
