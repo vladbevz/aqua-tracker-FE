@@ -14,14 +14,14 @@ const clearAuthHeader = () => {
 };
 
 /*
- * POST @ /users/signup
+ * POST @ /auth/signup
  * body: { name, email, password }
  */
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post(URL + "/auth/register", credentials);
+      const res = await axios.post(URL + "/auth/signup", credentials);
       // After successful registration, add the token to the HTTP header
       setAuthHeader(res.data.token);
       return res.data;
@@ -32,14 +32,14 @@ export const register = createAsyncThunk(
 );
 
 /*
- * POST @ /users/login
+ * POST @ /auth/signin
  * body: { email, password }
  */
 export const logIn = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post(URL + "/auth/login", credentials);
+      const res = await axios.post(URL + "/auth/signin", credentials);
       // After successful login, add the token to the HTTP header
       setAuthHeader(res.data.token);
       return res.data;
@@ -50,7 +50,7 @@ export const logIn = createAsyncThunk(
 );
 
 /*
- * POST @ /users/logout
+ * POST @ /auth/logout
  * headers: Authorization: Bearer token
  */
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
@@ -82,7 +82,29 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const res = await axios.get(URL + "/auth/current"); //Get information about the current user
+      const res = await axios.get(URL + "/users/current"); //Get information about the current user
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+/*
+ * PATCH @ /update
+ * headers: Authorization: Bearer token
+ */
+export const updateUser = createAsyncThunk(
+  "auth/update",
+  async (multipartFormData, thunkAPI) => {
+    const authHeader = "Bearer " + thunkAPI.getState().auth.token;
+    try {
+      const res = await axios.post(URL + "/users/update", multipartFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: authHeader, //CHECK: Is it need?
+        },
+      });
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
