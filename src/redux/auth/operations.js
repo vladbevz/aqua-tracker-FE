@@ -102,7 +102,7 @@ export const updateUser = createAsyncThunk(
       const res = await axios.post(URL + "/users/update", multipartFormData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: authHeader,
+          Authorization: authHeader, //CHECK: Is it need?
         },
       });
       return res.data;
