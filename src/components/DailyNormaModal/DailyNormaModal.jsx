@@ -1,10 +1,40 @@
 import css from "./DailyNormaModal.module.css";
 import "../../index.css";
 import { MdClose } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setWaterRate } from "../../redux/todayWaterList/operations";
 
-export const DailyNormaModal = (closeModal) => {
+export const DailyNormaModal = ({ closeModal }) => {
+  const [gender, setGender] = useState("girl");
+  const [weight, setWeight] = useState("");
+  const [activityTime, setActivityTime] = useState("");
+  const [waterAmount, setWaterAmount] = useState(0);
+
+  const calculateWaterRate = () => {
+    const weightNumber = parseFloat(weight);
+    const activitiTimeNumber = parseFloat(activityTime);
+
+    if (isNaN(weightNumber) || isNaN(activitiTimeNumber)) return;
+
+    let water = 0;
+    if (gender === "girl") {
+      water = weightNumber * 0.03 + activitiTimeNumber * 0.4;
+    } else if (gender === "man") {
+      water = weightNumber * 0.04 + activitiTimeNumber * 0.6;
+    }
+
+    setWaterAmount(water.toFixed(2));
+  };
+
+  useEffect(() => {
+    calculateWaterRate();
+  }, [gender, weight, activityTime]);
+
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(setWaterRate);
     console.log("Daily intake saved:");
   };
 
@@ -40,21 +70,33 @@ export const DailyNormaModal = (closeModal) => {
       <form className={css.form} onSubmit={handleSubmit}>
         <fieldset className={css.fieldset}>
           <label className={css.labelRadio}>
-            <input type="radio" name="gender" value="woman" defaultChecked />{" "}
+            <input
+              type="radio"
+              name="gender"
+              value="girl"
+              onChange={() => setGender("girl")}
+              defaultChecked
+            />{" "}
             For women
           </label>
           <label className={css.labelRadio}>
-            <input type="radio" name="gender" value="man" /> For men
+            <input
+              type="radio"
+              name="gender"
+              value="man"
+              onChange={() => setGender("man")}
+            />{" "}
+            For men
           </label>
         </fieldset>
         <label className={css.label}>
           Your weight in kilograms:
           <input
             type="number"
-            name="weight"
             placeholder="Enter your weight"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
             className={css.input}
-            defaultValue={0}
           />
         </label>
 
@@ -63,17 +105,17 @@ export const DailyNormaModal = (closeModal) => {
           high physical. load in hours:
           <input
             type="number"
-            name="activityTime"
             placeholder="Enter activity time"
+            value={activityTime}
+            onChange={(e) => setActivityTime(e.target.value)}
             className={css.input}
-            defaultValue={0}
           />
         </label>
         <div className={css.resultContainer}>
           <p className={css.result}>
             The required amount of water in liters per day:
           </p>
-          <span className={css.waterAmount}>1.5 L</span>
+          <span className={css.waterAmount}>{waterAmount} L</span>
         </div>
         <h2 className={css.subheading1}>
           Write down how much water you will drink:
