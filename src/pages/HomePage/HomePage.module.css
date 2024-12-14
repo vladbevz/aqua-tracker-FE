@@ -1,0 +1,48 @@
+.home {
+    height: 100vh;
+    background-image: url("/images/home/mob-home-back-1x.png");
+    background-size: cover;
+    background-position: inherit;
+    background-repeat: no-repeat;
+    padding-top: 8px;
+}
+
+.wrapper {
+    background: var(--secondary-color-1);
+    padding: 24px 8px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 14px 0px #407BFF4D;
+}
+
+@media only screen and (min-resolution: 192dpi) {
+    .home {
+        background-image: url("/images/home/mob-home-back-2x.png");
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .home {
+        background-image: url("/images/home/tab-home-back-1x.png");
+        padding-top: 40px;
+    }
+
+    @media only screen and (min-resolution: 192dpi) {
+        .home {
+            background-image: url("/images/home/tab-home-back-2x.png");
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    .home {
+        height: 800px;
+        background-image: url("/images/home/desk-home-back-1x.png");
+        padding-top: 40px;
+    }
+
+    @media only screen and (min-resolution: 192dpi) {
+        .home {
+            background-image: url("/images/home/desk-home-back-2x.png");
+        }
+    }
+}

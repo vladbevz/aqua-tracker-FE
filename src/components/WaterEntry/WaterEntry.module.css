@@ -1,0 +1,48 @@
+.waterEntry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+}
+
+.amount {
+    margin-left: 12px;
+    font-size: 18px;
+    line-height: 133%;
+    color: var(--primary-color-blue);
+}
+
+.time {
+    font-size: 12px;
+    line-height: 200%;
+}
+
+.img {
+    height: 26px;
+}
+
+.editBtn {
+    margin-right: 18px;
+    border: none;
+    background-color: inherit;
+    color: #9EBBFF;
+}
+
+.deleteBtn {
+    border: none;
+    background-color: inherit;
+    color: var(--secondary-color-2);
+}
+
+.btnBox {
+    display: flex;
+}
+
+.amountBox {
+    display: flex;
+}
+
+.box {
+    display: flex;
+    justify-content: space-between;
+}

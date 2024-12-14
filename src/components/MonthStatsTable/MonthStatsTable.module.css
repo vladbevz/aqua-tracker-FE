@@ -1,0 +1,61 @@
+.wrapper {
+    margin-top: 24px;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.month {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    /* padding: 10px; */
+}
+
+.day {
+    background-color: var(--primary-color-white);
+    text-align: center;
+    padding: 6px;
+    border-radius: 50%;
+
+
+}
+
+.date {
+    font-size: 14px;
+    line-height: 129%;
+    border-radius: 50%;
+}
+
+.item {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+
+.progress {
+    font-size: 10px;
+    line-height: 160%;
+    text-align: center;
+    color: var(--secondary-color-3);
+}
+
+.completed {
+    border: 1px solid green;
+    /* border-radius: 50%; */
+}
+
+.uncompleted {
+    border: 1px solid red;
+    /* border-radius: 50%; */
+}
