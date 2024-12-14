@@ -23,12 +23,12 @@
   background-color: transparent;
   border: none;
   color: #407bff;
-  width: 24px;
-  height: 24px;
   padding: 6px;
 }
 
 .closeIcon {
+  width: 24px;
+  height: 24px;
 }
 
 .title {
@@ -44,6 +44,8 @@
 .avatarWrap {
   display: flex;
   align-items: center;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .avatar {
@@ -56,6 +58,18 @@
   width: 16px;
   height: 16px;
   color: #407bff;
+}
+
+.avatarUploadText {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  color: #407bff;
+}
+
+.avatarHiddenInput {
+  display: none;
 }
 
 .genderWrap {
@@ -110,12 +124,12 @@
   margin-bottom: 24px;
 }
 
-.errorMessage {
+/* .errorMessage {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   line-height: 129%;
   color: var(--secondary-color-2);
-}
+} */
 
 .passwordWrap {
   display: flex;
@@ -145,6 +159,11 @@
   padding: 12px 10px;
   width: 256px;
   height: 44px;
+}
+
+.showPasswordEyeBtn {
+  border: none;
+  background-color: transparent;
 }
 
 .passwordInput::placeholder {
