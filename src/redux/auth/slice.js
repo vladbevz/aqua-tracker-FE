@@ -9,7 +9,7 @@ const initialState = {
     daylyNorm: null,
     gender: null,
   },
-  token: null,
+  accessToken: null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
@@ -22,12 +22,12 @@ const authSlice = createSlice({
     builder
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(logOut.fulfilled, () => {
