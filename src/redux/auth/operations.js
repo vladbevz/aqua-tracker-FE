@@ -4,8 +4,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 const URL = "https://aqua-tracker-be.onrender.com";
 
 // Utility to add JWT
-const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+const setAuthHeader = (accessToken) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 };
 
 // Utility to remove JWT
@@ -23,7 +23,7 @@ export const register = createAsyncThunk(
     try {
       const res = await axios.post(URL + "/auth/signup", credentials);
       // After successful registration, add the token to the HTTP header
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -41,7 +41,7 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post(URL + "/auth/signin", credentials);
       // After successful login, add the token to the HTTP header
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -72,7 +72,7 @@ export const refreshUser = createAsyncThunk(
   async (_, thunkAPI) => {
     // Reading the token from the state via getState()
     const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
+    const persistedToken = state.auth.accessToken;
 
     if (persistedToken === null) {
       // If there is no token, exit without performing any request
@@ -97,7 +97,7 @@ export const refreshUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   "auth/update",
   async (multipartFormData, thunkAPI) => {
-    const authHeader = "Bearer " + thunkAPI.getState().auth.token;
+    const authHeader = "Bearer " + thunkAPI.getState().accessToken;
     try {
       const res = await axios.post(URL + "/users/update", multipartFormData, {
         headers: {
