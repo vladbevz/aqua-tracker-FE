@@ -1,6 +1,6 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { useId } from "react";
+import { Formik, Form, Field, ErrorMessage, useFormikContext } from "formik";
+// import * as Yup from "yup";
+import { useState, useId } from "react";
 
 import { IoCloseOutline } from "react-icons/io5";
 import { HiOutlineArrowUpTray } from "react-icons/hi2";
@@ -8,13 +8,13 @@ import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 
 import css from "./SettingUser.module.css";
 
-const SettingSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(2, "Too short!")
-    .max(50, "Too long!")
-    .required("Required"),
-  email: Yup.string().email("Must be a valid email!").required("Required"),
-});
+// const SettingSchema = Yup.object().shape({
+//   username: Yup.string()
+//     .min(2, "Too short!")
+//     .max(50, "Too long!")
+//     .required("Required"),
+//   email: Yup.string().email("Must be a valid email!").required("Required"),
+// });
 
 const initialValues = {
   avatar: "",
@@ -26,23 +26,96 @@ const initialValues = {
   repeatNewPassword: "",
 };
 
+const AvatarUpload = () => {
+  const { setFieldValue } = useFormikContext();
+  const [avatarPreview, setAvatarPreview] = useState(
+    "images/noAvatar/no-avatar.png"
+  );
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setAvatarPreview(e.target.result);
+        setFieldValue("avatar", file);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleClick = () => {
+    document.getElementById("avatarInput").click();
+  };
+
+  return (
+    <div className={css.photoWrap}>
+      <h2 className={css.title}>Your photo</h2>
+      <div className={css.avatarWrap} onClick={handleClick}>
+        <img className={css.avatar} src={avatarPreview} alt="User avatar" />
+        <HiOutlineArrowUpTray className={css.arrowUpIcon} />
+        <span className={css.avatarUploadText}>Upload a photo</span>
+        <Field
+          type="file"
+          name="avatar"
+          id="avatarInput"
+          className={css.avatarHiddenInput}
+          onChange={handleFileChange}
+        />
+      </div>
+    </div>
+  );
+};
+
 export const SettingUser = () => {
+  const [showPassword, setShowPassword] = useState({
+    outdatedPassword: false,
+    newPassword: false,
+    repeatNewPassword: false,
+  });
+
+  const [passwordValues, setPasswordValues] = useState({
+    outdatedPassword: "",
+    newPassword: "",
+    repeatNewPassword: "",
+  });
+
+  const handleToggleShowPassword = (field) => {
+    setShowPassword((prevState) => ({
+      ...prevState,
+      [field]: !prevState[field],
+    }));
+  };
+
+  const handlePasswordChange = (field, value) => {
+    setPasswordValues((prevState) => ({ ...prevState, [field]: value }));
+  };
+
   const usernameFieldId = useId();
   const emailFieldId = useId();
   const outdatedPasswordFieldId = useId();
   const newPasswordFieldId = useId();
   const repeatNewPasswordFieldId = useId();
 
+  const handleClose = (evt) => {
+    console.log(evt);
+  };
+
   const handleSubmit = (values, actions) => {
     console.log(values);
     actions.resetForm();
+    setPasswordValues({
+      outdatedPassword: "",
+      newPassword: "",
+      repeatNewPassword: "",
+    });
   };
 
   return (
     <div className={css.container}>
       <div className={css.headerWrap}>
         <h1 className={css.header}>Setting</h1>
-        <button className={css.closeBtn}>
+        <button className={css.closeBtn} onClick={handleClose}>
           <IoCloseOutline className={css.closeIcon} />
         </button>
       </div>
@@ -50,24 +123,10 @@ export const SettingUser = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={SettingSchema}
+        // validationSchema={SettingSchema}
       >
         <Form>
-          <div className={css.photoWrap}>
-            <h2 className={css.title}>Your photo</h2>
-            <div className={css.avatarWrap}>
-              <img
-                className={css.avatar}
-                src="images/noAvatar/no-avatar.png"
-                alt="avatar"
-              />
-              <HiOutlineArrowUpTray className={css.arrowUpIcon} />
-              <label htmlFor="avatar">
-                Upload a photo
-                <Field type="file" name="avatar" />
-              </label>
-            </div>
-          </div>
+          <AvatarUpload />
 
           <div className={css.genderWrap}>
             <h2 className={css.title}>Your gender identity</h2>
@@ -93,11 +152,6 @@ export const SettingUser = () => {
               name="username"
               id={usernameFieldId}
             />
-            <ErrorMessage
-              className={css.errorMessage}
-              name="username"
-              component="span"
-            />
 
             <label className={css.credentialsLabel} htmlFor={emailFieldId}>
               E-mail
@@ -108,15 +162,11 @@ export const SettingUser = () => {
               name="email"
               id={emailFieldId}
             />
-            <ErrorMessage
-              className={css.errorMessage}
-              name="email"
-              component="span"
-            />
           </div>
 
           <div className={css.passwordWrap}>
             <h2 className={css.title}>Password</h2>
+
             <label
               className={css.passwordLabel}
               htmlFor={outdatedPasswordFieldId}
@@ -126,12 +176,28 @@ export const SettingUser = () => {
             <div className={css.passwordInputWrap}>
               <Field
                 className={css.passwordInput}
-                type="password"
+                type={showPassword.outdatedPassword ? "text" : "password"}
                 name="outdatedPassword"
                 placeholder="Password"
                 id={outdatedPasswordFieldId}
+                value={passwordValues.outdatedPassword}
+                onChange={(evt) =>
+                  handlePasswordChange("outdatedPassword", evt.target.value)
+                }
               />
-              <HiOutlineEyeOff className={css.passwordIcon} />
+              {passwordValues.outdatedPassword && (
+                <button
+                  className={css.showPasswordEyeBtn}
+                  type="button"
+                  onClick={() => handleToggleShowPassword("outdatedPassword")}
+                >
+                  {showPassword.outdatedPassword ? (
+                    <HiOutlineEye className={css.passwordIcon} />
+                  ) : (
+                    <HiOutlineEyeOff className={css.passwordIcon} />
+                  )}
+                </button>
+              )}
             </div>
             <ErrorMessage
               className={css.errorMessage}
@@ -145,12 +211,28 @@ export const SettingUser = () => {
             <div className={css.passwordInputWrap}>
               <Field
                 className={css.passwordInput}
-                type="password"
+                type={showPassword.newPassword ? "text" : "password"}
                 name="newPassword"
                 placeholder="Password"
                 id={newPasswordFieldId}
+                value={passwordValues.newPassword}
+                onChange={(evt) =>
+                  handlePasswordChange("newPassword", evt.target.value)
+                }
               />
-              <HiOutlineEyeOff className={css.passwordIcon} />
+              {passwordValues.newPassword && (
+                <button
+                  className={css.showPasswordEyeBtn}
+                  type="button"
+                  onClick={() => handleToggleShowPassword("newPassword")}
+                >
+                  {showPassword.newPassword ? (
+                    <HiOutlineEye className={css.passwordIcon} />
+                  ) : (
+                    <HiOutlineEyeOff className={css.passwordIcon} />
+                  )}
+                </button>
+              )}
             </div>
             <ErrorMessage
               className={css.errorMessage}
@@ -167,12 +249,28 @@ export const SettingUser = () => {
             <div className={css.passwordInputWrap}>
               <Field
                 className={css.passwordInput}
-                type="password"
+                type={showPassword.repeatNewPassword ? "text" : "password"}
                 name="repeatNewPassword"
                 placeholder="Password"
                 id={repeatNewPasswordFieldId}
+                value={passwordValues.repeatNewPassword}
+                onChange={(evt) =>
+                  handlePasswordChange("repeatNewPassword", evt.target.value)
+                }
               />
-              <HiOutlineEyeOff className={css.passwordIcon} />
+              {passwordValues.repeatNewPassword && (
+                <button
+                  className={css.showPasswordEyeBtn}
+                  type="button"
+                  onClick={() => handleToggleShowPassword("repeatNewPassword")}
+                >
+                  {showPassword.repeatNewPassword ? (
+                    <HiOutlineEye className={css.passwordIcon} />
+                  ) : (
+                    <HiOutlineEyeOff className={css.passwordIcon} />
+                  )}
+                </button>
+              )}
             </div>
             <ErrorMessage
               className={css.errorMessage}

@@ -1,93 +1,205 @@
-.title {
-  font-family: var(--font-medium);
+.container {
+  border-radius: 10px;
+  width: 280px;
+  padding: 32px 12px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.headerWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header {
+  font-weight: 500;
   font-size: 26px;
   line-height: 123%;
-  color: var(--primary-color-black);
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  border-radius: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-  height: 304px;
+.closeBtn {
+  background-color: transparent;
+  border: none;
+  color: #407bff;
+  padding: 6px;
 }
 
-.label {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-  text-align: left;
-  font-family: var(--font-regular);
+.closeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-weight: 500;
   font-size: 18px;
-  line-height: 133%;
-  color: var(--primary-color-black);
+  line-height: 111%;
 }
 
-.field {
-  border: 1px solid var(--secondary-color-1);
-  border-radius: 6px;
-  padding: 12px 10px;
+.photoWrap {
+  margin-bottom: 24px;
+}
+
+.avatarWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-top: 8px;
 }
 
-.field::placeholder {
-  font-family: var(--font-regular);
-  font-size: 16px;
-  line-height: 125%;
-  color: var(--secondary-color-3);
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
 }
 
-span {
-  color: red;
-  margin-top: 4px;
-  font-family: var(--font-regular);
+.arrowUpIcon {
+  width: 16px;
+  height: 16px;
+  color: #407bff;
+}
+
+.avatarUploadText {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  color: #407bff;
+}
+
+.avatarHiddenInput {
+  display: none;
+}
+
+.genderWrap {
+  margin-bottom: 24px;
+}
+
+.genderWrap .title {
+  margin-bottom: 12px;
+}
+
+.genderRadioWrap {
+  display: flex;
+  gap: 24px;
+}
+
+.genderLabelWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Roboto", sans-serif;
+}
+
+.genderLabelWrap input[type="radio"] {
+  accent-color: #407bff;
+}
+
+.genderText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+}
+
+.credentialsWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.credentialsLabel {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 111%;
+}
+
+.credentialsInput {
+  border: 1px solid #d7e3ff;
+  border-radius: 6px;
+  padding: 12px 10px;
+  width: 256px;
+  height: 44px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+/* .errorMessage {
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   line-height: 129%;
   color: var(--secondary-color-2);
-  display: block;
-  position: relative;
+} */
+
+.passwordWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.eyeBtn {
+.passwordLabel {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+}
+
+.passwordInput {
+  border: none;
+  outline: none;
+}
+
+.passwordInputWrap {
   display: flex;
   align-items: center;
-  background-color: transparent;
+  justify-content: space-between;
+  border: 1px solid #d7e3ff;
+  border-radius: 6px;
+  padding: 12px 10px;
+  width: 256px;
+  height: 44px;
+}
+
+.showPasswordEyeBtn {
   border: none;
-  position: absolute;
-  right: 10px;
-  top: 47px;
-
-  cursor: pointer;
+  background-color: transparent;
 }
 
-.pwdIcons {
-  color: var(--secondary-color-3);
-  width: 18px;
-  height: 16px;
+.passwordInput::placeholder {
+  color: #9ebbff;
 }
 
-.btn {
+.passwordIcon {
+  color: #407bff;
+}
+
+.saveBtn {
   border-radius: 10px;
+  border: none;
   padding: 8px 30px;
-  width: 100%;
+  width: 256px;
   height: 36px;
-  background-color: var(--primary-color-blue);
-  color: var(--primary-color-white);
-  font-family: var(--font-medium);
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+  background: #407bff;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
   font-size: 16px;
   line-height: 125%;
   text-align: center;
-  border: none;
 }
+
 @media only screen and (min-width: 768px) {
-  .form {
-    width: 336px;
+  .container {
+    width: 768px;
+    padding: 16px 32px;
   }
-  .btn {
-    height: 44px;
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: 1216px;
+    padding: 18px 12px;
   }
 }
