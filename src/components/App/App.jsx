@@ -13,13 +13,13 @@ export const App = () => {
   return (
     <SharedLayout>
       <Suspense fallback={null}>
-      <Toaster position="top-right" reverseOrder={false} />
+        <Toaster position="top-right" reverseOrder={false} />
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route
             path="/signup"
             element={
-              <RestrictedRoute component={<SignUpPage />} redirectTo="/" />
+              <RestrictedRoute component={<SignUpPage />} redirectTo="/home" />
             }
           />
           <Route
