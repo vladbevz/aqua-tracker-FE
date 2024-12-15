@@ -2,15 +2,26 @@ import { useDispatch } from "react-redux";
 import css from "./UserLogoutModal.module.css";
 import { IoCloseOutline } from "react-icons/io5";
 import { logOut } from "../../redux/auth/operations.js";
+import { toast } from "react-hot-toast";
 
 export const UserLogoutModal = ({ onCancel }) => {
   const dispatch = useDispatch();
-  const logOutUser = () => {
-    dispatch(logOut());
+  const logOutUser = async () => {
+   try {
+    await  dispatch(logOut());
+    toast.success("Successfully Log Out!");
+   } catch (error) {
+    if (error.response?.status === 500) {
+      toast.error("Server error. Please try again later.");
+    }else {
+      toast.error("An unexpected error occurred. Please try again.");
+    }
+   }
   };
 
   return (
     <div className={css.logOutContainer}>
+      
       <button className={css.closeBtn} onClick={onCancel}>
         <IoCloseOutline />
       </button>
