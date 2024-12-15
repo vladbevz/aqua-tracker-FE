@@ -9,8 +9,8 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors.js";
 const UserLogo = () => {
   const [isBackdropOpen, setIsBackdropOpen] = useState(false);
-  const [activeModal, setActiveModal] = useState(null); 
-  const user = useSelector(selectUser)
+  const [activeModal, setActiveModal] = useState(null);
+  const user = useSelector(selectUser);
   const toggleBackdrop = () => {
     setIsBackdropOpen((prev) => !prev);
   };
@@ -21,34 +21,39 @@ const UserLogo = () => {
   };
 
   return (
-    <div className = {css.profileDropdown}>
-      
-      <div className = {css.profileInfo} >
-      <span className = {css.username}>{user.name}</span>
-        <img
-          src = "https://via.placeholder.com/40"
-          alt = "User Avatar"
-          className = {css.avatar}
-        />
-        <button className = {css.arrowButton} onClick = {toggleBackdrop}>
-          {isBackdropOpen ? <IoIosArrowUp className = {css.arrow} /> : <IoIosArrowDown className = {css.arrow} />}
+    <div className={css.profileDropdown}>
+      <div className={css.profileInfo}>
+        <span className={css.username}>{user.name}</span>
+        <img src={user.avatarUrl} alt="User Avatar" className={css.avatar} />
+        <button className={css.arrowButton} onClick={toggleBackdrop}>
+          {isBackdropOpen ? (
+            <IoIosArrowUp className={css.arrow} />
+          ) : (
+            <IoIosArrowDown className={css.arrow} />
+          )}
         </button>
       </div>
 
       {isBackdropOpen && (
         <UserLogoModal
-          onSettingsClick = {() => toggleModal("settings")}
-          onLogoutClick = {() => toggleModal("logout")}
-          onClose = {toggleBackdrop}
+          onSettingsClick={() => toggleModal("settings")}
+          onLogoutClick={() => toggleModal("logout")}
+          onClose={toggleBackdrop}
         />
       )}
 
-      <ModalWrap isOpen = {activeModal === "logout"} handleClose={() => toggleModal("logout")}>
-        <UserLogoutModal onCancel = {() => toggleModal("logout")} />
+      <ModalWrap
+        isOpen={activeModal === "logout"}
+        handleClose={() => toggleModal("logout")}
+      >
+        <UserLogoutModal onCancel={() => toggleModal("logout")} />
       </ModalWrap>
 
-      <ModalWrap isOpen = {activeModal === "settings"} handleClose={() => toggleModal("settings")}>
-        <SettingUser onCancel = {() => toggleModal("settings")} />
+      <ModalWrap
+        isOpen={activeModal === "settings"}
+        handleClose={() => toggleModal("settings")}
+      >
+        <SettingUser onCancel={() => toggleModal("settings")} />
       </ModalWrap>
     </div>
   );
