@@ -50,7 +50,7 @@
 
 .btnContainer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 @media (max-width: 1440px) {
@@ -76,7 +76,6 @@
   transition: background 0.3s ease;
   background: #e4e9f2;
   color: #407bff;
-  margin-right: 24px;
   padding: 10px 30px 10px 30px;
 }
 .cancelBtn:hover {
@@ -93,6 +92,7 @@
   background: #ef5050;
   color: #ffff;
   padding: 10px 30px 10px 30px;
+  margin-right: 24px;
   width: 160px;
 }
 
@@ -114,11 +114,11 @@
 @media (max-width: 768px) {
   .cancelBtn {
     margin-right: 0;
-    margin-bottom: 24px;
     width: 232px;
   }
   .deleteEntryBtn {
     width: 232px;
+    margin-bottom: 24px;
   }
 
   .closeBtn {
