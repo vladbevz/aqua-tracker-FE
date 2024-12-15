@@ -8,11 +8,12 @@ import { NotFoundPage } from "../../pages/NotFoundPage/NotFoundPage.jsx";
 import RestrictedRoute from "../RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { SharedLayout } from "../SharedLayout/SharedLayout.jsx";
-
+import { Toaster } from "react-hot-toast";
 export const App = () => {
   return (
     <SharedLayout>
       <Suspense fallback={null}>
+      <Toaster position="top-right" reverseOrder={false} />
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route
