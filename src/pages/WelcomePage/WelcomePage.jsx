@@ -2,7 +2,6 @@ import css from "./WelcomePage.module.css";
 import { Link } from "react-router-dom";
 import { HiOutlineCalendarDays } from "react-icons/hi2";
 import { LiaToolsSolid } from "react-icons/lia";
-import { TestModal } from "../../components/testModal";
 
 export const WelcomePage = () => {
   return (
@@ -60,7 +59,6 @@ export const WelcomePage = () => {
       <div className={css["main-paige-illustration"]}>
         <img src="" alt="" />
       </div>
-      <TestModal />
     </div>
   );
 };
