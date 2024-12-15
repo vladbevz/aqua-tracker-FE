@@ -67,7 +67,7 @@ const AvatarUpload = () => {
   );
 };
 
-export const SettingUser = () => {
+export const SettingUser = ({ onCancel }) => {
   const [showPassword, setShowPassword] = useState({
     outdatedPassword: false,
     newPassword: false,
@@ -97,10 +97,6 @@ export const SettingUser = () => {
   const newPasswordFieldId = useId();
   const repeatNewPasswordFieldId = useId();
 
-  const handleClose = (evt) => {
-    console.log(evt);
-  };
-
   const handleSubmit = (values, actions) => {
     console.log(values);
     actions.resetForm();
@@ -115,7 +111,7 @@ export const SettingUser = () => {
     <div className={css.container}>
       <div className={css.headerWrap}>
         <h1 className={css.header}>Setting</h1>
-        <button className={css.closeBtn} onClick={handleClose}>
+        <button className={css.closeBtn} onClick={onCancel}>
           <IoCloseOutline className={css.closeIcon} />
         </button>
       </div>
