@@ -5,11 +5,12 @@ import { UserLogoutModal } from "../UserLogoutModal/UserLogoutModal.jsx";
 import css from "./UserLogo.module.css";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { SettingUser } from "../SettingUser/SettingUser.jsx";
-
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors.js";
 const UserLogo = () => {
   const [isBackdropOpen, setIsBackdropOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null); 
-
+  const user = useSelector(selectUser)
   const toggleBackdrop = () => {
     setIsBackdropOpen((prev) => !prev);
   };
@@ -23,7 +24,7 @@ const UserLogo = () => {
     <div className = {css.profileDropdown}>
       
       <div className = {css.profileInfo} >
-      <span className = {css.username}>UserName</span>
+      <span className = {css.username}>{user.name}</span>
         <img
           src = "https://via.placeholder.com/40"
           alt = "User Avatar"

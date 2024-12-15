@@ -7,7 +7,6 @@ export const UserLogoutModal = ({ onCancel }) => {
   const dispatch = useDispatch();
   const logOutUser = () => {
     dispatch(logOut());
-    onCancel();
   };
 
   return (
