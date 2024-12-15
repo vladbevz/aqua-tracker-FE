@@ -10,6 +10,7 @@ import data from "./data.json";
 export const HomePage = () => {
   const [monthData, setMonthData] = useState(data);
   const [dailyEntries, setDailyEntries] = useState(entries);
+
   return (
     <section className={css.home}>
       <div className="container">

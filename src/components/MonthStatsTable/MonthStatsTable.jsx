@@ -5,15 +5,15 @@ import { HiOutlineChevronRight } from "react-icons/hi";
 export const MonthStatsTable = ({ days }) => {
     return (
         <div className={css.wrapper}>
-            <div className={css.title}>
-                <h2>Month</h2>
+            <div className={css.header}>
+                <h2 className={css.title}>Month</h2>
                 <div className={css.pagination}>
-                    <button id="prev-month"><HiOutlineChevronLeft /></button>
-                    <p id="month-title">April, 2023</p>
-                    <button id="next-month"><HiOutlineChevronRight /></button>
+                    <button className={css.paginationBtn}><HiOutlineChevronLeft /></button>
+                    <p className={css.paginationMonth}>April, 2023</p>
+                    <button className={css.paginationBtn}><HiOutlineChevronRight /></button>
                 </div>
             </div>
-            <div className={css.month}>
+            <div className={css.calendar}>
                 {days.map((day, index) => (
                     <div key={index} className={css.item}>
                         <div key={index} className={`${ css.day } ${day.completed ? `${ css.completed }` : `${ css.uncompleted }`}`}>
