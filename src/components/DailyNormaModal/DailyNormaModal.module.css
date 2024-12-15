@@ -32,7 +32,7 @@ span {
 .closeButton {
   color: #407bff;
   border: none;
-  background-color: white;
+  background-color: transparent;
   width: 24px;
   height: 24px;
 }

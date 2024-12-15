@@ -1,0 +1,127 @@
+.deleteEntryContainer {
+  background: #fff;
+  border-radius: 10px;
+  padding: 32px 24px;
+  width: 280px;
+  height: 280px;
+}
+@media (min-width: 768px) {
+  .deleteEntryContainer {
+    width: 592px;
+    height: 208px;
+    padding: 32px 24px;
+  }
+}
+
+.deleteEntryHead {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.deleteEntryTitle {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.23077;
+  color: #2f2f2f;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #407bff;
+  display: flex;
+  align-items: center;
+}
+
+.closeBtnIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.deleteEntryText {
+  margin-top: 24px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (max-width: 1440px) {
+  .btnContainer {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
+  .btnContainer {
+    justify-content: flex-end;
+    flex-direction: column;
+  }
+}
+
+.cancelBtn {
+  width: 160px;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  background: #e4e9f2;
+  color: #407bff;
+  margin-right: 24px;
+  padding: 10px 30px 10px 30px;
+}
+.cancelBtn:hover {
+  background: #d0d8e9;
+}
+
+.deleteEntryBtn {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  background: #ef5050;
+  color: #ffff;
+  padding: 10px 30px 10px 30px;
+  width: 160px;
+}
+
+.deleteEntry:hover {
+  background: #ef5050;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #407bff;
+  top: 22px;
+  right: 16px;
+  padding: 0;
+  font-size: 44px;
+}
+
+@media (max-width: 768px) {
+  .cancelBtn {
+    margin-right: 0;
+    margin-bottom: 24px;
+    width: 232px;
+  }
+  .deleteEntryBtn {
+    width: 232px;
+  }
+
+  .closeBtn {
+    font-size: 34px;
+  }
+}

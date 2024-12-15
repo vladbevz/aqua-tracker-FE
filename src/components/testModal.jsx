@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ModalWrap } from "./ModalWrap/ModalWrap";
-import { DailyNormaModal } from "./DailyNormaModal/DailyNormaModal";
+// import { DailyNormaModal } from "./DailyNormaModal/DailyNormaModal";
+import { DeleteEntryModal } from "./DeleteEntryModal/DeleteEntryModal";
 
 export const TestModal = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ export const TestModal = () => {
     <>
       <button onClick={openModal}>Open Modal</button>
       <ModalWrap isOpen={modalIsOpen} handleClose={closeModal}>
-        <DailyNormaModal closeModal={closeModal} />
+        <DeleteEntryModal closeModal={closeModal} />
       </ModalWrap>
     </>
   );
