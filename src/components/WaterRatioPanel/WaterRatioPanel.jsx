@@ -1,9 +1,18 @@
 import { useState } from "react";
 import css from "./WaterRatioPanel.module.css";
+import { TodayListModal } from "../TodayListModal/TodayListModal.jsx";
+import { ModalWrap } from "../ModalWrap/ModalWrap";
 
 export const WaterRatioPanel = () => {
     const [progress, setProgress] = useState(80);
-
+    const [modalIsOpen, setIsOpen] = useState(false);
+    
+    const openModal = () => {
+        setIsOpen(true);
+    };
+    const closeModal = () => {
+        setIsOpen(false);
+    }
 
     return (
         <div>
@@ -14,8 +23,11 @@ export const WaterRatioPanel = () => {
                 </div>
             </div>
             <div>
-                <button type="button" className={css.addBtn}>+ Add Water</button>
+                <button type="button" className={css.addBtn} onClick={openModal}>+ Add Water</button>
             </div>
+            {modalIsOpen && <ModalWrap isOpen={modalIsOpen} handleClose={closeModal} >
+                                <TodayListModal closeModal={closeModal} />
+                            </ModalWrap>}
         </div>
     )
 }
