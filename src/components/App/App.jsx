@@ -9,15 +9,20 @@ import RestrictedRoute from "../RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { SharedLayout } from "../SharedLayout/SharedLayout.jsx";
 import { Toaster } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { refreshUser } from "../../redux/auth/operations.js";
+import { selectIsRefreshing } from "../../redux/auth/selectors.js";
 export const App = () => {
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  //TODO: add some loader when refreshing process is
+  return isRefreshing ? (
+    <b>Please wait, updating user info...</b>
+  ) : (
     <SharedLayout>
       <Suspense fallback={null}>
         <Toaster position="top-right" reverseOrder={false} />
