@@ -7,7 +7,7 @@ import css from "./HomePage.module.css";
 import entries from "./entries.json";
 import data from "./data.json";
 
-export const HomePage = () => {
+export default function HomePage() {
   const [monthData, setMonthData] = useState(data);
   const [dailyEntries, setDailyEntries] = useState(entries);
 
@@ -28,7 +28,7 @@ export const HomePage = () => {
       </div>
     </section>
   );
-};
+}
 
 // const addEntry = () => {
 //         setDailyEntry([...entries, { amount: 200, time: "15:00 PM" }]);

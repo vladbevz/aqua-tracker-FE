@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import css from "./NotFoundPage.module.css";
 
-export const NotFoundPage = () => {
+export default function NotFoundPage () {
   return (
     <div className={css.container}>
       <h1 className={css.title}>The page you requested could not be found.</h1>
