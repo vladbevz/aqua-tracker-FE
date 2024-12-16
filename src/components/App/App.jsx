@@ -25,7 +25,7 @@ export const App = () => {
   ) : (
     <SharedLayout>
       <Suspense fallback={null}>
-        <Toaster position="top-right" reverseOrder={false} />
+        <Toaster reverseOrder={false} />
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route

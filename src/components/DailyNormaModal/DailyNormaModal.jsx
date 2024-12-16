@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { selectUser } from "../../redux/auth/selectors";
 import css from "./DailyNormaModal.module.css";
 import "../../index.css";
+import { updateUser } from "../../redux/auth/operations";
 
 export const DailyNormaModal = ({ closeModal }) => {
   const user = useSelector(selectUser);
@@ -47,7 +48,7 @@ export const DailyNormaModal = ({ closeModal }) => {
       return;
     }
     try {
-      await dispatch();
+      await dispatch(updateUser({ daylyNorm: waterAmount }));
       toast.success("Successfully daily intake saved!");
       console.log("Daily intake saved:");
       closeModal();
@@ -65,12 +66,6 @@ export const DailyNormaModal = ({ closeModal }) => {
     if (value === "") {
       setWaterAmount("");
     } else {
-      // value = parseFloat(value);
-      // if (value < 0.5) {
-      //   value = 0.5;
-      // } else if (value > 15) {
-      //   value = 15;
-      // }
       setWaterAmount(toMilliliters(value));
     }
   };
@@ -135,7 +130,7 @@ export const DailyNormaModal = ({ closeModal }) => {
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
             className={css.input}
-            min={0}
+            min={1}
           />
         </label>
 
@@ -148,7 +143,7 @@ export const DailyNormaModal = ({ closeModal }) => {
             value={activityTime}
             onChange={(e) => setActivityTime(e.target.value)}
             className={css.input}
-            min={0}
+            min={1}
           />
         </label>
         <div className={css.resultContainer}>
@@ -169,7 +164,7 @@ export const DailyNormaModal = ({ closeModal }) => {
             value={toLiters(waterAmount) || ""}
             onChange={handleWaterChange}
             min={0.5}
-            // max={15}}
+            step={0.01}
           />
         </label>
         <button type="submit" className={css.saveButton}>
