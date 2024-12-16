@@ -13,8 +13,6 @@ export const UserLogoutModal = ({ onCancel }) => {
    } catch (error) {
     if (error.response?.status === 500) {
       toast.error("Server error. Please try again later.");
-    }else {
-      toast.error("An unexpected error occurred. Please try again.");
     }
    }
   };

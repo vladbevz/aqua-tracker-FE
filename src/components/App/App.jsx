@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshUser } from "../../redux/auth/operations.js";
 import { selectIsRefreshing } from "../../redux/auth/selectors.js";
+import { Loader } from "../Loader/Loader.jsx";
 export const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -20,8 +21,11 @@ export const App = () => {
   }, [dispatch]);
 
   //TODO: add some loader when refreshing process is
-  return isRefreshing ? (
-    <b>Please wait, updating user info...</b>
+  return isRefreshing ? (<>
+  <b>Please wait, updating user info...</b>
+  <Loader/>
+  </>
+    
   ) : (
     <SharedLayout>
       <Suspense fallback={null}>
