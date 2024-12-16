@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
 import { HomePage } from "../../pages/HomePage/HomePage.jsx";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { SignInPage } from "../../pages/SignInPage/SignInPage.jsx";
 import { SignUpPage } from "../../pages/SignUpPage/SignUpPage.jsx";
 import { WelcomePage } from "../../pages/WelcomePage/WelcomePage.jsx";
@@ -9,8 +9,20 @@ import RestrictedRoute from "../RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { SharedLayout } from "../SharedLayout/SharedLayout.jsx";
 import { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { refreshUser } from "../../redux/auth/operations.js";
+import { selectIsRefreshing } from "../../redux/auth/selectors.js";
 export const App = () => {
-  return (
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  //TODO: add some loader when refreshing process is
+  return isRefreshing ? (
+    <b>Please wait, updating user info...</b>
+  ) : (
     <SharedLayout>
       <Suspense fallback={null}>
         <Toaster position="top-right" reverseOrder={false} />
