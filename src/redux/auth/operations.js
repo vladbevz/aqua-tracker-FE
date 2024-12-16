@@ -98,9 +98,9 @@ export const refreshUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   "auth/update",
   async (multipartFormData, thunkAPI) => {
-    const authHeader = "Bearer " + thunkAPI.getState().accessToken;
+    const authHeader = "Bearer " + thunkAPI.getState().auth.accessToken;
     try {
-      const res = await axiosToast.post(
+      const res = await axiosToast.patch(
         URL + "/users/update",
         multipartFormData,
         {
