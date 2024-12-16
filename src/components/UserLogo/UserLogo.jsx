@@ -24,7 +24,11 @@ const UserLogo = () => {
     <div className={css.profileDropdown}>
       <div className={css.profileInfo}>
         <span className={css.username}>{user.name}</span>
-        <img src={user.avatarUrl} alt="User Avatar" className={css.avatar} />
+        <img
+          src={user.avatarUrl || "images/noAvatar/no-avatar.png"}
+          alt="User Avatar"
+          className={css.avatar}
+        />
         <button className={css.arrowButton} onClick={toggleBackdrop}>
           {isBackdropOpen ? (
             <IoIosArrowUp className={css.arrow} />
