@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosToast from "../../Utilits/toast";
 
 const URL = "https://aqua-tracker-be.onrender.com";
 
@@ -8,7 +8,7 @@ export const fetchTodayWater = createAsyncThunk(
   "todayWater/fetchWater",
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get(URL + "/water");
+      const res = await axiosToast.get(URL + "/water");
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -21,7 +21,7 @@ export const addTodayWater = createAsyncThunk(
   "todayWater/addWater",
   async (water, thunkAPI) => {
     try {
-      const response = await axios.post(URL + "/water", water);
+      const response = await axiosToast.post(URL + "/water", water);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -34,7 +34,7 @@ export const deleteTodayWater = createAsyncThunk(
   "todayWater/deleteWater",
   async (waterId, thunkAPI) => {
     try {
-      const response = await axios.delete(`${URL}/water/${waterId}`);
+      const response = await axiosToast.delete(`${URL}/water/${waterId}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -50,7 +50,7 @@ export const updateTodayWater = createAsyncThunk(
   "todayWater/updateWater",
   async (water, thunkAPI) => {
     try {
-      const res = await axios.post(`${URL}/water/${water.waterId}`);
+      const res = await axiosToast.patch(`${URL}/water/${water.waterId}`);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

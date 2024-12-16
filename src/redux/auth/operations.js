@@ -1,6 +1,6 @@
 // import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axiosToast from "./toast";
+import axiosToast from "../../Utilits/toast";
 
 const URL = "https://aqua-tracker-be.onrender.com";
 
