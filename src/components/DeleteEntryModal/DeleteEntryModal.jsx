@@ -1,8 +1,12 @@
 import css from "./DeleteEntryModal.module.css";
+import { useDispatch } from "react-redux";
 import { IoCloseOutline } from "react-icons/io5";
+import { deleteTodayWater } from "../../redux/todayWaterList/operations";
 
-export const DeleteEntryModal = ({ closeModal }) => {
+export const DeleteEntryModal = ({ closeModal, idWater }) => {
+  const dispath = useDispatch();
   const handleClick = () => {
+    dispath(deleteTodayWater(idWater));
     closeModal();
   };
 
