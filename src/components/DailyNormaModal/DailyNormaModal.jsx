@@ -61,10 +61,16 @@ export const DailyNormaModal = ({ closeModal }) => {
   };
 
   const handleWaterChange = (e) => {
-    const value = e.target.value;
+    let value = e.target.value;
     if (value === "") {
       setWaterAmount("");
     } else {
+      // value = parseFloat(value);
+      // if (value < 0.5) {
+      //   value = 0.5;
+      // } else if (value > 15) {
+      //   value = 15;
+      // }
       setWaterAmount(toMilliliters(value));
     }
   };
@@ -129,6 +135,7 @@ export const DailyNormaModal = ({ closeModal }) => {
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
             className={css.input}
+            min={0}
           />
         </label>
 
@@ -141,6 +148,7 @@ export const DailyNormaModal = ({ closeModal }) => {
             value={activityTime}
             onChange={(e) => setActivityTime(e.target.value)}
             className={css.input}
+            min={0}
           />
         </label>
         <div className={css.resultContainer}>
@@ -160,6 +168,8 @@ export const DailyNormaModal = ({ closeModal }) => {
             className={css.input}
             value={toLiters(waterAmount) || ""}
             onChange={handleWaterChange}
+            min={0.5}
+            // max={15}}
           />
         </label>
         <button type="submit" className={css.saveButton}>
