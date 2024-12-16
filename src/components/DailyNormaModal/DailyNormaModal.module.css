@@ -55,14 +55,19 @@ span {
 }
 
 .normaSpan {
+  margin: 0;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.33333;
   color: #407bff;
+  margin-left: 8px;
 }
 
 .explanation1 {
+  margin: 0;
+  margin-right: 8px;
+  display: inline;
   color: #407bff;
 }
 .explanation {
@@ -137,6 +142,7 @@ span {
 }
 
 .waterAmount {
+  margin: 0;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   font-size: 18px;

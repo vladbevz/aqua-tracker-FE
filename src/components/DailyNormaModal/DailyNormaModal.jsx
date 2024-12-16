@@ -1,15 +1,22 @@
+import { IoCloseOutline } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import { selectUser } from "../../redux/auth/selectors";
 import css from "./DailyNormaModal.module.css";
 import "../../index.css";
-import { MdClose } from "react-icons/md";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setWaterRate } from "../../redux/todayWaterList/operations";
 
 export const DailyNormaModal = ({ closeModal }) => {
+  const user = useSelector(selectUser);
+
   const [gender, setGender] = useState("girl");
   const [weight, setWeight] = useState("");
   const [activityTime, setActivityTime] = useState("");
-  const [waterAmount, setWaterAmount] = useState(0);
+  const [waterAmount, setWaterAmount] = useState(user.daylyNorm || 0);
+
+  const toMilliliters = (liters) => liters * 1000;
+
+  const toLiters = (milliliters) => milliliters / 1000;
 
   const calculateWaterRate = () => {
     const weightNumber = parseFloat(weight);
@@ -24,7 +31,7 @@ export const DailyNormaModal = ({ closeModal }) => {
       water = weightNumber * 0.04 + activitiTimeNumber * 0.6;
     }
 
-    setWaterAmount(water.toFixed(2));
+    setWaterAmount(toMilliliters(parseFloat(water.toFixed(2))));
   };
 
   useEffect(() => {
@@ -32,18 +39,43 @@ export const DailyNormaModal = ({ closeModal }) => {
   }, [gender, weight, activityTime]);
 
   const dispatch = useDispatch();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(setWaterRate);
-    console.log("Daily intake saved:");
+    const water = parseFloat(waterAmount);
+    if (water < toMilliliters(0.5) || water > toMilliliters(15)) {
+      toast.error("The water intake must be between 0.5 and 15 liters.");
+      return;
+    }
+    try {
+      await dispatch();
+      toast.success("Successfully daily intake saved!");
+      console.log("Daily intake saved:");
+      closeModal();
+    } catch (error) {
+      if (error.response?.status === 500) {
+        toast.error("Server error. Please try again later.");
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
+    }
   };
 
+  const handleWaterChange = (e) => {
+    const value = e.target.value;
+    if (value === "") {
+      setWaterAmount("");
+    } else {
+      setWaterAmount(toMilliliters(value));
+    }
+  };
+
+  console.log(waterAmount);
   return (
     <div className={css.modal}>
       <div className={css.head}>
         <h1 className={css.title}>My daily norma</h1>
         <button onClick={closeModal} className={css.closeButton}>
-          <MdClose className={css.closeButton} />
+          <IoCloseOutline className={css.closeButton} />
         </button>
       </div>
 
@@ -59,11 +91,11 @@ export const DailyNormaModal = ({ closeModal }) => {
       </ul>
 
       <p className={css.explanation}>
-        <span className={css.explanation1}>*</span> <strong>V</strong> is the
-        volume of the water norm in liters per day, <strong>M</strong> is your
-        body weight, <strong>T</strong> is the time of active sports, or another
-        type of activity commensurate in terms of loads (in the absence of
-        these, you must set 0).
+        <span className={css.explanation1}>*</span>
+        <strong>V</strong> is the volume of the water norm in liters per day,{" "}
+        <strong>M</strong> is your body weight, <strong>T</strong> is the time
+        of active sports, or another type of activity commensurate in terms of
+        loads (in the absence of these, you must set 0).
       </p>
 
       <h2 className={css.subheading}>Calculate your rate:</h2>
@@ -115,7 +147,7 @@ export const DailyNormaModal = ({ closeModal }) => {
           <p className={css.result}>
             The required amount of water in liters per day:
           </p>
-          <span className={css.waterAmount}>{waterAmount} L</span>
+          <span className={css.waterAmount}>{toLiters(waterAmount)} L</span>
         </div>
         <h2 className={css.subheading1}>
           Write down how much water you will drink:
@@ -126,9 +158,10 @@ export const DailyNormaModal = ({ closeModal }) => {
             name="dailyIntake"
             placeholder="Enter amount in liters"
             className={css.input}
+            value={toLiters(waterAmount) || ""}
+            onChange={handleWaterChange}
           />
         </label>
-
         <button type="submit" className={css.saveButton}>
           Save
         </button>
