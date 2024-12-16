@@ -4,7 +4,7 @@ import { HiOutlineCalendarDays } from "react-icons/hi2";
 import { HiOutlinePresentationChartBar } from "react-icons/hi2";
 import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
 import { RxDotFilled } from "react-icons/rx";
-export const WelcomePage = () => {
+export default function WelcomePage() {
   return (
     <div className={css["main-page"]}>
       <section className={css["main-paige-info"]}>
@@ -87,4 +87,4 @@ export const WelcomePage = () => {
       </section>
     </div>
   );
-};
+}
