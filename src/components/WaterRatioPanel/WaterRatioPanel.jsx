@@ -2,12 +2,13 @@ import { useState } from "react";
 import css from "./WaterRatioPanel.module.css";
 import { AddWaterModal } from "../AddWaterModal/AddWaterModal";
 import { ModalWrap } from "../ModalWrap/ModalWrap";
+import { useSelector } from "react-redux";
+import { selectTodayWaterPercent } from "../../redux/todayWaterList/selectors";
 
 export const WaterRatioPanel = () => {
-  const [progress, setProgress] = useState(80);
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  
+  const progress = useSelector(selectTodayWaterPercent);
 
   const openModal = () => {
     setIsOpen(true);
@@ -37,11 +38,3 @@ export const WaterRatioPanel = () => {
     </div>
   );
 };
-
-// const addWater = () => {
-//     const newEntry = { id: Date.now(), amount: 200, time: new Date().toLocaleTimeString() };
-//     const newTotal = waterEntries.reduce((sum, entry) => sum + entry.amount, 0) + newEntry.amount;
-
-//     setWaterEntries([...waterEntries, newEntry]);
-//     setProgress(Math.min((newTotal / (dailyGoal * 1000)) * 100, 100));
-// };
