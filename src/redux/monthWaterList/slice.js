@@ -21,6 +21,7 @@ const monthWaterListSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.month = action.payload.data.monthWaterList.month;
+        state.month = action.payload.data.monthWaterList.year;
         state.amountWaterPerMonth =
           action.payload.data.monthWaterList.amountWaterPerMonth;
         state.items = action.payload.data.monthWaterList.monthWaterList;
