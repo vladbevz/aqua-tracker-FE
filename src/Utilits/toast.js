@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { store } from './../redux/store';
-import { changeLoadStatus } from "../redux/utils/slice";
+// import { store } from './../redux/store';
+// import { changeLoadStatus } from "../redux/utils/slice";
 
 // Create axios example
 const axiosToast = axios.create({
@@ -9,7 +9,8 @@ const axiosToast = axios.create({
 });
 
 const setLoading = (type) => {
-  store.dispatch(changeLoadStatus(type));
+  // store.dispatch(changeLoadStatus(type));
+  return type;
 };
 
 const showLoader = () => {
