@@ -5,7 +5,7 @@ import css from "./TodayWaterList.module.css";
 import { HiPlusSmall } from "react-icons/hi2";
 import { AddWaterModal } from "../AddWaterModal/AddWaterModal.jsx";
 
-export const TodayWaterList = ({ entries }) => {
+export const TodayWaterList = ({list}) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -20,8 +20,8 @@ export const TodayWaterList = ({ entries }) => {
       <div className="today-section">
         <p className={css.text}>Today</p>
         <ul className={css.list}>
-          {entries.map((entry, index) => (
-            <WaterEntry key={index} {...entry} />
+          {list.map((entry) => (
+            <WaterEntry key={entry._id} {...entry} />
           ))}
         </ul>
         <button className={css.addBtn} onClick={openModal}>

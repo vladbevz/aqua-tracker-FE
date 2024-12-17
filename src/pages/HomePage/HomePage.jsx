@@ -1,15 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DailyNorma } from "../../components/DailyNorma/DailyNorma.jsx";
 import { TodayWaterList } from "../../components/TodayWaterList/TodayWaterList.jsx";
 import { WaterRatioPanel } from "../../components/WaterRatioPanel/WaterRatioPanel.jsx";
 import { MonthStatsTable } from "../../components/MonthStatsTable/MonthStatsTable.jsx";
 import css from "./HomePage.module.css";
-import entries from "./entries.json";
+// import entries from "./entries.json";
 import data from "./data.json";
+import { fetchTodayWater } from "../../redux/todayWaterList/operations.js";
+import { useDispatch, useSelector } from "react-redux";
+import { selectTodayWaterList } from "../../redux/todayWaterList/selectors.js";
 
 export default function HomePage() {
   const [monthData, setMonthData] = useState(data);
-  const [dailyEntries, setDailyEntries] = useState(entries);
+  // const [dailyEntries, setDailyEntries] = useState(entries);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodayWater());
+  }, [dispatch]);
+
+  const waterList = useSelector(selectTodayWaterList);
 
   return (
     <section className={css.home}>
@@ -22,21 +32,10 @@ export default function HomePage() {
         />
         <WaterRatioPanel />
         <div className={css.wrapper}>
-          <TodayWaterList entries={dailyEntries} />
+          <TodayWaterList list={waterList} />
           <MonthStatsTable days={monthData} />
         </div>
       </div>
     </section>
   );
 }
-
-// const addEntry = () => {
-//         setDailyEntry([...entries, { amount: 200, time: "15:00 PM" }]);
-// };
-
-// const deleteEntry = (id) => {
-//    const updatedEntries = dailyEntries.filter((entry) => entry.id !== id);
-// const newTotal = updatedEntries.reduce((sum, entry) => sum + entry.amount, 0);
-// setWaterEntries(updatedEntries);
-// setProgress((newTotal / (dailyGoal * 1000)) * 100);
-// };
