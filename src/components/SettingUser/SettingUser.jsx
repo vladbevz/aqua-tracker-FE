@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from "formik";
-// import * as Yup from "yup";
+import * as Yup from "yup";
 import { useState, useId } from "react";
 
 import { IoCloseOutline } from "react-icons/io5";
@@ -8,13 +8,9 @@ import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 
 import css from "./SettingUser.module.css";
 
-// const SettingSchema = Yup.object().shape({
-//   username: Yup.string()
-//     .min(2, "Too short!")
-//     .max(50, "Too long!")
-//     .required("Required"),
-//   email: Yup.string().email("Must be a valid email!").required("Required"),
-// });
+const SettingSchema = Yup.object().shape({
+  email: Yup.string().email("Must be a valid email!").required("Required"),
+});
 
 const initialValues = {
   avatar: "",
@@ -32,15 +28,28 @@ const AvatarUpload = () => {
     "images/noAvatar/no-avatar.png"
   );
 
-  const handleFileChange = (event) => {
+  const uploadAvatar = async (file) => {
+    const formData = new FormData();
+    formData.append("avatar", file);
+    try {
+      const response = await fetch("users/avatar", {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.log(error, "Avatar upload error: ", error);
+    }
+  };
+
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setAvatarPreview(e.target.result);
-        setFieldValue("avatar", file);
-      };
-      reader.readAsDataURL(file);
+      const previewUrl = URL.createObjectURL(file);
+      setAvatarPreview(previewUrl);
+      await uploadAvatar(file);
     }
   };
 
@@ -105,6 +114,7 @@ export const SettingUser = ({ onCancel }) => {
       newPassword: "",
       repeatNewPassword: "",
     });
+    onCancel();
   };
 
   return (
@@ -119,7 +129,7 @@ export const SettingUser = ({ onCancel }) => {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        // validationSchema={SettingSchema}
+        validationSchema={SettingSchema}
       >
         <Form>
           <AvatarUpload />
@@ -156,6 +166,7 @@ export const SettingUser = ({ onCancel }) => {
               className={css.credentialsInput}
               type="email"
               name="email"
+              placeholder="User's email"
               id={emailFieldId}
             />
           </div>
