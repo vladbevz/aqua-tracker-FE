@@ -5,8 +5,9 @@ import { logOut } from "../auth/operations";
 const monthWaterListSlice = createSlice({
   name: "monthWaterList",
   initialState: {
+    year: null,
     month: null,
-    amountWaterPerMont: 0,
+    amountWaterPerMonth: 0,
     items: [], //{date, daylyNorm, servings, planDaylyNorm}
     isLoading: false,
     error: null,
@@ -20,13 +21,14 @@ const monthWaterListSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.month = action.payload.data.monthWaterList.month;
-        state.amountWaterPerMont =
-          action.payload.data.monthWaterList.amountWaterPerMont;
+        state.amountWaterPerMonth =
+          action.payload.data.monthWaterList.amountWaterPerMonth;
         state.items = action.payload.data.monthWaterList.monthWaterList;
       })
       .addCase(logOut.fulfilled, (state) => {
+        state.year = null;
         state.month = null;
-        state.amountWaterPerMont = 0;
+        state.amountWaterPerMonth = 0;
         state.monthWaterList = [];
         state.isLoading = false;
         state.error = null;
