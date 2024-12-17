@@ -7,6 +7,8 @@ export const WaterRatioPanel = () => {
   const [progress, setProgress] = useState(80);
   const [modalIsOpen, setIsOpen] = useState(false);
 
+  
+
   const openModal = () => {
     setIsOpen(true);
   };
