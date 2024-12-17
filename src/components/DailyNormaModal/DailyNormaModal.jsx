@@ -14,6 +14,7 @@ export const DailyNormaModal = ({ closeModal }) => {
   const [weight, setWeight] = useState("");
   const [activityTime, setActivityTime] = useState("");
   const [waterAmount, setWaterAmount] = useState(user.daylyNorm || 0);
+  const [woterAmountForCalculet, setWoterAmountForCalculet] = useState(0);
 
   const toMilliliters = (liters) => liters * 1000;
 
@@ -33,6 +34,7 @@ export const DailyNormaModal = ({ closeModal }) => {
     }
 
     setWaterAmount(toMilliliters(parseFloat(water.toFixed(2))));
+    setWoterAmountForCalculet(toMilliliters(parseFloat(water.toFixed(2))));
   };
 
   useEffect(() => {
@@ -150,7 +152,9 @@ export const DailyNormaModal = ({ closeModal }) => {
           <p className={css.result}>
             The required amount of water in liters per day:
           </p>
-          <span className={css.waterAmount}>{toLiters(waterAmount)} L</span>
+          <span className={css.waterAmount}>
+            {toLiters(woterAmountForCalculet)} L
+          </span>
         </div>
         <h2 className={css.subheading1}>
           Write down how much water you will drink:
