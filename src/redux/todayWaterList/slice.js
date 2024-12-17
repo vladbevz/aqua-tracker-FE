@@ -22,6 +22,7 @@ const todayWaterListSlice = createSlice({
     daylyNorm: null,
     amountWaterPerDay: null,
     servings: null,
+    percent: null,
     items: [], // {date, amount, curDaylyNorm}
     isLoading: false,
     error: null,
@@ -35,6 +36,7 @@ const todayWaterListSlice = createSlice({
         state.daylyNorm = action.payload.data.daylyNorm;
         state.amountWaterPerDay = action.payload.data.amountWaterPerDay;
         state.servings = action.payload.data.servings;
+        state.percent = action.payload.data.percent;
         state.items = action.payload.data.todayWaterList;
       })
       .addCase(fetchTodayWater.rejected, handleRejected)
@@ -70,6 +72,7 @@ const todayWaterListSlice = createSlice({
         state.daylyNorm = null;
         state.amountWaterPerDay = null;
         state.servings = null;
+        state.percent = null;
         state.items = [];
         state.error = null;
         state.isLoading = false;

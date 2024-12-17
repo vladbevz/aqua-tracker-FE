@@ -5,6 +5,7 @@ export const selectTodayWaterAmountWaterPerDay = (state) =>
   state.todayWaterList.amountWaterPerDay;
 export const selectTodayWaterServings = (state) =>
   state.todayWaterList.servings;
+export const selectTodayWaterPercent = (state) => state.todayWaterList.percent;
 export const selectTodayWater = (state) => state.todayWaterList;
 export const selectIsLoading = (state) => state.todayWaterList.isLoading;
 export const selectTodayWaterData = (state) => state.todayWaterList;
