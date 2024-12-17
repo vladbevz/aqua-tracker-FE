@@ -124,12 +124,12 @@
   margin-bottom: 24px;
 }
 
-/* .errorMessage {
+.errorMessage {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   line-height: 129%;
   color: var(--secondary-color-2);
-} */
+}
 
 .passwordWrap {
   display: flex;
@@ -194,6 +194,18 @@
   .container {
     width: 768px;
     padding: 16px 32px;
+  }
+
+  .credentialsInput {
+    width: 392px;
+  }
+
+  .passwordInputWrap {
+    width: 392px;
+  }
+
+  .passwordInput {
+    width: 332px;
   }
 }
 
