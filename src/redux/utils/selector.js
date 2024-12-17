@@ -1,1 +1,0 @@
-export const selectLoadStatus = (state) => state.utils.showLoad;

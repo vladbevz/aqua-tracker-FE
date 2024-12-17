@@ -13,7 +13,6 @@ import storage from "redux-persist/lib/storage";
 import { monthWaterListReducer } from "./monthWaterList/slice";
 import { todayWaterListReducer } from "./todayWaterList/slice";
 import { authReducer } from "./auth/slice";
-import { utilsReducer } from "./utils/slice"
 
 // Persisting token field from auth slice to localstorage
 const authPersistConfig = {
@@ -27,7 +26,6 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     monthWater: monthWaterListReducer,
     todayWater: todayWaterListReducer,
-    utils: utilsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

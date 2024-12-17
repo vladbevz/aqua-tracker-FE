@@ -1,29 +1,37 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
-// import { store } from './../redux/store';
-// import { changeLoadStatus } from "../redux/utils/slice";
+import { Loader } from "../components/Loader/Loader";
+
+let id = null;
+let loaderShowed = false;
+
+const showLoader = () => {
+  if (loaderShowed) return;
+  toast(
+    (to) => {
+      id = to.id;
+      return <Loader />;
+    },
+    { duration: "Infinity", type: "custom" }
+  );
+  loaderShowed = true;
+};
+
+const hideLoader = () => {
+  if (!id) return 
+  toast.dismiss(id);
+  id = null
+  loaderShowed = false;
+};
 
 // Create axios example
 const axiosToast = axios.create({
   timeout: 10000,
 });
 
-const setLoading = (type) => {
-  // store.dispatch(changeLoadStatus(type));
-  return type;
-};
-
-const showLoader = () => {
-  setLoading(true);
-};
-
-const hideLoader = () => {
-  setLoading(false);
-};
-
 // Показ повідомлення про успіх
 const showSuccessMessage = (message) => {
-  toast.success(message || "Success!");
+  toast.success(message || "Successfuly!");
 };
 
 // Показ повідомлення про помилку
@@ -48,7 +56,7 @@ axiosToast.interceptors.request.use(
 axiosToast.interceptors.response.use(
   (response) => {
     hideLoader(); // Приховуємо лоадер після відповіді
-    showSuccessMessage(response?.data?.message);
+    showSuccessMessage();
     return response;
   },
   (error) => {
