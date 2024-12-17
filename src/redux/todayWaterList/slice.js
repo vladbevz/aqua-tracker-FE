@@ -19,6 +19,9 @@ const handleRejected = (state, action) => {
 const todayWaterListSlice = createSlice({
   name: "todayWaterList",
   initialState: {
+    daylyNorm: null,
+    amountWaterPerDay: null,
+    servings: null,
     items: [], // {date, amount, curDaylyNorm}
     isLoading: false,
     error: null,
@@ -29,7 +32,10 @@ const todayWaterListSlice = createSlice({
       .addCase(fetchTodayWater.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        state.daylyNorm = action.payload.data.daylyNorm;
+        state.amountWaterPerDay = action.payload.data.amountWaterPerDay;
+        state.servings = action.payload.data.servings;
+        state.items = action.payload.data.todayWaterList;
       })
       .addCase(fetchTodayWater.rejected, handleRejected)
       .addCase(addTodayWater.pending, handlePending)
@@ -61,6 +67,9 @@ const todayWaterListSlice = createSlice({
       })
       .addCase(updateTodayWater.rejected, handleRejected)
       .addCase(logOut.fulfilled, (state) => {
+        state.daylyNorm = null;
+        state.amountWaterPerDay = null;
+        state.servings = null;
         state.items = [];
         state.error = null;
         state.isLoading = false;
