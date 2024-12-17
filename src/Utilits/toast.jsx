@@ -18,9 +18,9 @@ const showLoader = () => {
 };
 
 const hideLoader = () => {
-  if (!id) return 
+  if (!id) return;
   toast.dismiss(id);
-  id = null
+  id = null;
   loaderShowed = false;
 };
 
@@ -47,7 +47,8 @@ axiosToast.interceptors.request.use(
   },
   (error) => {
     hideLoader(); // Приховуємо лоадер у випадку помилки запиту
-    showErrorMessage(error.message);
+    const errorMessage = error.response?.data?.data?.message || error.message;
+    showErrorMessage(errorMessage);
     return Promise.reject(error);
   }
 );
@@ -61,7 +62,7 @@ axiosToast.interceptors.response.use(
   },
   (error) => {
     hideLoader(); // Приховуємо лоадер навіть при помилці
-    const errorMessage = error.response?.data?.message || error.message;
+    const errorMessage = error.response?.data?.data?.message || error.message;
     showErrorMessage(errorMessage);
     return Promise.reject(error);
   }
