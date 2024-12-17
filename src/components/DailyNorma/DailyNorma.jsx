@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./DailyNorma.module.css";
 import { DailyNormaModal } from "../DailyNormaModal/DailyNormaModal";
 import { ModalWrap } from "../ModalWrap/ModalWrap.jsx";
+import { useSelector } from "react-redux";
+import { selectDailyNorm } from "../../redux/auth/selectors.js";
 
 export const DailyNorma = () => {
-    // const [dailyGoal, setDailyGoal] = useState(1.5);
-    // const [showModal, setShowModal] = useState(false);
     const [modalIsOpen, setIsOpen] = useState(false);
+
+    const dailyNorm = useSelector(selectDailyNorm) / 1000;
     
     const openModal = () => {
         setIsOpen(true);
@@ -22,7 +24,7 @@ export const DailyNorma = () => {
                     <p className={css.text}>My daily norma</p>
                 </div>
                 <div className={css.amount}>
-                    <p className={css.number}>1.5 L</p>
+                    <p className={css.number}>{dailyNorm} L</p>
                 <button className={css.editBtn} onClick={openModal}>Edit</button>
                 </div>
             </div>
