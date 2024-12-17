@@ -1,27 +1,37 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { Loader } from "../components/Loader/Loader";
 
-// Створюємо екземпляр Axios
-const axiosToast = axios.create({
-  timeout: 10000, // Час очікування запиту (в мс)
-});
-
-// Показ лоадера через toast
-let toastId; // Збережемо ID, щоб оновлювати або закривати toast
+let id = null;
+let loaderShowed = false;
 
 const showLoader = () => {
-  toastId = toast.loading("Loading...");
+  if (loaderShowed) return;
+  toast(
+    (to) => {
+      id = to.id;
+      return <Loader />;
+    },
+    { duration: "Infinity", type: "custom" }
+  );
+  loaderShowed = true;
 };
 
 const hideLoader = () => {
-  if (toastId) {
-    toast.dismiss(toastId);
-  }
+  if (!id) return 
+  toast.dismiss(id);
+  id = null
+  loaderShowed = false;
 };
+
+// Create axios example
+const axiosToast = axios.create({
+  timeout: 10000,
+});
 
 // Показ повідомлення про успіх
 const showSuccessMessage = (message) => {
-  toast.success(message || "Success!");
+  toast.success(message || "Successfuly!");
 };
 
 // Показ повідомлення про помилку
@@ -46,7 +56,7 @@ axiosToast.interceptors.request.use(
 axiosToast.interceptors.response.use(
   (response) => {
     hideLoader(); // Приховуємо лоадер після відповіді
-    showSuccessMessage(response?.data?.message);
+    showSuccessMessage();
     return response;
   },
   (error) => {
