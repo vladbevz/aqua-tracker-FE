@@ -1,22 +1,23 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { store } from './../redux/store';
+import { changeLoadStatus } from "../redux/utils/slice";
 
-// Створюємо екземпляр Axios
+// Create axios example
 const axiosToast = axios.create({
-  timeout: 10000, // Час очікування запиту (в мс)
+  timeout: 10000,
 });
 
-// Показ лоадера через toast
-let toastId; // Збережемо ID, щоб оновлювати або закривати toast
+const setLoading = (type) => {
+  store.dispatch(changeLoadStatus(type));
+};
 
 const showLoader = () => {
-  toastId = toast.loading("Loading...");
+  setLoading(true);
 };
 
 const hideLoader = () => {
-  if (toastId) {
-    toast.dismiss(toastId);
-  }
+  setLoading(false);
 };
 
 // Показ повідомлення про успіх
