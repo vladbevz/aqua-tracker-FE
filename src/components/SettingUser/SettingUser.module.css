@@ -52,12 +52,14 @@
   width: 80px;
   height: 80px;
   border-radius: 100%;
+  cursor: pointer;
 }
 
 .arrowUpIcon {
   width: 16px;
   height: 16px;
   color: #407bff;
+  cursor: pointer;
 }
 
 .avatarUploadText {
@@ -66,6 +68,7 @@
   font-size: 14px;
   line-height: 129%;
   color: #407bff;
+  cursor: pointer;
 }
 
 .avatarHiddenInput {
@@ -120,6 +123,11 @@
   padding: 12px 10px;
   width: 256px;
   height: 44px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: #407bff;
   margin-top: 8px;
   margin-bottom: 24px;
 }
@@ -134,8 +142,12 @@
 .passwordWrap {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  /* gap: 12px; */
   margin-bottom: 24px;
+}
+
+.passwordWrap .title {
+  margin-bottom: 12px;
 }
 
 .passwordLabel {
@@ -143,11 +155,17 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 125%;
+  margin-bottom: 8px;
 }
 
 .passwordInput {
   border: none;
   outline: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  /* color: #407bff; */
 }
 
 .passwordInputWrap {
@@ -159,6 +177,7 @@
   padding: 12px 10px;
   width: 256px;
   height: 44px;
+  margin-bottom: 12px;
 }
 
 .showPasswordEyeBtn {
@@ -193,7 +212,7 @@
 @media only screen and (min-width: 768px) {
   .container {
     width: 768px;
-    padding: 16px 32px;
+    padding: 24px 32px;
   }
 
   .credentialsInput {
@@ -212,6 +231,5 @@
 @media (min-width: 1440px) {
   .container {
     width: 1216px;
-    padding: 18px 12px;
   }
 }

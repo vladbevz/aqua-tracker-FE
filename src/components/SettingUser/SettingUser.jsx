@@ -23,7 +23,7 @@ const initialValues = {
 };
 
 const AvatarUpload = () => {
-  const { setFieldValue } = useFormikContext();
+  // const { setFieldValue } = useFormikContext();
   const [avatarPreview, setAvatarPreview] = useState(
     "images/noAvatar/no-avatar.png"
   );
@@ -32,8 +32,8 @@ const AvatarUpload = () => {
     const formData = new FormData();
     formData.append("avatar", file);
     try {
-      const response = await fetch("users/avatar", {
-        method: "POST",
+      const response = await fetch("users/update", {
+        method: "PATCH",
         body: formData,
       });
       if (!response.ok) {
