@@ -18,13 +18,14 @@ const monthWaterListSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchMonthWater.fulfilled, (state, action) => {
+        console.log("action.payload: ", action.payload);
         state.isLoading = false;
         state.error = null;
-        state.month = action.payload.data.monthWaterList.month;
-        state.month = action.payload.data.monthWaterList.year;
+        state.month = action.payload.data.data.month;
+        state.year = action.payload.data.data.year;
         state.amountWaterPerMonth =
-          action.payload.data.monthWaterList.amountWaterPerMonth;
-        state.items = action.payload.data.monthWaterList.monthWaterList;
+          action.payload.data.data.amountWaterPerMonth;
+        state.items = action.payload.data.data.monthWaterList;
       })
       .addCase(logOut.fulfilled, (state) => {
         state.year = null;
