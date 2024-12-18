@@ -4,6 +4,7 @@ import { Loader } from "../components/Loader/Loader";
 
 let id = null;
 let loaderShowed = false;
+let sucsessShowed = false;
 
 const showLoader = () => {
   if (loaderShowed) return;
@@ -24,15 +25,22 @@ const hideLoader = () => {
   loaderShowed = false;
 };
 
+const showSuccess = (message) => {
+  if (sucsessShowed) return;
+  sucsessShowed = true;
+  toast.success(message || "Successfuly!");
+  setTimeout(
+    () => {
+      sucsessShowed = false;
+    },3000
+  )
+};
+
 // Create axios example
 const axiosToast = axios.create({
   timeout: 10000,
 });
 
-// Показ повідомлення про успіх
-const showSuccessMessage = (message) => {
-  toast.success(message || "Successfuly!");
-};
 
 // Показ повідомлення про помилку
 const showErrorMessage = (error) => {
@@ -57,7 +65,7 @@ axiosToast.interceptors.request.use(
 axiosToast.interceptors.response.use(
   (response) => {
     hideLoader(); // Приховуємо лоадер після відповіді
-    showSuccessMessage();
+    showSuccess();
     return response;
   },
   (error) => {
