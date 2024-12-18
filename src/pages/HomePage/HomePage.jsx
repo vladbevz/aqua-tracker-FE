@@ -5,18 +5,18 @@ import { WaterRatioPanel } from "../../components/WaterRatioPanel/WaterRatioPane
 import { MonthStatsTable } from "../../components/MonthStatsTable/MonthStatsTable.jsx";
 import css from "./HomePage.module.css";
 // import entries from "./entries.json";
-import data from "./data.json";
 import { fetchTodayWater } from "../../redux/todayWaterList/operations.js";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTodayWaterList } from "../../redux/todayWaterList/selectors.js";
 import { fetchMonthWater } from "../../redux/monthWaterList/operations.js";
 import { getMonthName } from "../../Utilits/getMonth.js";
+import { selectMonthWaterList } from "../../redux/monthWaterList/selector.js";
 
 export default function HomePage() {
-  const [monthData, setMonthData] = useState(data);
   const [year, setYear] = useState(2024);
   const [monthNumber, setMonthNumber] = useState(11);
   const month = getMonthName(monthNumber);
+  const monthData = useSelector(selectMonthWaterList);
   // const [dailyEntries, setDailyEntries] = useState(entries);
 
   const dispatch = useDispatch();
