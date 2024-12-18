@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import css from "./AddWaterModal.module.css";
 
+import { addTodayWater } from "../../redux/todayWaterList/operations";
+
 export const AddWaterModal = ({ closeModal }) => {
   const [counter, setCounter] = useState(50);
   const [currentTime, setCurrentTime] = useState("");
@@ -25,10 +27,10 @@ export const AddWaterModal = ({ closeModal }) => {
       return;
     }
     const payload = {
+      amount: counter,
       time: v.time,
-      value: counter,
     };
-    dispatch(payload);
+    dispatch(addTodayWater(payload));
     closeModal();
   };
 
