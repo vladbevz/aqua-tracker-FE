@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./SignUpForm.module.css";
+import { SignInPage } from "../../pages/SignInPage/SignInPage.jsx";
 
 const initialValues = {
   email: "",
@@ -20,8 +21,8 @@ export const SignUpForm = () => {
       .required("Password is required"),
 
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required'),
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required"),
   });
 
   return (
@@ -64,7 +65,7 @@ export const SignUpForm = () => {
           </button>
         </Form>
       </Formik>
-      <a>Sign In</a>
+      <a href={<SignInPage />}>Sign In</a>
     </div>
   );
 };
