@@ -10,6 +10,11 @@ export const MonthStatsTable = ({
   monthNumber,
   setYear,
 }) => {
+
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+  const disableNextMonthButton = currentMonth <= monthNumber && currentYear >= year;
+
   const setPrevMonth = () => {
     if (monthNumber - 1 < 0) {
       setMonthNumber(11);
@@ -39,7 +44,11 @@ export const MonthStatsTable = ({
           <p className={css.paginationMonth}>
             {month}, {year}
           </p>
-          <button className={css.paginationBtn} onClick={setNextMonth}>
+          <button
+            className={css.paginationBtn}
+            onClick={setNextMonth}
+            disabled={disableNextMonthButton}
+          >
             <HiOutlineChevronRight />
           </button>
         </div>
