@@ -1,1 +1,1 @@
-export const selectMonthWaterList = (state) => state.selectMonthWaterList;
+export const selectMonthWaterList = (state) => state.monthWater.items;
