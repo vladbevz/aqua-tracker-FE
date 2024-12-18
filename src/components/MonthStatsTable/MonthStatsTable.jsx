@@ -59,12 +59,14 @@ export const MonthStatsTable = ({
             <div
               key={index}
               className={`${css.day} ${
-                day.completed ? `${css.completed}` : `${css.uncompleted}`
+                day.amountWaterPerDay < day.daylyNorm
+                  ? `${css.completed}`
+                  : `${css.uncompleted}`
               }`}
             >
-              <p className={css.date}>{day.date}</p>
+              <p className={css.date}>{day.date.split("-")[2]}</p>
             </div>
-            <p className={css.progress}>{day.progress}%</p>
+            <p className={css.progress}>{day.percent}%</p>
           </div>
         ))}
       </div>
