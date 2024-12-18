@@ -1,21 +1,32 @@
-.main-page {
-  font-family: "Roboto", sans-serif;
-  background-color: #f9fafe;
-  background-image: url(/public/images/MainPage/mob-1x.png),
-    url(/public/images/MainPage/mob-2x.png);
+.backround-image {
+  height: 840px;
+  background-image: url("/public/images/MainPage/mob-1x.png");
   background-position: center;
   background-repeat: no-repeat;
-  color: #333;
-  padding: 0;
+  background-size: cover;
+}
+
+@media only screen and (min-resolution: 192dpi) {
+  .backround-image {
+    background-image: url("/public/images/MainPage/mob-2x.png");
+  }
+}
+
+.main-page {
+  padding: 4px 20px;
   width: 320px;
-  height: 100%;
+  height: 680px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  padding: 20px;
   box-sizing: border-box;
-  background-size: cover;
+}
+
+@media only screen and (min-resolution: 192dpi) {
+  .main-page {
+    background-image: url("/public/images/MainPage/mob-2x.png");
+  }
 }
 
 .main-paige-info {
@@ -103,24 +114,38 @@
 }
 
 .why-drink-list li {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin-bottom: 16px;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;
   color: #2f2f2f;
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
+}
+
+.why-drink-list li svg {
+  flex-shrink: 0;
 }
 
 @media screen and (min-width: 768px) {
-  .main-page {
-    width: 100%;
+  .backround-image {
     height: 800px;
-    justify-content: space-between;
+    background-image: url("/public/images/MainPage/tab-1x.png");
+  }
+
+  @media only screen and (min-resolution: 192dpi) {
+    .backround-image {
+      background-image: url("/public/images/MainPage/tab-2x.png");
+    }
+  }
+
+  .main-page {
+    width: 768px;
+    height: 800px;
     align-items: flex-start;
-    padding: 32px;
-    background-image: url(/public/images/MainPage/tab-1x.png),
-      url(/public/images/MainPage/tab-2x.png);
+    padding: 0 32px;
   }
 
   .main-paige-info {
@@ -129,32 +154,16 @@
   }
 
   .main-paige-title {
-    font-weight: 700;
     font-size: 36px;
     line-height: 1.17;
-    color: #2f2f2f;
-    margin-bottom: 16px;
   }
 
   .main-paige-text {
-    font-weight: 400;
     font-size: 26px;
-    line-height: 1.23077;
-    color: #2f2f2f;
-    margin-bottom: 24px;
-  }
-
-  .main-benefits-title {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 1.11111;
-    color: #2f2f2f;
+    line-height: 1.23;
   }
 
   .main-benefits-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -192,45 +201,32 @@
     justify-content: flex-start;
     flex-direction: column;
     flex: 1;
-    background-color: #ecf2ff;
     padding: 32px 24px;
-    width: 100%;
     max-width: 496px;
-    text-align: left;
-    box-sizing: border-box;
-  }
-
-  .why-drink-title {
-    font-weight: 500;
-    font-size: 18px;
-
-    line-height: 1.11111;
-    color: #2f2f2f;
   }
 
   .why-drink-list li {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.25;
-    color: #2f2f2f;
     margin-bottom: 16px;
   }
 }
 
 @media screen and (min-width: 1440px) {
+  .backround-image {
+    height: 900px;
+    background-image: url("/public/images/MainPage/desk-1x.png");
+  }
+
+  @media only screen and (min-resolution: 192dpi) {
+    .backround-image {
+      background-image: url("/public/images/MainPage/desk-2x.png");
+    }
+  }
+
   .main-page {
-    width: 100%;
-    display: flex;
+    width: 1440px;
+    height: 850px;
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 0 auto;
     padding: 80px 216px;
-    background-image: url(/public/images/MainPage/desk-1x.png),
-      url(/public/images/MainPage/desk-2x.png);
-    background-size: cover;
-    background-position: center;
-    box-sizing: border-box;
   }
 
   .main-paige-info {
@@ -238,26 +234,11 @@
   }
 
   .main-paige-title {
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 1.17;
     margin-bottom: 20px;
-    color: #2f2f2f;
   }
 
   .main-paige-text {
-    font-weight: 400;
-    font-size: 26px;
-    line-height: 1.23;
-    color: #2f2f2f;
     margin-bottom: 32px;
-  }
-
-  .main-benefits-title {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 1.11111;
-    color: #2f2f2f;
   }
 
   .main-benefits-list {
@@ -269,11 +250,7 @@
   }
 
   .main-benefits-list li {
-    font-weight: 400;
     font-size: 18px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 0;
   }
 
   .try-main-button {
@@ -291,22 +268,17 @@
   }
 
   .why-drink-water {
-    background-color: #ecf2ff;
-    border-radius: 16px;
     max-width: 600px;
     flex: 1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .why-drink-title {
-    font-weight: 500;
     font-size: 22px;
     margin-bottom: 24px;
-    color: #2f2f2f;
   }
 
   .why-drink-list li {
-    font-weight: 400;
     font-size: 18px;
     margin-bottom: 20px;
     line-height: 1.4;
