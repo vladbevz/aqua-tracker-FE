@@ -52,7 +52,6 @@ export const DailyNormaModal = ({ closeModal }) => {
     try {
       await dispatch(updateUser({ daylyNorm: waterAmount }));
       toast.success("Successfully daily intake saved!");
-      console.log("Daily intake saved:");
       closeModal();
     } catch (error) {
       if (error.response?.status === 500) {
@@ -71,8 +70,6 @@ export const DailyNormaModal = ({ closeModal }) => {
       setWaterAmount(toMilliliters(value));
     }
   };
-
-  console.log(waterAmount);
   return (
     <div className={css.modal}>
       <div className={css.head}>
