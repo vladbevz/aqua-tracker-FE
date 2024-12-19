@@ -1,3 +1,7 @@
+a:hover {
+  color: var(--secondary-color-4);
+}
+
 .title {
   font-family: var(--font-medium);
   font-size: 26px;
@@ -32,6 +36,7 @@
   border-radius: 6px;
   padding: 12px 10px;
   margin-top: 8px;
+  outline: none;
 }
 
 .field::placeholder {
@@ -110,4 +115,8 @@ span {
   .form {
     width: 384px;
   }
+}
+
+.errorField {
+  border: 1px solid var(--secondary-color-2);
 }
