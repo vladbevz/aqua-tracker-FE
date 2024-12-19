@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux";
 import { IoCloseOutline } from "react-icons/io5";
 import { deleteTodayWater } from "../../redux/todayWaterList/operations";
 
-export const DeleteEntryModal = ({ closeModal, idWater }) => {
+export const DeleteEntryModal = ({ closeModal, id }) => {
   const dispath = useDispatch();
+
   const handleClick = () => {
-    dispath(deleteTodayWater(idWater));
+    console.log(id);
+    dispath(deleteTodayWater(id));
     closeModal();
   };
 
