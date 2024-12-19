@@ -44,7 +44,7 @@ const todayWaterListSlice = createSlice({
       .addCase(addTodayWater.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items.push(action.payload);
+        state.items.push(action.payload.data);
       })
       .addCase(addTodayWater.rejected, handleRejected)
       .addCase(deleteTodayWater.pending, handlePending)
