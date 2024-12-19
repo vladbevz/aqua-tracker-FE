@@ -23,12 +23,6 @@
   box-sizing: border-box;
 }
 
-@media only screen and (min-resolution: 192dpi) {
-  .main-page {
-    background-image: url("/public/images/MainPage/mob-2x.png");
-  }
-}
-
 .main-paige-info {
   margin-bottom: 20px;
   width: 100%;
