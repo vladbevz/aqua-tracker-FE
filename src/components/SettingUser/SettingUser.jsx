@@ -1,6 +1,13 @@
-import { Formik, Form, Field, ErrorMessage, useFormikContext } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState, useId } from "react";
+import axios from "axios";
+
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors";
+
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../redux/auth/operations";
 
 import { IoCloseOutline } from "react-icons/io5";
 import { HiOutlineArrowUpTray } from "react-icons/hi2";
@@ -10,37 +17,53 @@ import css from "./SettingUser.module.css";
 
 const SettingSchema = Yup.object().shape({
   email: Yup.string().email("Must be a valid email!").required("Required"),
+  newPassword: Yup.string().min(8, "Password must be at least 8 characters!"),
+  repeatNewPassword: Yup.string().oneOf(
+    [Yup.ref("newPassword"), null],
+    "Passwords must match!"
+  ),
 });
 
-const initialValues = {
-  avatar: "",
-  picked: "Woman",
-  username: "",
-  email: "",
-  outdatedPassword: "",
-  newPassword: "",
-  repeatNewPassword: "",
-};
+export const SettingUser = ({ onCancel }) => {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
-const AvatarUpload = () => {
-  // const { setFieldValue } = useFormikContext();
+  const initialValues = {
+    avatar: user.avatarUrl || "",
+    picked: "Woman",
+    username: user.name || "",
+    email: user.email || "",
+    outdatedPassword: "",
+    newPassword: "",
+    repeatNewPassword: "",
+  };
+
+  //avatar
   const [avatarPreview, setAvatarPreview] = useState(
-    "images/noAvatar/no-avatar.png"
+    user.avatarUrl || "images/noAvatar/no-avatar.png"
   );
+  const [isUploading, setIsUploading] = useState(false);
 
   const uploadAvatar = async (file) => {
     const formData = new FormData();
-    formData.append("avatar", file);
+    formData.append("avatarUrl", file);
     try {
-      const response = await fetch("users/update", {
-        method: "PATCH",
-        body: formData,
+      setIsUploading(true);
+      const response = await axios.patch("/users/avatar", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
-      }
+      console.log("Avatar upload successful: ", response.data);
+      return response.data.avatarUrl;
     } catch (error) {
-      console.log(error, "Avatar upload error: ", error);
+      console.error(
+        "Avatar upload error: ",
+        error.response || error.errorMessage
+      );
+      throw error;
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -49,7 +72,13 @@ const AvatarUpload = () => {
     if (file) {
       const previewUrl = URL.createObjectURL(file);
       setAvatarPreview(previewUrl);
-      await uploadAvatar(file);
+
+      try {
+        const uploadedAvatarUrl = await uploadAvatar(file);
+        setAvatarPreview(uploadedAvatarUrl);
+      } catch (error) {
+        console.error("Error updating avatar: ", error);
+      }
     }
   };
 
@@ -57,26 +86,7 @@ const AvatarUpload = () => {
     document.getElementById("avatarInput").click();
   };
 
-  return (
-    <div className={css.photoWrap}>
-      <h2 className={css.title}>Your photo</h2>
-      <div className={css.avatarWrap} onClick={handleClick}>
-        <img className={css.avatar} src={avatarPreview} alt="User avatar" />
-        <HiOutlineArrowUpTray className={css.arrowUpIcon} />
-        <span className={css.avatarUploadText}>Upload a photo</span>
-        <Field
-          type="file"
-          name="avatar"
-          id="avatarInput"
-          className={css.avatarHiddenInput}
-          onChange={handleFileChange}
-        />
-      </div>
-    </div>
-  );
-};
-
-export const SettingUser = ({ onCancel }) => {
+  //user data
   const [showPassword, setShowPassword] = useState({
     outdatedPassword: false,
     newPassword: false,
@@ -106,15 +116,25 @@ export const SettingUser = ({ onCancel }) => {
   const newPasswordFieldId = useId();
   const repeatNewPasswordFieldId = useId();
 
-  const handleSubmit = (values, actions) => {
-    console.log(values);
-    actions.resetForm();
-    setPasswordValues({
-      outdatedPassword: "",
-      newPassword: "",
-      repeatNewPassword: "",
-    });
-    onCancel();
+  const handleSubmit = async (values, actions) => {
+    const { avatar, username, email, newPassword } = values;
+    const formData = new FormData();
+    formData.append("name", username);
+    formData.append("email", email);
+    if (avatar && typeof avatar !== "string") {
+      formData.append("avatarUrl", avatar);
+    }
+    if (newPassword) {
+      formData.append("password", newPassword);
+    }
+
+    try {
+      await dispatch(updateUser(formData)).unwrap();
+      actions.resetForm();
+      onCancel();
+    } catch (error) {
+      console.error("Failed to update user: ", error);
+    }
   };
 
   return (
@@ -130,166 +150,224 @@ export const SettingUser = ({ onCancel }) => {
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={SettingSchema}
+        enableReinitialize
       >
-        <Form>
-          <AvatarUpload />
-
-          <div className={css.genderWrap}>
-            <h2 className={css.title}>Your gender identity</h2>
-            <div className={css.genderRadioWrap}>
-              <label className={css.genderLabelWrap} htmlFor="picked">
-                <Field type="radio" name="picked" value="Woman" />
-                <p className={css.genderText}>Woman</p>
-              </label>
-              <label className={css.genderLabelWrap} htmlFor="picked">
-                <Field type="radio" name="picked" value="Man" />
-                <p className={css.genderText}>Man</p>
-              </label>
+        {({ setFieldValue }) => (
+          <Form>
+            <div className={css.photoWrap}>
+              <h2 className={css.title}>Your photo</h2>
+              <div className={css.avatarWrap} onClick={handleClick}>
+                <img
+                  className={css.avatar}
+                  src={avatarPreview}
+                  alt="User avatar"
+                  aria-busy={isUploading}
+                />
+                {isUploading ? (
+                  <span>Uploading...</span>
+                ) : (
+                  <>
+                    <HiOutlineArrowUpTray className={css.arrowUpIcon} />
+                    <span className={css.avatarUploadText}>Upload a photo</span>
+                  </>
+                )}
+                <input
+                  type="file"
+                  id="avatarInput"
+                  className={css.avatarHiddenInput}
+                  accept="image/*"
+                  onChange={(e) => {
+                    setFieldValue("avatar", e.target.files[0]);
+                    handleFileChange(e);
+                  }}
+                />
+              </div>
             </div>
-          </div>
 
-          <div className={css.credentialsWrap}>
-            <label className={css.credentialsLabel} htmlFor={usernameFieldId}>
-              Your name
-            </label>
-            <Field
-              className={css.credentialsInput}
-              type="text"
-              name="username"
-              id={usernameFieldId}
-            />
+            <div className={css.genderWrap}>
+              <h2 className={css.title}>Your gender identity</h2>
+              <div className={css.genderRadioWrap}>
+                <label className={css.genderLabelWrap} htmlFor="pickedWoman">
+                  <Field
+                    type="radio"
+                    name="picked"
+                    value="Woman"
+                    id="pickedWoman"
+                  />
+                  <p className={css.genderText}>Woman</p>
+                </label>
+                <label className={css.genderLabelWrap} htmlFor="pickedMan">
+                  <Field
+                    type="radio"
+                    name="picked"
+                    value="Man"
+                    id="pickedMan"
+                  />
+                  <p className={css.genderText}>Man</p>
+                </label>
+              </div>
+            </div>
 
-            <label className={css.credentialsLabel} htmlFor={emailFieldId}>
-              E-mail
-            </label>
-            <Field
-              className={css.credentialsInput}
-              type="email"
-              name="email"
-              placeholder="User's email"
-              id={emailFieldId}
-            />
-          </div>
-
-          <div className={css.passwordWrap}>
-            <h2 className={css.title}>Password</h2>
-
-            <label
-              className={css.passwordLabel}
-              htmlFor={outdatedPasswordFieldId}
-            >
-              Outdated password:
-            </label>
-            <div className={css.passwordInputWrap}>
+            <div className={css.credentialsWrap}>
+              <label className={css.credentialsLabel} htmlFor={usernameFieldId}>
+                Your name
+              </label>
               <Field
-                className={css.passwordInput}
-                type={showPassword.outdatedPassword ? "text" : "password"}
+                className={css.credentialsInput}
+                type="text"
+                name="username"
+                id={usernameFieldId}
+              />
+
+              <label className={css.credentialsLabel} htmlFor={emailFieldId}>
+                E-mail
+              </label>
+              <Field
+                className={css.credentialsInput}
+                type="email"
+                name="email"
+                placeholder="User's email"
+                id={emailFieldId}
+              />
+            </div>
+
+            <div className={css.passwordWrap}>
+              <h2 className={css.title}>Password</h2>
+
+              <label
+                className={css.passwordLabel}
+                htmlFor={outdatedPasswordFieldId}
+              >
+                Outdated password:
+              </label>
+              <div className={css.passwordInputWrap}>
+                <Field
+                  className={css.passwordInput}
+                  type={showPassword.outdatedPassword ? "text" : "password"}
+                  name="outdatedPassword"
+                  placeholder="Password"
+                  id={outdatedPasswordFieldId}
+                  value={passwordValues.outdatedPassword}
+                  onChange={(evt) =>
+                    handlePasswordChange("outdatedPassword", evt.target.value)
+                  }
+                />
+                {passwordValues.outdatedPassword && (
+                  <button
+                    className={css.showPasswordEyeBtn}
+                    type="button"
+                    onClick={() => handleToggleShowPassword("outdatedPassword")}
+                    aria-label={
+                      showPassword.outdatedPassword
+                        ? "Hide outdated password"
+                        : "Show outdated password"
+                    }
+                  >
+                    {showPassword.outdatedPassword ? (
+                      <HiOutlineEye className={css.passwordIcon} />
+                    ) : (
+                      <HiOutlineEyeOff className={css.passwordIcon} />
+                    )}
+                  </button>
+                )}
+              </div>
+              <ErrorMessage
+                className={css.errorMessage}
                 name="outdatedPassword"
-                placeholder="Password"
-                id={outdatedPasswordFieldId}
-                value={passwordValues.outdatedPassword}
-                onChange={(evt) =>
-                  handlePasswordChange("outdatedPassword", evt.target.value)
-                }
+                component="span"
               />
-              {passwordValues.outdatedPassword && (
-                <button
-                  className={css.showPasswordEyeBtn}
-                  type="button"
-                  onClick={() => handleToggleShowPassword("outdatedPassword")}
-                >
-                  {showPassword.outdatedPassword ? (
-                    <HiOutlineEye className={css.passwordIcon} />
-                  ) : (
-                    <HiOutlineEyeOff className={css.passwordIcon} />
-                  )}
-                </button>
-              )}
-            </div>
-            <ErrorMessage
-              className={css.errorMessage}
-              name="outdatedPassword"
-              component="span"
-            />
 
-            <label className={css.passwordLabel} htmlFor={newPasswordFieldId}>
-              New password:
-            </label>
-            <div className={css.passwordInputWrap}>
-              <Field
-                className={css.passwordInput}
-                type={showPassword.newPassword ? "text" : "password"}
+              <label className={css.passwordLabel} htmlFor={newPasswordFieldId}>
+                New password:
+              </label>
+              <div className={css.passwordInputWrap}>
+                <Field
+                  className={css.passwordInput}
+                  type={showPassword.newPassword ? "text" : "password"}
+                  name="newPassword"
+                  placeholder="Password"
+                  id={newPasswordFieldId}
+                  value={passwordValues.newPassword}
+                  onChange={(evt) =>
+                    handlePasswordChange("newPassword", evt.target.value)
+                  }
+                />
+                {passwordValues.newPassword && (
+                  <button
+                    className={css.showPasswordEyeBtn}
+                    type="button"
+                    onClick={() => handleToggleShowPassword("newPassword")}
+                    aria-label={
+                      showPassword.newPassword
+                        ? "Hide new password"
+                        : "Show new password"
+                    }
+                  >
+                    {showPassword.newPassword ? (
+                      <HiOutlineEye className={css.passwordIcon} />
+                    ) : (
+                      <HiOutlineEyeOff className={css.passwordIcon} />
+                    )}
+                  </button>
+                )}
+              </div>
+              <ErrorMessage
+                className={css.errorMessage}
                 name="newPassword"
-                placeholder="Password"
-                id={newPasswordFieldId}
-                value={passwordValues.newPassword}
-                onChange={(evt) =>
-                  handlePasswordChange("newPassword", evt.target.value)
-                }
+                component="span"
               />
-              {passwordValues.newPassword && (
-                <button
-                  className={css.showPasswordEyeBtn}
-                  type="button"
-                  onClick={() => handleToggleShowPassword("newPassword")}
-                >
-                  {showPassword.newPassword ? (
-                    <HiOutlineEye className={css.passwordIcon} />
-                  ) : (
-                    <HiOutlineEyeOff className={css.passwordIcon} />
-                  )}
-                </button>
-              )}
-            </div>
-            <ErrorMessage
-              className={css.errorMessage}
-              name="newPassword"
-              component="span"
-            />
 
-            <label
-              className={css.passwordLabel}
-              htmlFor={repeatNewPasswordFieldId}
-            >
-              Repeat new password:
-            </label>
-            <div className={css.passwordInputWrap}>
-              <Field
-                className={css.passwordInput}
-                type={showPassword.repeatNewPassword ? "text" : "password"}
+              <label
+                className={css.passwordLabel}
+                htmlFor={repeatNewPasswordFieldId}
+              >
+                Repeat new password:
+              </label>
+              <div className={css.passwordInputWrap}>
+                <Field
+                  className={css.passwordInput}
+                  type={showPassword.repeatNewPassword ? "text" : "password"}
+                  name="repeatNewPassword"
+                  placeholder="Password"
+                  id={repeatNewPasswordFieldId}
+                  value={passwordValues.repeatNewPassword}
+                  onChange={(evt) =>
+                    handlePasswordChange("repeatNewPassword", evt.target.value)
+                  }
+                />
+                {passwordValues.repeatNewPassword && (
+                  <button
+                    className={css.showPasswordEyeBtn}
+                    type="button"
+                    onClick={() =>
+                      handleToggleShowPassword("repeatNewPassword")
+                    }
+                    aria-label={
+                      showPassword.repeatNewPassword
+                        ? "Hide repeat password"
+                        : "Show repeat password"
+                    }
+                  >
+                    {showPassword.repeatNewPassword ? (
+                      <HiOutlineEye className={css.passwordIcon} />
+                    ) : (
+                      <HiOutlineEyeOff className={css.passwordIcon} />
+                    )}
+                  </button>
+                )}
+              </div>
+              <ErrorMessage
+                className={css.errorMessage}
                 name="repeatNewPassword"
-                placeholder="Password"
-                id={repeatNewPasswordFieldId}
-                value={passwordValues.repeatNewPassword}
-                onChange={(evt) =>
-                  handlePasswordChange("repeatNewPassword", evt.target.value)
-                }
+                component="span"
               />
-              {passwordValues.repeatNewPassword && (
-                <button
-                  className={css.showPasswordEyeBtn}
-                  type="button"
-                  onClick={() => handleToggleShowPassword("repeatNewPassword")}
-                >
-                  {showPassword.repeatNewPassword ? (
-                    <HiOutlineEye className={css.passwordIcon} />
-                  ) : (
-                    <HiOutlineEyeOff className={css.passwordIcon} />
-                  )}
-                </button>
-              )}
             </div>
-            <ErrorMessage
-              className={css.errorMessage}
-              name="repeatNewPassword"
-              component="span"
-            />
-          </div>
 
-          <button className={css.saveBtn} type="submit">
-            Save
-          </button>
-        </Form>
+            <button className={css.saveBtn} type="submit">
+              Save
+            </button>
+          </Form>
+        )}
       </Formik>
     </div>
   );

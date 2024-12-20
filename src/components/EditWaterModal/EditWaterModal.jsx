@@ -51,12 +51,12 @@ export const AddWaterModal = ({ closeModal }) => {
   return (
     <div className={css.container}>
       <div className={css.head}>
-        <h1 className={css.title}>Add water</h1>
+        <h1 className={css.title}>Edit the entered amount of water</h1>
         <button className={css.closeBtn} onClick={closeModal}>
           <IoCloseOutline className={css.closeBtnIcon} />
         </button>
       </div>
-      <h2 className={css.subtitle}>Choose a value:</h2>
+      <h2 className={css.subtitle}>Correct entered data:</h2>
       <p className={css.text}>Amount of water</p>
       <div className={css.counterContainer}>
         <button className={css.counterBtn} onClick={decrement}>

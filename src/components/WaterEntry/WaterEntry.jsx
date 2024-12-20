@@ -10,8 +10,8 @@ export const WaterEntry = (item) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const date = new Date(item.date);
-  const hours = date.getUTCHours().toString().padStart(2, '0');
-  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  const hours = date.getUTCHours().toString().padStart(2, "0");
+  const minutes = date.getUTCMinutes().toString().padStart(2, "0");
   const formattedTime = `${hours}:${minutes}`;
 
   const openModal = () => {
@@ -40,7 +40,7 @@ export const WaterEntry = (item) => {
       </li>
       {modalIsOpen && (
         <ModalWrap isOpen={modalIsOpen} handleClose={closeModal}>
-          <DeleteEntryModal closeModal={closeModal} />
+          <DeleteEntryModal closeModal={closeModal} id={item._id} />
         </ModalWrap>
       )}
     </>

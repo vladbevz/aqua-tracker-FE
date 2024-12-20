@@ -17,6 +17,7 @@ export default function HomePage() {
   const [monthNumber, setMonthNumber] = useState(11);
   const month = getMonthName(monthNumber);
   const monthData = useSelector(selectMonthWaterList);
+
   // const [dailyEntries, setDailyEntries] = useState(entries);
 
   const dispatch = useDispatch();
@@ -34,11 +35,12 @@ export default function HomePage() {
     dispatch(fetchTodayWater());
   }, [dispatch]);
 
+  const waterList = useSelector(selectTodayWaterList);
+
   useEffect(() => {
     getMonthData(year, month);
-  }, [monthNumber]);
+  }, [monthNumber, waterList]);
 
-  const waterList = useSelector(selectTodayWaterList);
 
   return (
     <section className={css.home}>
