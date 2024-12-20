@@ -1,0 +1,237 @@
+.container {
+  border-radius: 10px;
+  width: 280px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 32px 12px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.headerWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header {
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 123%;
+}
+
+.closeBtn {
+  background-color: transparent;
+  border: none;
+  color: #407bff;
+  padding: 6px;
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 111%;
+}
+
+.photoWrap {
+  margin-bottom: 24px;
+}
+
+.avatarWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.arrowUpIcon {
+  width: 16px;
+  height: 16px;
+  color: #407bff;
+  cursor: pointer;
+}
+
+.avatarUploadText {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  color: #407bff;
+  cursor: pointer;
+}
+
+.avatarHiddenInput {
+  display: none;
+}
+
+.genderWrap {
+  margin-bottom: 24px;
+}
+
+.genderWrap .title {
+  margin-bottom: 12px;
+}
+
+.genderRadioWrap {
+  display: flex;
+  gap: 24px;
+}
+
+.genderLabelWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Roboto", sans-serif;
+}
+
+.genderLabelWrap input[type="radio"] {
+  accent-color: #407bff;
+}
+
+.genderText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+}
+
+.credentialsWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.credentialsLabel {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 111%;
+}
+
+.credentialsInput {
+  border: 1px solid #d7e3ff;
+  border-radius: 6px;
+  padding: 12px 10px;
+  width: 256px;
+  height: 44px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: #407bff;
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.errorMessage {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--secondary-color-2);
+}
+
+.passwordWrap {
+  display: flex;
+  flex-direction: column;
+  /* gap: 12px; */
+  margin-bottom: 24px;
+}
+
+.passwordWrap .title {
+  margin-bottom: 12px;
+}
+
+.passwordLabel {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  margin-bottom: 8px;
+}
+
+.passwordInput {
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  /* color: #407bff; */
+}
+
+.passwordInputWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #d7e3ff;
+  border-radius: 6px;
+  padding: 12px 10px;
+  width: 256px;
+  height: 44px;
+  margin-bottom: 12px;
+}
+
+.showPasswordEyeBtn {
+  border: none;
+  background-color: transparent;
+}
+
+.passwordInput::placeholder {
+  color: #9ebbff;
+}
+
+.passwordIcon {
+  color: #407bff;
+}
+
+.saveBtn {
+  border-radius: 10px;
+  border: none;
+  padding: 8px 30px;
+  width: 256px;
+  height: 36px;
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+  background: #407bff;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding: 24px 32px;
+  }
+
+  .credentialsInput {
+    width: 392px;
+  }
+
+  .passwordInputWrap {
+    width: 392px;
+  }
+
+  .passwordInput {
+    width: 332px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: 1216px;
+  }
+}

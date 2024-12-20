@@ -1,0 +1,114 @@
+.wrapper {
+    margin-top: 24px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: var(--font-medium);
+    line-height: 125%;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.paginationBtn {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background-color: var(--secondary-color-1);
+    color: var(--primary-color-blue);
+}
+
+.paginationMonth {
+    margin: 0 12px;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--primary-color-blue);
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color-white);
+    padding: 6px;
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+}
+
+.date {
+    font-size: 14px;
+    line-height: 129%;
+    border-radius: 50%;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress {
+    font-size: 10px;
+    line-height: 160%;
+    text-align: center;
+    color: var(--secondary-color-3);
+}
+
+.completed {
+    border: none;
+}
+
+.uncompleted {
+    border: 1px solid var(--secondary-color-4);
+}
+
+@media only screen and (min-width: 768px) {
+    .calendar {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 10px;
+    }
+
+    .title {
+        font-size: 26px;
+        line-height: 123%;
+    }
+
+    .date {
+        font-size: 16px;
+        line-height: 125%;
+    }
+
+    .day {
+        padding: 7px;
+        height: 34px;
+        width: 34px;
+    }
+
+    .progress {
+        font-size: 13px;
+        line-height: 153%;
+    }
+
+}

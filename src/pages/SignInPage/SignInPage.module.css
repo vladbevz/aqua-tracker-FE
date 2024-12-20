@@ -1,15 +1,16 @@
 .signIn {
-  height: 100vh;
+  height: 680px;
   background-image: url("/images/SignIn/Mobile-Sign-In.png");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  padding-top: 24px;
+  padding: 4px 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.wrapper {
-  padding: 8px 20px;
-}
 @media only screen and (min-resolution: 192dpi) {
   .signIn {
     background-image: url("/images/SignIn/Mobile-Sign-In-2x.png");
@@ -19,7 +20,9 @@
 @media only screen and (min-width: 768px) {
   .signIn {
     background-image: url("/images/SignIn/Tablet-Sign-In.png");
-    padding-top: 40px;
+    /* padding-top: 40px; */
+    padding: 0 32px;
+    display: block;
   }
 
   @media only screen and (min-resolution: 192dpi) {
@@ -34,6 +37,7 @@
     height: 800px;
     background-image: url("/images/SignIn/Desc-Sign-In.png");
     padding-top: 40px;
+    display: block;
   }
 
   @media only screen and (min-resolution: 192dpi) {
