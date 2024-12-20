@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router";
+import { Routes, Route } from "react-router";
 import { Suspense, useEffect, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
