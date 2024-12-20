@@ -20,6 +20,7 @@
 
 .img {
     height: 26px;
+    width: 26px;
 }
 
 .editBtn {
@@ -35,15 +36,32 @@
     color: var(--secondary-color-2);
 }
 
-.btnBox {
+.flex {
     display: flex;
+    align-items: center;
 }
+
 
 .amountBox {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 12px;
 }
 
 .box {
     display: flex;
     justify-content: space-between;
+}
+
+@media only screen and (min-width: 768px) {
+
+    .img {
+            height: 36px;
+            width: 36px;
+        }
+
+    .amountBox {
+        margin-right: 16px;
+    }
 }
