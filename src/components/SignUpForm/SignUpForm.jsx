@@ -1,8 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import styles from "./SignUpForm.module.css";
+import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
+import styles from "./SignUpForm.module.css";
 
 const initialValues = {
   email: "",
@@ -12,19 +15,25 @@ const initialValues = {
 
 export const SignUpForm = () => {
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const handleSubmit = (values, actions) => {
     dispatch(
       register({
-        email: form.elements.email.value,
-        password: form.elements.password.value,
+        email: values.email,
+        password: values.password,
       })
     );
-
-    form.reset();
+    actions.resetForm();
   };
 
   const inputSchema = Yup.object().shape({
@@ -44,49 +53,95 @@ export const SignUpForm = () => {
 
   return (
     <div className={styles.container}>
+      <h3 className={styles.title}>Sign Up</h3>
       <Formik
         initialValues={initialValues}
-        onSubmit={{}}
+        onSubmit={handleSubmit}
         validationSchema={inputSchema}
       >
-        <Form
-          className={styles.form}
-          onSubmit={handleSubmit}
-          autoComplete="off"
-        >
-          <label className={styles.label}>
-            Enter your email
-            <Field type="email" name="email" />
-            <ErrorMessage
-              name="email"
-              component="span"
-              className={styles.errorMessage}
-            />
-          </label>
-          <label className={styles.label}>
-            Enter your password
-            <Field type="password" name="password" />
-            <ErrorMessage
-              name="password"
-              component="span"
-              className={styles.errorMessage}
-            />
-          </label>
-          <label className={styles.label}>
-            Confirm Password
-            <Field type="password" name="confirmPassword" />
-            <ErrorMessage
-              name="confirmPassword"
-              component="span"
-              className={styles.errorMessage}
-            />
-          </label>
-          <button className={styles.btn} type="submit">
-            Sign Up
-          </button>
-        </Form>
+        {({ errors, touched }) => (
+          <Form className={styles.form} autoComplete="off">
+            <label className={styles.label}>
+              Enter your email
+              <Field
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                className={`${styles.field} ${
+                  errors.email && touched.email ? styles.errorField : ""
+                }`}
+              />
+              <ErrorMessage
+                name="email"
+                component="span"
+                className={styles.errorMessage}
+              />
+            </label>
+            <label className={styles.label}>
+              Enter your password
+              <Field
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                className={`${styles.field} ${
+                  errors.password && touched.password ? styles.errorField : ""
+                }`}
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className={styles.eyeBtn}
+              >
+                {showPassword ? (
+                  <HiOutlineEye className={styles.pwdIcons} />
+                ) : (
+                  <HiOutlineEyeOff className={styles.pwdIcons} />
+                )}
+              </button>
+              <ErrorMessage
+                name="password"
+                component="span"
+                className={styles.errorMessage}
+              />
+            </label>
+            <label className={styles.label}>
+              Confirm Password
+              <Field
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                className={`${styles.field} ${
+                  errors.confirmPassword && touched.confirmPassword
+                    ? styles.errorField
+                    : ""
+                }`}
+              />
+              <button
+                type="button"
+                onClick={toggleConfirmPasswordVisibility}
+                className={styles.eyeBtn}
+              >
+                {showConfirmPassword ? (
+                  <HiOutlineEye className={styles.pwdIcons} />
+                ) : (
+                  <HiOutlineEyeOff className={styles.pwdIcons} />
+                )}
+              </button>
+              <ErrorMessage
+                name="confirmPassword"
+                component="span"
+                className={styles.errorMessage}
+              />
+            </label>
+            <button className={styles.btn} type="submit">
+              Sign Up
+            </button>
+            <Link to="/signin" className={styles.link}>
+              Sign In
+            </Link>
+          </Form>
+        )}
       </Formik>
-      <a>Sign In</a>
     </div>
   );
 };
