@@ -1,4 +1,8 @@
-a:hover {
+.link {
+  width: 80px;
+}
+
+.link:hover {
   color: var(--secondary-color-4);
 }
 
