@@ -2,12 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:8px;
+  gap: 8px;
 }
-.link{
+.link {
   font-size: 16px;
   font-weight: 400;
-  color: #407BFF;
+  color: #407bff;
 }
 .avatar {
   width: 28px;
@@ -15,5 +15,8 @@
   border-radius: 50%;
   object-fit: cover;
   border: 1px;
-  color: #2F2F2F;
+  color: #2f2f2f;
+}
+.link:hover {
+  color: var(--secondary-color-4);
 }
