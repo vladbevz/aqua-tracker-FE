@@ -97,6 +97,39 @@ export const SignInForm = () => {
           </Form>
         )}
       </Formik>
+      <picture className={css.picture}>
+        {/* Десктоп с высоким разрешением */}
+        <source
+          srcSet="/images/SignIn/Bottle/Bottle-Desc-Sign-In-x2.png"
+          media="(min-width: 1440px) and (min-resolution: 192dpi)"
+        />
+        {/* Десктоп */}
+        <source
+          srcSet="/images/SignIn/Bottle/Bottle-Desc-Sign-In.png"
+          media="(min-width: 1440px)"
+        />
+        {/* Планшет с высоким разрешением */}
+        <source
+          srcSet="/images/SignIn/Bottle/Bottle-Tab-Sign-In-x2.png"
+          media="(min-width: 768px) and (min-resolution: 192dpi)"
+        />
+        {/* Планшет */}
+        <source
+          srcSet="/images/SignIn/Bottle/Bottle-Tab-Sign-In.png"
+          media="(min-width: 768px)"
+        />
+        {/* Мобильные устройства с высоким разрешением */}
+        <source
+          srcSet="/images/SignIn/Bottle/Bottle-Mob-Sign-In-x2.png"
+          media="(max-width: 767px) and (min-resolution: 192dpi)"
+        />
+        {/* Мобильные устройства */}
+        <img
+          src="/images/SignIn/Bottle/Bottle-Mob-Sign-In.png"
+          alt="Bottle Sign In"
+          style={{ width: "100%", height: "auto" }}
+        />
+      </picture>
     </div>
   );
 };

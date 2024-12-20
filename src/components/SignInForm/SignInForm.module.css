@@ -101,12 +101,29 @@ span {
   text-align: center;
   border: none;
 }
+
+.container {
+  position: relative;
+}
+
+.picture {
+  width: 280px;
+  height: 210px;
+  position: absolute;
+}
+
 @media only screen and (min-width: 768px) {
   .form {
     width: 336px;
   }
   .btn {
     height: 44px;
+  }
+  .picture {
+    width: 600px;
+    height: 548px;
+    top: 0;
+    left: 20%;
   }
 }
 @media only screen and (min-width: 1440px) {
@@ -118,6 +135,13 @@ span {
   }
   .form {
     width: 384px;
+  }
+  .picture {
+    position: absolute;
+    width: 916px;
+    height: 680px;
+    top: -100px;
+    left: -250%;
   }
 }
 
