@@ -14,6 +14,42 @@ export const MonthStatsTable = ({
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   const disableNextMonthButton = currentMonth <= monthNumber && currentYear >= year;
+  let fullMonthData = [];
+
+
+  const getDaysInMonth = (currentYear, currentMonth) => {
+    return new Date(currentYear, currentMonth + 1, 0).getDate();
+  }
+
+  const createDataFullMonth = (fetchData) => {
+    const daysCount = getDaysInMonth(year, monthNumber);
+    const data = [];
+    for (let i = 0; i < daysCount; i++) {
+      data[i] = {
+        amountWaterPerDay: 200,
+        date: `2024-12-${i + 1}`,
+        dayWaterList: [
+          {
+            amount: 50,
+            createdAt: "2024-12-18T20:27:07.543Z",
+            curDaylyNorm: 1500,
+            date: "2024-12-18T20:27:07.541Z",
+            updatedAt: "2024-12-18T20:27:07.543Z",
+            userId: "675d373b5b0fbabf3c4db90a",
+            _id: "6763301b6a099355cf1c7e87",
+          },
+        ],
+        daylyNorm: 8000,
+        percent: 0,
+        servings: 11,
+      };
+    }
+
+    for (const element of fetchData) {
+      data[element.date.split("-")[2] - 1] = element;
+    }
+    return data;
+  };
 
   const setPrevMonth = () => {
     if (monthNumber - 1 < 0) {
@@ -32,6 +68,8 @@ export const MonthStatsTable = ({
     }
     setMonthNumber(monthNumber + 1);
   };
+
+  fullMonthData = (createDataFullMonth(monthData));
 
   return (
     <div className={css.wrapper}>
@@ -54,7 +92,7 @@ export const MonthStatsTable = ({
         </div>
       </div>
       <div className={css.calendar}>
-        {monthData.map((day, index) => (
+        {fullMonthData.map((day, index) => (
           <div key={index} className={css.item}>
             <div
               key={index}
