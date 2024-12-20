@@ -76,6 +76,7 @@ span {
   color: var(--primary-color-blue);
   cursor: pointer;
   margin-top: 16px;
+  width: 80px;
 }
 
 .pwdIcons {
