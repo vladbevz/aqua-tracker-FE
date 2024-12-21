@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./WaterRatioPanel.module.css";
 import { AddWaterModal } from "../AddWaterModal/AddWaterModal";
 import { ModalWrap } from "../ModalWrap/ModalWrap";
@@ -11,6 +11,12 @@ export const WaterRatioPanel = () => {
 
   const progress = useSelector(selectTodayWaterPercent);
 
+  const changedProgress = progress > 100 ? 100 : progress;
+
+  // useEffect(() => {
+  //   console.log("Updated progress:", progress);
+  // }, [progress]);
+
   const openModal = () => {
     setIsOpen(true);
   };
@@ -22,20 +28,21 @@ export const WaterRatioPanel = () => {
     <div className={css.box}>
       <div className={css.progressWrapper}>
         <p className={css.textBar}>Today</p>
-        <div className={css.number} style={{ marginLeft: `${progress/1.16}%` }}>{progress}%</div>
+          <div className={css.progressHolder}>
+            <div className={css.spanBox}>
+              <p className={css.holder}>0%</p>
+              <span className={css.span}></span>
+            </div>
+          <div className={css.spanBox}>
+            <p className={css.holder}>100%</p>
+            <span className={css.span}></span>
+          </div>
+        </div>
+        
         <div className={css.progressBar}>
           <div className={css.progress} style={{ width: `${progress}%` }}></div>
         </div>
-        <div className={css.progressHolder}>
-          <div className={css.spanBox}>
-            <span className={css.span}></span>
-            <p className={css.holder}>0%</p>
-          </div>
-          <div className={css.spanBox}>
-            <span className={css.span}></span>
-            <p className={css.holder}>100%</p>
-          </div>
-        </div>
+        <div className={css.number} style={{ marginLeft: `${changedProgress/1.16}%` }}>{progress}%</div>
       </div>
       <div className={css.btnBox}>
         <button type="button" className={css.addBtn} onClick={openModal}>

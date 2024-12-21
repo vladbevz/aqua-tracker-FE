@@ -24,12 +24,14 @@ export const WaterEntry = (item) => {
   return (
     <>
       <li className={css.waterEntry}>
-        <div className={css.amountBox}>
-          <img src={Glass} alt="glass" className={css.img} />
-          <p className={css.amount}>{item.amount} ml</p>
+        <div className={css.flex}>
+          <div className={css.amountBox}>
+            <img src={Glass} alt="glass" className={css.img} />
+            <p className={css.amount}>{item.amount} ml</p>
+          </div>
+          <p className={css.time}>{formattedTime}</p>
         </div>
-        <p className={css.time}>{formattedTime}</p>
-        <div className={css.btnBox}>
+        <div className={css.flex}>
           <button className={css.editBtn}>
             <HiOutlinePencilSquare />
           </button>
