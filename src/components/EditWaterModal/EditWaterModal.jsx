@@ -10,6 +10,7 @@ import css from "./EditWaterModal.module.css";
 
 import { updateTodayWater } from "../../redux/todayWaterList/operations";
 import Glass from "/images/home/glass.svg";
+import { createDateAsUTC } from "../../Utilits/dateTime";
 
 export const EditWaterModal = ({ closeModal, item }) => {
   const [counter, setCounter] = useState(item.amount);
@@ -28,15 +29,15 @@ export const EditWaterModal = ({ closeModal, item }) => {
       return;
     }
 
-    const formattedTime = values.time.toLocaleTimeString("en-GB", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
+    // const formattedTime = values.time.toLocaleTimeString("en-GB", {
+    //   hour: "2-digit",
+    //   minute: "2-digit",
+    //   hour12: false,
+    // });
     const payload = {
       waterId: item._id,
       amount: counter,
-      time: formattedTime,
+      date: createDateAsUTC(values.time),
     };
     dispatch(updateTodayWater(payload));
     closeModal();

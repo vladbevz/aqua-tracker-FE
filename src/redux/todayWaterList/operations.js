@@ -69,7 +69,7 @@ export const updateTodayWater = createAsyncThunk(
       const res = await axiosToast.patch(
         `${URL}/water/${water.waterId}`,
         {
-          time: water.time,
+          date: water.date,
           amount: water.amount,
         },
         {
