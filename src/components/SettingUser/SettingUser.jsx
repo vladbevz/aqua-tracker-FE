@@ -1,12 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState, useId } from "react";
-import axios from "axios";
 
-import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../../redux/auth/operations";
 
 import { IoCloseOutline } from "react-icons/io5";
@@ -44,40 +42,22 @@ export const SettingUser = ({ onCancel }) => {
   );
   const [isUploading, setIsUploading] = useState(false);
 
-  const uploadAvatar = async (file) => {
-    const formData = new FormData();
-    formData.append("avatarUrl", file);
-    try {
-      setIsUploading(true);
-      const response = await axios.patch("/users/avatar", formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      console.log("Avatar upload successful: ", response.data);
-      return response.data.avatarUrl;
-    } catch (error) {
-      console.error(
-        "Avatar upload error: ",
-        error.response || error.errorMessage
-      );
-      throw error;
-    } finally {
-      setIsUploading(false);
-    }
-  };
-
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       const previewUrl = URL.createObjectURL(file);
       setAvatarPreview(previewUrl);
 
+      const formData = new FormData();
+      formData.append("avatarUrl", file);
+
       try {
-        const uploadedAvatarUrl = await uploadAvatar(file);
-        setAvatarPreview(uploadedAvatarUrl);
+        setIsUploading(true);
+        await dispatch(updateUser(formData)).unwrap();
       } catch (error) {
         console.error("Error updating avatar: ", error);
+      } finally {
+        setIsUploading(false);
       }
     }
   };
