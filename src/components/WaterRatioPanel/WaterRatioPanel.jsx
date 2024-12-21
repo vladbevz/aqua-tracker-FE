@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./WaterRatioPanel.module.css";
 import { AddWaterModal } from "../AddWaterModal/AddWaterModal";
 import { ModalWrap } from "../ModalWrap/ModalWrap";
@@ -12,10 +12,6 @@ export const WaterRatioPanel = () => {
   const progress = useSelector(selectTodayWaterPercent);
 
   const changedProgress = progress > 100 ? 100 : progress;
-
-  // useEffect(() => {
-  //   console.log("Updated progress:", progress);
-  // }, [progress]);
 
   const openModal = () => {
     setIsOpen(true);

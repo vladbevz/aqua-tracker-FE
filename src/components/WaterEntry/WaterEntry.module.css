@@ -27,7 +27,15 @@
     margin-right: 18px;
     border: none;
     background-color: inherit;
-    color: #9EBBFF;
+    color: var(--secondary-color-3);
+}
+
+.editImg:hover {
+    border-bottom: 1px solid var(--secondary-color-3);
+}
+
+.deleteImg:hover {
+    border-bottom: 1px solid var(--secondary-color-2);
 }
 
 .deleteBtn {
