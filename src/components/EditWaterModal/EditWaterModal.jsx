@@ -8,10 +8,16 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./EditWaterModal.module.css";
 
-import { addTodayWater } from "../../redux/todayWaterList/operations";
+import { updateTodayWater } from "../../redux/todayWaterList/operations";
+import Glass from "/images/home/glass.svg";
 
-export const EditWaterModal = ({ closeModal }) => {
-  const [counter, setCounter] = useState(50);
+export const EditWaterModal = ({ closeModal, item }) => {
+  const [counter, setCounter] = useState(item.amount);
+  const date = new Date(item.date);
+  const hours = date.getUTCHours().toString().padStart(2, "0");
+  const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+  const formattedTime = `${hours}:${minutes}`;
+  const dateForInput = new Date(date.setHours(hours, minutes));
 
   const dispatch = useDispatch();
 
@@ -28,10 +34,11 @@ export const EditWaterModal = ({ closeModal }) => {
       hour12: false,
     });
     const payload = {
+      waterId: item._id,
       amount: counter,
       time: formattedTime,
     };
-    dispatch(addTodayWater(payload));
+    dispatch(updateTodayWater(payload));
     closeModal();
   };
 
@@ -56,6 +63,13 @@ export const EditWaterModal = ({ closeModal }) => {
           <IoCloseOutline className={css.closeBtnIcon} />
         </button>
       </div>
+      <div className={css.flex}>
+        <div className={css.amountBox}>
+          <img src={Glass} alt="glass" className={css.img} />
+          <p className={css.amount}>{item.amount} ml</p>
+        </div>
+        <p className={css.time}>{formattedTime}</p>
+      </div>
       <h2 className={css.subtitle}>Correct entered data:</h2>
       <p className={css.text}>Amount of water</p>
       <div className={css.counterContainer}>
@@ -69,7 +83,7 @@ export const EditWaterModal = ({ closeModal }) => {
       </div>
       <Formik
         initialValues={{
-          time: new Date(),
+          time: dateForInput,
           value: counter,
         }}
         enableReinitialize={true}
@@ -85,6 +99,7 @@ export const EditWaterModal = ({ closeModal }) => {
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={5}
+                timeFormat="HH:mm"
                 dateFormat="HH:mm"
                 timeCaption="Time"
                 className={css.inputTime}
