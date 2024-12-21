@@ -35,22 +35,19 @@ export const WaterEntry = (item) => {
         <div className={css.flex}>
           <button
             className={css.editBtn}
-            onClick={() => openModal("editWater")}
-          >
-            <HiOutlinePencilSquare />
+            onClick={() => openModal("editWater")}>
+            <HiOutlinePencilSquare className={css.editImg} />
           </button>
           <button
             className={css.deleteBtn}
-            onClick={() => openModal("deleteWater")}
-          >
-            <HiOutlineTrash />
+            onClick={() => openModal("deleteWater")}>
+            <HiOutlineTrash className={css.deleteImg} />
           </button>
         </div>
       </li>
       <ModalWrap
         isOpen={activeModal === "deleteWater"}
-        handleClose={closeModal}
-      >
+        handleClose={closeModal}>
         <DeleteEntryModal closeModal={closeModal} id={item._id} />
       </ModalWrap>
 

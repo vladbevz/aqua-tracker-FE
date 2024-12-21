@@ -4,9 +4,13 @@ import { WaterEntry } from "../WaterEntry/WaterEntry";
 import css from "./TodayWaterList.module.css";
 import { HiPlusSmall } from "react-icons/hi2";
 import { AddWaterModal } from "../AddWaterModal/AddWaterModal.jsx";
+import { useSelector } from "react-redux";
+import { selectTodayWaterList } from "../../redux/todayWaterList/selectors.js";
 
-export const TodayWaterList = ({list}) => {
+export const TodayWaterList = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  const waterList = useSelector(selectTodayWaterList);
 
   const openModal = () => {
     setIsOpen(true);
@@ -20,8 +24,8 @@ export const TodayWaterList = ({list}) => {
       <div className="today-section">
         <p className={css.text}>Today</p>
         <ul className={css.list}>
-          {list.map((entry) => (
-            <WaterEntry key={entry._id} {...entry} />
+          {waterList.map((item) => (
+            <WaterEntry key={item._id} {...item} />
           ))}
         </ul>
         <button className={css.addBtn} onClick={openModal}>
