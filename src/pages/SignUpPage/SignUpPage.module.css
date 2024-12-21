@@ -3,9 +3,8 @@
   background-size: cover;
   background-position: inherit;
   background-repeat: no-repeat;
-
+  height: 100%;
   padding: 4px 20px;
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,8 +13,9 @@
 .bottle {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 372px;
-  position: absolute;
+  height: 210px;
+  max-width: 280px;
+  margin-top: 50px;
 }
 
 @media only screen and (min-resolution: 192dpi) {
@@ -37,9 +37,10 @@
 
   .bottle {
     content: url("/images/SignUp/tab-bottle-1x.png");
-    width: 734px;
-    margin-left: 50px;
-    margin-top: -500px;
+    max-width: 734px;
+    height: 548px;
+    margin-left: 60px;
+    margin-top: -330px;
   }
 
   @media only screen and (min-resolution: 192dpi) {
@@ -54,16 +55,19 @@
 
 @media (min-width: 1440px) {
   .signUp {
-    height: 800px;
-    background-image: url("/images/SignUp/lap-background-1x.png");
+    height: 582px;
+    margin-top: 0;
     padding-top: 40px;
     display: block;
+    background-image: url("/images/SignUp/lap-background-1x.png");
   }
 
   .bottle {
     content: url("/images/SignUp/lap-bottle-1x.png");
-    width: 916px;
-    margin-top: -600px;
+    max-width: 916px;
+    height: 680px;
+    margin-top: -360px;
+    margin-left: -30px;
   }
 
   @media only screen and (min-resolution: 192dpi) {
