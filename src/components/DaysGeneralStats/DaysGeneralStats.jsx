@@ -1,4 +1,5 @@
 import css from "./DaysGeneralStats.module.css";
+import { capitalizeFirstLetter } from "../../Utilits/capitalize";
 
 export const DaysGeneralStats = ({
   month,
@@ -8,13 +9,15 @@ export const DaysGeneralStats = ({
   servings,
   showedLeft,
 }) => {
+  const capitalizeMonth = capitalizeFirstLetter(month);
+
   return (
     <div
       className={`${css.container} ${
         showedLeft ? `${css.showedLeft}` : `${css.showedRight}`
       }`}
     >
-      <p className={css.currentDate}>{`${currentDay}, ${month} `}</p>
+      <p className={css.currentDate}>{`${currentDay}, ${capitalizeMonth} `}</p>
       <p className={css.descriptionText}>
         Daily norma:
         <span className={css.stateText}>{daylyNorm}L</span>

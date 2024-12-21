@@ -3,6 +3,7 @@ import { HiOutlineChevronLeft } from "react-icons/hi";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { MonthOneDay } from "./MonthOneDay/MonthOneDay";
+import { capitalizeFirstLetter } from "../../Utilits/capitalize";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 
@@ -76,6 +77,8 @@ export const MonthStatsTable = ({
     setFullMonthData(createDataFullMonth(monthData));
   }, [monthData, year, monthNumber]);
 
+  const capitalizeMonth = capitalizeFirstLetter(month);
+
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
@@ -85,7 +88,7 @@ export const MonthStatsTable = ({
             <HiOutlineChevronLeft />
           </button>
           <p className={css.paginationMonth}>
-            {month}, {year}
+            {capitalizeMonth}, {year}
           </p>
           <button
             className={css.paginationBtn}
