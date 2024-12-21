@@ -105,11 +105,11 @@ export const SignUpForm = () => {
               />
             </label>
             <label className={styles.label}>
-              Confirm Password
+              Repeat password
               <Field
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
-                placeholder="Confirm Password"
+                placeholder="Repeat password"
                 className={`${styles.field} ${
                   errors.confirmPassword && touched.confirmPassword
                     ? styles.errorField

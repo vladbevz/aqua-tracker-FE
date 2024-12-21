@@ -8,6 +8,7 @@ export default function SignInPage() {
         className={styles.bottle}
         src="/images/SignUp/mob-bottle-1x.png"
         alt="Bottle"
+        style={{ width: "100%", height: "auto" }}
       />
     </section>
   );
