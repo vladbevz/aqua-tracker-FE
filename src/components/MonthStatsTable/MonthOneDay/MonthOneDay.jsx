@@ -2,18 +2,16 @@ import { useState } from "react";
 import { DaysGeneralStats } from "../../DaysGeneralStats/DaysGeneralStats";
 import css from "./MonthOneDay.module.css";
 
-
-export const MonthOneDay = ({
-  day,
-}) => {
-
+export const MonthOneDay = ({ day, month }) => {
   const { date, servings, amountWaterPerDay, daylyNorm, percent } = { ...day };
-
-  const [dayInfoShowed, setDayInfoShowed] = useState({status: false, left: true})
+  const [dayInfoShowed, setDayInfoShowed] = useState({
+    status: false,
+    left: true,
+  });
 
   const hideDayInfo = () => {
     setDayInfoShowed({ status: false, left: true });
-  }
+  };
   const showDayInfo = (e) => {
     const elementCoordinate = e.currentTarget.getBoundingClientRect();
     const parentCoordinate =
@@ -23,7 +21,9 @@ export const MonthOneDay = ({
       elementCoordinate.left <
       parentCoordinate.left + parentCoordinate.width / 2;
     setDayInfoShowed({ status: true, left: positionLeft });
-  }
+  };
+
+  const currentDay = date.split("-")[2];
 
   return (
     <div
@@ -37,6 +37,8 @@ export const MonthOneDay = ({
           daylyNorm={daylyNorm}
           percent={percent}
           showedLeft={dayInfoShowed.left}
+          currentDay={currentDay}
+          month={month}
         />
       ) : (
         <></>
@@ -48,7 +50,7 @@ export const MonthOneDay = ({
             : `${css.uncompleted}`
         }`}
       >
-        <p className={css.date}>{date.split("-")[2]}</p>
+        <p className={css.date}>{currentDay}</p>
       </div>
       <p className={css.progress}>{percent}%</p>
     </div>

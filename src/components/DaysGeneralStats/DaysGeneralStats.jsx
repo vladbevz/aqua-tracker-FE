@@ -1,15 +1,20 @@
-
 import css from "./DaysGeneralStats.module.css";
 
-export const DaysGeneralStats = ({ percent, daylyNorm, servings, showedLeft }) => {
-
+export const DaysGeneralStats = ({
+  month,
+  currentDay,
+  percent,
+  daylyNorm,
+  servings,
+  showedLeft,
+}) => {
   return (
     <div
       className={`${css.container} ${
         showedLeft ? `${css.showedLeft}` : `${css.showedRight}`
       }`}
     >
-      <p className={css.currentDate}>17,December</p>
+      <p className={css.currentDate}>{`${currentDay}, ${month} `}</p>
       <p className={css.descriptionText}>
         Daily norma:
         <span className={css.stateText}>{daylyNorm}L</span>
