@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
+
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import css from "./SignInForm.module.css";
@@ -14,6 +16,7 @@ const initialValues = {
 
 export const SignInForm = () => {
   const dispatch = useDispatch();
+
   const handleSubmit = (values, actions) => {
     actions.resetForm();
     dispatch(logIn(values));
@@ -98,32 +101,26 @@ export const SignInForm = () => {
         )}
       </Formik>
       <picture className={css.picture}>
-        {/* Десктоп с высоким разрешением */}
         <source
           srcSet="/images/SignIn/Bottle/Bottle-Desc-Sign-In-x2.png"
           media="(min-width: 1440px) and (min-resolution: 192dpi)"
         />
-        {/* Десктоп */}
         <source
           srcSet="/images/SignIn/Bottle/Bottle-Desc-Sign-In.png"
           media="(min-width: 1440px)"
         />
-        {/* Планшет с высоким разрешением */}
         <source
           srcSet="/images/SignIn/Bottle/Bottle-Tab-Sign-In-x2.png"
           media="(min-width: 768px) and (min-resolution: 192dpi)"
         />
-        {/* Планшет */}
         <source
           srcSet="/images/SignIn/Bottle/Bottle-Tab-Sign-In.png"
           media="(min-width: 768px)"
         />
-        {/* Мобильные устройства с высоким разрешением */}
         <source
           srcSet="/images/SignIn/Bottle/Bottle-Mob-Sign-In-x2.png"
           media="(max-width: 767px) and (min-resolution: 192dpi)"
         />
-        {/* Мобильные устройства */}
         <img
           src="/images/SignIn/Bottle/Bottle-Mob-Sign-In.png"
           alt="Bottle Sign In"
