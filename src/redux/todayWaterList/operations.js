@@ -66,11 +66,18 @@ export const updateTodayWater = createAsyncThunk(
   async (water, thunkAPI) => {
     try {
       const authHeader = "Bearer " + thunkAPI.getState().auth.accessToken;
-      const res = await axiosToast.patch(`${URL}/water/${water.waterId}`, {
-        headers: {
-          Authorization: authHeader,
+      const res = await axiosToast.patch(
+        `${URL}/water/${water.waterId}`,
+        {
+          time: water.time,
+          amount: water.amount,
         },
-      });
+        {
+          headers: {
+            Authorization: authHeader,
+          },
+        }
+      );
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

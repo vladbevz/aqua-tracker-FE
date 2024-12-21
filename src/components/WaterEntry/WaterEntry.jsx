@@ -55,7 +55,7 @@ export const WaterEntry = (item) => {
       </ModalWrap>
 
       <ModalWrap isOpen={activeModal === "editWater"} handleClose={closeModal}>
-        <EditWaterModal closeModal={closeModal} />
+        <EditWaterModal closeModal={closeModal} item={item} />
       </ModalWrap>
     </>
   );

@@ -85,6 +85,7 @@ export const AddWaterModal = ({ closeModal }) => {
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={5}
+                timeFormat="HH:mm"
                 dateFormat="HH:mm"
                 timeCaption="Time"
                 className={css.inputTime}
