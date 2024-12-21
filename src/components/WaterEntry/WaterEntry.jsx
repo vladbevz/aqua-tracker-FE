@@ -5,22 +5,23 @@ import css from "./WaterEntry.module.css";
 import Glass from "/images/home/glass.svg";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { HiOutlineTrash } from "react-icons/hi2";
+import { EditWaterModal } from "../EditWaterModal/EditWaterModal.jsx";
 
 export const WaterEntry = (item) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
 
   const date = new Date(item.date);
   const hours = date.getUTCHours().toString().padStart(2, "0");
   const minutes = date.getUTCMinutes().toString().padStart(2, "0");
   const formattedTime = `${hours}:${minutes}`;
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-  const closeModal = () => {
-    setIsOpen(false);
+  const openModal = (modalType) => {
+    setActiveModal(modalType);
   };
 
+  const closeModal = () => {
+    setActiveModal(null);
+  };
   return (
     <>
       <li className={css.waterEntry}>
@@ -32,19 +33,30 @@ export const WaterEntry = (item) => {
           <p className={css.time}>{formattedTime}</p>
         </div>
         <div className={css.flex}>
-          <button className={css.editBtn}>
+          <button
+            className={css.editBtn}
+            onClick={() => openModal("editWater")}
+          >
             <HiOutlinePencilSquare />
           </button>
-          <button className={css.deleteBtn} onClick={openModal}>
+          <button
+            className={css.deleteBtn}
+            onClick={() => openModal("deleteWater")}
+          >
             <HiOutlineTrash />
           </button>
         </div>
       </li>
-      {modalIsOpen && (
-        <ModalWrap isOpen={modalIsOpen} handleClose={closeModal}>
-          <DeleteEntryModal closeModal={closeModal} id={item._id} />
-        </ModalWrap>
-      )}
+      <ModalWrap
+        isOpen={activeModal === "deleteWater"}
+        handleClose={closeModal}
+      >
+        <DeleteEntryModal closeModal={closeModal} id={item._id} />
+      </ModalWrap>
+
+      <ModalWrap isOpen={activeModal === "editWater"} handleClose={closeModal}>
+        <EditWaterModal closeModal={closeModal} />
+      </ModalWrap>
     </>
   );
 };
