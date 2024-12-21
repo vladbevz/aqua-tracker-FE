@@ -18,7 +18,6 @@ const monthWaterListSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchMonthWater.fulfilled, (state, action) => {
-        console.log("action.payload: ", action.payload);
         state.isLoading = false;
         state.error = null;
         state.month = action.payload.data.data.month;
