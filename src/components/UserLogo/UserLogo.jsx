@@ -20,15 +20,20 @@ const UserLogo = () => {
     setIsBackdropOpen(false);
   };
 
+  const getFallbackAvatar = () => {
+    const letter = user.name?.charAt(0) || user.email?.charAt(0) || "?";
+    return letter.toUpperCase();
+  };
+
   return (
     <div className={css.profileDropdown}>
       <div className={css.profileInfo}>
-        <span className={css.username}>{user.name}</span>
-        <img
-          src={user.avatarUrl || "images/noAvatar/no-avatar.png"}
-          alt="User Avatar"
-          className={css.avatar}
-        />
+        <span className={css.username}>{user.name || user.email}</span>
+        {user.avatarUrl ? (
+          <img src={user.avatarUrl} alt="User Avatar" className={css.avatar} />
+        ) : (
+          <div className={css.fallbackAvatar}>{getFallbackAvatar()}</div>
+        )}
         <button className={css.arrowButton} onClick={toggleBackdrop}>
           {isBackdropOpen ? (
             <IoIosArrowUp className={css.arrow} />

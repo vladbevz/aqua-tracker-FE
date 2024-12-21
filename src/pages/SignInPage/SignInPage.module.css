@@ -1,7 +1,7 @@
 .signIn {
   height: 680px;
   background-image: url("/images/SignIn/Mobile-Sign-In.png");
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   padding: 4px 20px;
@@ -13,7 +13,7 @@
 
 @media only screen and (min-resolution: 192dpi) {
   .signIn {
-    background-image: url("/images/SignIn/Mobile-Sign-In-2x.png");
+    background-image: url("/images/SignIn/Mobile-Sign-In-x2.png");
   }
 }
 
@@ -35,6 +35,7 @@
 @media (min-width: 1440px) {
   .signIn {
     height: 800px;
+    margin-top: 0;
     background-image: url("/images/SignIn/Desc-Sign-In.png");
     padding-top: 40px;
     display: block;

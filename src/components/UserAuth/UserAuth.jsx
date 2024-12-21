@@ -7,19 +7,21 @@ import { RxAvatar } from "react-icons/rx";
 // const logedIn = false;
 
 export const UserAuth = () => {
-  const logedIn = useSelector(selectIsLoggedIn)
+  const logedIn = useSelector(selectIsLoggedIn);
   return (
     <div className={css.container}>
       {logedIn ? (
         <>
-        <UserLogo/>
+          <UserLogo />
         </>
       ) : (
-       <>
-       <NavLink to='/signin' className={css.link}>Sign In</NavLink>
-       <RxAvatar  className = {css.avatar}/>
-       </> 
+        <>
+          <NavLink to="/signin" className={css.link}>
+            Sign In
+          </NavLink>
+          <RxAvatar className={css.avatar} />
+        </>
       )}
     </div>
-  )
+  );
 };

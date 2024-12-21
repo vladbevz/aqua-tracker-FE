@@ -1,32 +1,49 @@
 .signUp {
   height: 100vh;
-  background-image: url("/images/SignIn/SignUp/mob-signup-back-1x.png");
+  background-image: url("/images/SignUp/mob-back-1x.png");
   background-size: cover;
-  background-position: center;
+  background-position: inherit;
   background-repeat: no-repeat;
-  
+  padding: 4px 20px;
 }
 
 .bottle {
-    height: 680px;
-    width: 916px;
-    margin-top: 20px;
-    margin-bottom: 40px;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
 }
 
 @media only screen and (min-resolution: 192dpi) {
-  .container {
-    background-image: url("/images/SignIn/SignUp/mob-signup-back-2x.png");
+  .signUp {
+    background-image: url("/images/SignUp/mob-back-2x.png");
+  }
+  .bottle {
+    content: url("/images/SignUp/mpb-bottle-2x.png");
   }
 }
 
 @media only screen and (min-width: 768px) {
   .signUp {
-    background-image: url("/images/SignIn/SignUp/tab-signup-back-1x.png");
+    background-image: url("/images/SignUp/tab-back-1x.png");
+
+    padding: 0 32px;
+    display: block;
   }
+
+  .bottle {
+    content: url("/images/SignUp/tab-bottle-1x.png");
+    width: 734px;
+    margin-left: 80px;
+    margin-top: -400px;
+  }
+
   @media only screen and (min-resolution: 192dpi) {
     .signUp {
-      background-image: url("/images/SignIn/SignUp/tab-signup-back-2x.png");
+      background-image: url("/images/SignUp/tab-back-2x.png");
+    }
+    .bottle {
+      content: url("/images/SignUp/tab-bottle-wx.png");
     }
   }
 }
@@ -34,11 +51,23 @@
 @media (min-width: 1440px) {
   .signUp {
     height: 800px;
-    background-image: url("/images/SignIn/SignUp/lap-signup-back-1x.png");
+    background-image: url("/images/SignUp/lap-background-1x.png");
+    padding-top: 40px;
+    display: block;
   }
+
+  .bottle {
+    content: url("/images/SignUp/lap-bottle-1x.png");
+    width: 916px;
+    margin-top: -400px;
+  }
+
   @media only screen and (min-resolution: 192dpi) {
     .signUp {
-      background-image: url("/images/SignIn/SignUp/lap-signup-back-2x.png");
+      background-image: url("/images/SignUp/lap-background-2x.png");
+    }
+    .bottle {
+      content: url("/images/SignUp/lap-bottle-2x.png");
     }
   }
 }
