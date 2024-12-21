@@ -19,6 +19,7 @@ export const EditWaterModal = ({ closeModal, item }) => {
   const minutes = date.getUTCMinutes().toString().padStart(2, "0");
   const formattedTime = `${hours}:${minutes}`;
   const dateForInput = new Date(date.setHours(hours, minutes));
+  const [time, setTime] = useState(dateForInput);
 
   const dispatch = useDispatch();
 
@@ -84,19 +85,19 @@ export const EditWaterModal = ({ closeModal, item }) => {
       </div>
       <Formik
         initialValues={{
-          time: dateForInput,
+          time: new Date(time),
           value: counter,
         }}
         enableReinitialize={true}
         onSubmit={handleSubmit}
       >
-        {({ setFieldValue, values }) => (
+        {({ values }) => (
           <Form className={css.form}>
             <label className={css.label}>
               Recording time:
               <DatePicker
                 selected={values.time}
-                onChange={(date) => setFieldValue("time", date)}
+                onChange={(date) => setTime(date)}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={5}
