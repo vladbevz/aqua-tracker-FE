@@ -3,6 +3,8 @@ import { HiOutlineChevronLeft } from "react-icons/hi";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { MonthOneDay } from "./MonthOneDay/MonthOneDay";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors";
 
 export const MonthStatsTable = ({
   monthData,
@@ -12,15 +14,16 @@ export const MonthStatsTable = ({
   monthNumber,
   setYear,
 }) => {
-
+  const user = useSelector(selectUser);
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
-  const disableNextMonthButton = currentMonth <= monthNumber && currentYear >= year;
+  const disableNextMonthButton =
+    currentMonth <= monthNumber && currentYear >= year;
   const [fullMonthData, setFullMonthData] = useState([]);
 
   const getDaysInMonth = (currentYear, currentMonth) => {
     return new Date(currentYear, currentMonth + 1, 0).getDate();
-  }
+  };
 
   const setPrevMonth = () => {
     if (monthNumber - 1 < 0) {
@@ -59,7 +62,7 @@ export const MonthStatsTable = ({
               _id: "6763301b6a099355cf1c7e87",
             },
           ],
-          daylyNorm: 8000,
+          daylyNorm: user.daylyNorm / 1000,
           percent: 0,
           servings: 0,
         };
@@ -95,7 +98,13 @@ export const MonthStatsTable = ({
       </div>
       <div className={css.calendar}>
         {fullMonthData.map((day, index) => (
-          <MonthOneDay day={day} index={index} key={index} />
+          <MonthOneDay
+            day={day}
+            monthData={monthData}
+            month={month}
+            index={index}
+            key={index}
+          />
         ))}
       </div>
     </div>
