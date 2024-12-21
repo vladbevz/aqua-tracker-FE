@@ -1,114 +1,117 @@
 .home {
-    height: 100vh;
-    background-image: url("/images/home/mob-home-back-1x.png");
-    background-size: cover;
-    background-position: inherit;
-    background-repeat: no-repeat;
-    margin-top: 16px;
+  height: 100vh;
+  background-image: url("/images/home/mob-home-back-1x.png");
+  background-size: cover;
+  background-position: inherit;
+  background-repeat: no-repeat;
+  margin-top: 16px;
 }
 
 .container {
-    width: 320px;
-    padding: 0px 20px 40px 20px;
-    margin: 0 auto;
+  width: 320px;
+  padding: 0px 20px 40px 20px;
+  margin: 0 auto;
 }
 
 .wrapper {
-    background: var(--secondary-color-1);
-    padding: 24px 8px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 14px 0px #407BFF4D;
+  background: var(--secondary-color-1);
+  padding: 24px 8px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 14px 0px #407bff4d;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .box {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .bottle {
-    width: 280px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media only screen and (min-resolution: 192dpi) {
-    .home {
-        background-image: url("/images/home/mob-home-back-2x.png");
-    }
+  .home {
+    background-image: url("/images/home/mob-home-back-2x.png");
+  }
 
-    .bottle {
-        content: url("/images/home/mob-home-bottle-2x.png");
-    }
+  .bottle {
+    content: url("/images/home/mob-home-bottle-2x.png");
+  }
 }
 
 @media only screen and (min-width: 768px) {
-    .home {
-        background-image: url("/images/home/tab-home-back-1x.png");
-        margin-top: 24px;
-    }
+  .home {
+    background-image: url("/images/home/tab-home-back-1x.png");
+    margin-top: 24px;
+  }
 
-    .container {
-        width: 768px;
-        padding: 0px 32px 44px 32px;
+  .container {
+    width: 768px;
+    padding: 0px 32px 44px 32px;
+  }
+
+  .bottle {
+    width: 518px;
+    content: url("/images/home/tab-home-bottle-1x.png");
+  }
+
+  .wrapper {
+    padding: 32px 24px;
+  }
+
+  @media only screen and (min-resolution: 192dpi) {
+    .home {
+      background-image: url("/images/home/tab-home-back-2x.png");
     }
 
     .bottle {
-        width: 518px;
-        content: url("/images/home/tab-home-bottle-1x.png");
+      content: url("/images/home/tab-home-bottle-2x.png");
     }
-
-    .wrapper {
-        padding: 32px 24px;
-    }
-
-    @media only screen and (min-resolution: 192dpi) {
-        .home {
-            background-image: url("/images/home/tab-home-back-2x.png");
-        }
-
-        .bottle {
-            content: url("/images/home/tab-home-bottle-2x.png");
-        }
-    }
+  }
 }
 
 @media (min-width: 1440px) {
+  .home {
+    height: 800px;
+    background-image: url("/images/home/desk-home-back-1x.png");
+    margin-top: 8px;
+  }
+
+  .container {
+    display: flex;
+    width: 1216px;
+    padding: 0px;
+    padding-bottom: 40px;
+  }
+
+  .wrapper {
+    width: 592px;
+  }
+  .relative {
+    position: relative;
+  }
+
+  .bottle {
+    width: 738px;
+    content: url("/images/home/desk-home-bottle-1x.png");
+  }
+
+  .box {
+    margin-right: -48px;
+    margin-bottom: 16px;
+  }
+
+  @media only screen and (min-resolution: 192dpi) {
     .home {
-        height: 800px;
-        background-image: url("/images/home/desk-home-back-1x.png");
-        margin-top: 8px;
-    }
-
-    .container {
-        display: flex;
-        width: 1216px;
-        padding: 0px;
-        padding-bottom: 40px;
-    }
-
-    .wrapper {
-        width: 592px;
-    }
-    .relative {
-        position: relative;
+      background-image: url("/images/home/desk-home-back-2x.png");
     }
 
     .bottle {
-        width: 738px;
-        content: url("/images/home/desk-home-bottle-1x.png");
+      content: url("/images/home/desk-home-bottle-2x.png");
     }
-
-    .box {
-        margin-right: -48px;
-        margin-bottom: 16px;
-    }
-
-    @media only screen and (min-resolution: 192dpi) {
-        .home {
-            background-image: url("/images/home/desk-home-back-2x.png");
-        }
-
-        .bottle {
-            content: url("/images/home/desk-home-bottle-2x.png");
-        }
-    }
+  }
 }

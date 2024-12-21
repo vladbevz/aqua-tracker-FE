@@ -6,11 +6,11 @@ import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import css from "./AddWaterModal.module.css";
+import css from "./EditWaterModal.module.css";
 
 import { addTodayWater } from "../../redux/todayWaterList/operations";
 
-export const AddWaterModal = ({ closeModal }) => {
+export const EditWaterModal = ({ closeModal }) => {
   const [counter, setCounter] = useState(50);
 
   const dispatch = useDispatch();
