@@ -45,6 +45,13 @@ const todayWaterListSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items.push(action.payload.data);
+        state.servings = state.items.length;
+        state.amountWaterPerDay = state.items
+          .map((el) => el.amount)
+          .reduce((partialSum, a) => partialSum + a, 0);
+        state.percent = Math.trunc(
+          (state.amountWaterPerDay * 100) / state.daylyNorm
+        );
       })
       .addCase(addTodayWater.rejected, handleRejected)
       .addCase(deleteTodayWater.pending, handlePending)
@@ -55,6 +62,13 @@ const todayWaterListSlice = createSlice({
           (water) => water.id === action.payload.id
         );
         state.items.splice(index, 1);
+        state.servings = state.items.length;
+        state.amountWaterPerDay = state.items
+          .map((el) => el.amount)
+          .reduce((partialSum, a) => partialSum + a, 0);
+        state.percent = Math.trunc(
+          (state.amountWaterPerDay * 100) / state.daylyNorm
+        );
       })
       .addCase(deleteTodayWater.rejected, handleRejected)
       .addCase(updateTodayWater.pending)
@@ -66,6 +80,13 @@ const todayWaterListSlice = createSlice({
             break;
           }
         }
+        state.servings = state.items.length;
+        state.amountWaterPerDay = state.items
+          .map((el) => el.amount)
+          .reduce((partialSum, a) => partialSum + a, 0);
+        state.percent = Math.trunc(
+          (state.amountWaterPerDay * 100) / state.daylyNorm
+        );
       })
       .addCase(updateTodayWater.rejected, handleRejected)
       .addCase(logOut.fulfilled, (state) => {
