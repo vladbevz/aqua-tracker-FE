@@ -1,6 +1,6 @@
 .container {
   border-radius: 10px;
-  padding: 24px 16px;
+  padding: 24px 12px;
   width: 292px;
   height: 192px;
   box-shadow: 0 4px 4px 0 rgba(64, 123, 255, 0.3);
@@ -46,7 +46,10 @@
 }
 
 @media only screen and (max-width: 768px) {
-
+  .container {
+    width: 280px;
+    max-width: 100%;
+  }
   .showedRight {
     left: 0;
   }
@@ -54,5 +57,4 @@
   .showedLeft {
     left: 0;
   }
-
 }
