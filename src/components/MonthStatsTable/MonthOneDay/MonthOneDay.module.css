@@ -1,0 +1,66 @@
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color-white);
+    padding: 6px;
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+}
+
+.progress {
+    font-size: 10px;
+    line-height: 160%;
+    text-align: center;
+    color: var(--secondary-color-3);
+}
+
+.date {
+    font-size: 14px;
+    line-height: 129%;
+    border-radius: 50%;
+}
+
+.completed {
+    border: none;
+}
+
+.uncompleted {
+    border: 1px solid var(--secondary-color-4);
+}
+
+@media only screen and (max-width: 768px) {
+
+    .item {
+        position: static;
+    }
+
+    .date {
+        font-size: 16px;
+        line-height: 125%;
+    }
+
+    .day {
+        padding: 7px;
+        height: 34px;
+        width: 34px;
+    }
+
+    .progress {
+        font-size: 13px;
+        line-height: 153%;
+    }
+
+}

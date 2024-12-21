@@ -5,6 +5,18 @@
   height: 192px;
   box-shadow: 0 4px 4px 0 rgba(64, 123, 255, 0.3);
   background: var(--primary-color-white);
+  position: absolute;
+  bottom: 100%;
+  z-index: 100;
+  transition: all 0.3s ease-in;
+}
+
+.showedRight {
+  right: 50%;
+}
+
+.showedLeft {
+  left: 50%;
 }
 
 .currentDate {
@@ -31,4 +43,16 @@
   font-size: 18px;
   line-height: 133%;
   margin-left: 6px;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .showedRight {
+    left: 0;
+  }
+
+  .showedLeft {
+    left: 0;
+  }
+
 }

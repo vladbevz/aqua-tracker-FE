@@ -1,26 +1,26 @@
+
 import css from "./DaysGeneralStats.module.css";
-import { useState } from "react";
 
-export const DaysGeneralStats = () => {
-  const [isVisible, setIsVisible] = useState(false);
+export const DaysGeneralStats = ({ percent, daylyNorm, servings, showedLeft }) => {
 
-  const toggleVisibility = () => {
-    setIsVisible((prev) => !prev);
-  };
   return (
-    <div className={css.container}>
+    <div
+      className={`${css.container} ${
+        showedLeft ? `${css.showedLeft}` : `${css.showedRight}`
+      }`}
+    >
       <p className={css.currentDate}>17,December</p>
       <p className={css.descriptionText}>
         Daily norma:
-        <span className={css.stateText}>1.8L</span>
+        <span className={css.stateText}>{daylyNorm}L</span>
       </p>
       <p className={css.descriptionText}>
         Fulfillment of the daily norm:
-        <span className={css.stateText}>60%</span>
+        <span className={css.stateText}>{percent}%</span>
       </p>
       <p className={css.descriptionText}>
         How many servings of water:
-        <span className={css.stateText}>6</span>
+        <span className={css.stateText}>{servings}</span>
       </p>
     </div>
   );
