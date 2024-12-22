@@ -15,11 +15,22 @@ import css from "./SettingUser.module.css";
 
 const SettingSchema = Yup.object().shape({
   email: Yup.string().email("Must be a valid email!").required("Required"),
-  newPassword: Yup.string().min(8, "Password must be at least 8 characters!"),
-  repeatNewPassword: Yup.string().oneOf(
-    [Yup.ref("newPassword"), null],
-    "Passwords must match!"
-  ),
+  outdatedPassword: Yup.string(),
+  newPassword: Yup.string()
+    .min(8, "Password must be at least 8 characters!")
+    .when("outdatedPassword", {
+      is: (outdatedPassword) => !!outdatedPassword,
+      then: (schema) =>
+        schema.required(
+          "New password is required if outdated password is provided!"
+        ),
+    }),
+  repeatNewPassword: Yup.string()
+    .oneOf([Yup.ref("newPassword"), null], "Passwords must match!")
+    .when("newPassword", {
+      is: (newPassword) => !!newPassword,
+      then: (schema) => schema.required("Please confirm your new password!"),
+    }),
 });
 
 export const SettingUser = ({ onCancel }) => {
@@ -28,7 +39,7 @@ export const SettingUser = ({ onCancel }) => {
 
   const initialValues = {
     avatar: user.avatarUrl || "",
-    picked: "Woman",
+    gender: user.gender || "woman",
     username: user.name || "",
     email: user.email || "",
     outdatedPassword: "",
@@ -36,11 +47,10 @@ export const SettingUser = ({ onCancel }) => {
     repeatNewPassword: "",
   };
 
-  //avatar
+  // Avatar
   const [avatarPreview, setAvatarPreview] = useState(
     user.avatarUrl || "images/noAvatar/no-avatar.png"
   );
-  const [isUploading, setIsUploading] = useState(false);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -52,12 +62,9 @@ export const SettingUser = ({ onCancel }) => {
       formData.append("avatarUrl", file);
 
       try {
-        setIsUploading(true);
         await dispatch(updateUser(formData)).unwrap();
       } catch (error) {
         console.error("Error updating avatar: ", error);
-      } finally {
-        setIsUploading(false);
       }
     }
   };
@@ -66,17 +73,11 @@ export const SettingUser = ({ onCancel }) => {
     document.getElementById("avatarInput").click();
   };
 
-  //user data
+  // Password management
   const [showPassword, setShowPassword] = useState({
     outdatedPassword: false,
     newPassword: false,
     repeatNewPassword: false,
-  });
-
-  const [passwordValues, setPasswordValues] = useState({
-    outdatedPassword: "",
-    newPassword: "",
-    repeatNewPassword: "",
   });
 
   const handleToggleShowPassword = (field) => {
@@ -86,26 +87,32 @@ export const SettingUser = ({ onCancel }) => {
     }));
   };
 
-  const handlePasswordChange = (field, value) => {
-    setPasswordValues((prevState) => ({ ...prevState, [field]: value }));
-  };
-
   const usernameFieldId = useId();
   const emailFieldId = useId();
-  const outdatedPasswordFieldId = useId();
-  const newPasswordFieldId = useId();
-  const repeatNewPasswordFieldId = useId();
+  // const outdatedPasswordFieldId = useId();
+  // const newPasswordFieldId = useId();
+  // const repeatNewPasswordFieldId = useId();
 
   const handleSubmit = async (values, actions) => {
-    const { avatar, username, email, newPassword } = values;
+    const { avatar, gender, username, email, outdatedPassword, newPassword } =
+      values;
+
     const formData = new FormData();
-    formData.append("name", username);
-    formData.append("email", email);
     if (avatar && typeof avatar !== "string") {
       formData.append("avatarUrl", avatar);
     }
-    if (newPassword) {
-      formData.append("password", newPassword);
+    if (gender !== initialValues.gender) {
+      formData.append("gender", gender);
+    }
+    formData.append("name", username);
+    formData.append("email", email);
+
+    if (outdatedPassword && newPassword) {
+      formData.append("outdatedPassword", outdatedPassword);
+      formData.append("newPassword", newPassword);
+    } else if (newPassword && !outdatedPassword) {
+      console.error("Outdated password is required to set a new password.");
+      return;
     }
 
     try {
@@ -141,16 +148,9 @@ export const SettingUser = ({ onCancel }) => {
                   className={css.avatar}
                   src={avatarPreview}
                   alt="User avatar"
-                  aria-busy={isUploading}
                 />
-                {isUploading ? (
-                  <span>Uploading...</span>
-                ) : (
-                  <>
-                    <HiOutlineArrowUpTray className={css.arrowUpIcon} />
-                    <span className={css.avatarUploadText}>Upload a photo</span>
-                  </>
-                )}
+                <HiOutlineArrowUpTray className={css.arrowUpIcon} />
+                <span className={css.avatarUploadText}>Upload a photo</span>
                 <input
                   type="file"
                   id="avatarInput"
@@ -170,8 +170,8 @@ export const SettingUser = ({ onCancel }) => {
                 <label className={css.genderLabelWrap} htmlFor="pickedWoman">
                   <Field
                     type="radio"
-                    name="picked"
-                    value="Woman"
+                    name="gender"
+                    value="woman"
                     id="pickedWoman"
                   />
                   <p className={css.genderText}>Woman</p>
@@ -179,8 +179,8 @@ export const SettingUser = ({ onCancel }) => {
                 <label className={css.genderLabelWrap} htmlFor="pickedMan">
                   <Field
                     type="radio"
-                    name="picked"
-                    value="Man"
+                    name="gender"
+                    value="man"
                     id="pickedMan"
                   />
                   <p className={css.genderText}>Man</p>
@@ -206,7 +206,6 @@ export const SettingUser = ({ onCancel }) => {
                 className={css.credentialsInput}
                 type="email"
                 name="email"
-                placeholder="User's email"
                 id={emailFieldId}
               />
             </div>
@@ -214,133 +213,44 @@ export const SettingUser = ({ onCancel }) => {
             <div className={css.passwordWrap}>
               <h2 className={css.title}>Password</h2>
 
-              <label
-                className={css.passwordLabel}
-                htmlFor={outdatedPasswordFieldId}
-              >
-                Outdated password:
-              </label>
-              <div className={css.passwordInputWrap}>
-                <Field
-                  className={css.passwordInput}
-                  type={showPassword.outdatedPassword ? "text" : "password"}
-                  name="outdatedPassword"
-                  placeholder="Password"
-                  id={outdatedPasswordFieldId}
-                  value={passwordValues.outdatedPassword}
-                  onChange={(evt) =>
-                    handlePasswordChange("outdatedPassword", evt.target.value)
-                  }
-                />
-                {passwordValues.outdatedPassword && (
-                  <button
-                    className={css.showPasswordEyeBtn}
-                    type="button"
-                    onClick={() => handleToggleShowPassword("outdatedPassword")}
-                    aria-label={
-                      showPassword.outdatedPassword
-                        ? "Hide outdated password"
-                        : "Show outdated password"
-                    }
-                  >
-                    {showPassword.outdatedPassword ? (
-                      <HiOutlineEye className={css.passwordIcon} />
-                    ) : (
-                      <HiOutlineEyeOff className={css.passwordIcon} />
-                    )}
-                  </button>
-                )}
-              </div>
-              <ErrorMessage
-                className={css.errorMessage}
-                name="outdatedPassword"
-                component="span"
-              />
-
-              <label className={css.passwordLabel} htmlFor={newPasswordFieldId}>
-                New password:
-              </label>
-              <div className={css.passwordInputWrap}>
-                <Field
-                  className={css.passwordInput}
-                  type={showPassword.newPassword ? "text" : "password"}
-                  name="newPassword"
-                  placeholder="Password"
-                  id={newPasswordFieldId}
-                  value={passwordValues.newPassword}
-                  onChange={(evt) =>
-                    handlePasswordChange("newPassword", evt.target.value)
-                  }
-                />
-                {passwordValues.newPassword && (
-                  <button
-                    className={css.showPasswordEyeBtn}
-                    type="button"
-                    onClick={() => handleToggleShowPassword("newPassword")}
-                    aria-label={
-                      showPassword.newPassword
-                        ? "Hide new password"
-                        : "Show new password"
-                    }
-                  >
-                    {showPassword.newPassword ? (
-                      <HiOutlineEye className={css.passwordIcon} />
-                    ) : (
-                      <HiOutlineEyeOff className={css.passwordIcon} />
-                    )}
-                  </button>
-                )}
-              </div>
-              <ErrorMessage
-                className={css.errorMessage}
-                name="newPassword"
-                component="span"
-              />
-
-              <label
-                className={css.passwordLabel}
-                htmlFor={repeatNewPasswordFieldId}
-              >
-                Repeat new password:
-              </label>
-              <div className={css.passwordInputWrap}>
-                <Field
-                  className={css.passwordInput}
-                  type={showPassword.repeatNewPassword ? "text" : "password"}
-                  name="repeatNewPassword"
-                  placeholder="Password"
-                  id={repeatNewPasswordFieldId}
-                  value={passwordValues.repeatNewPassword}
-                  onChange={(evt) =>
-                    handlePasswordChange("repeatNewPassword", evt.target.value)
-                  }
-                />
-                {passwordValues.repeatNewPassword && (
-                  <button
-                    className={css.showPasswordEyeBtn}
-                    type="button"
-                    onClick={() =>
-                      handleToggleShowPassword("repeatNewPassword")
-                    }
-                    aria-label={
-                      showPassword.repeatNewPassword
-                        ? "Hide repeat password"
-                        : "Show repeat password"
-                    }
-                  >
-                    {showPassword.repeatNewPassword ? (
-                      <HiOutlineEye className={css.passwordIcon} />
-                    ) : (
-                      <HiOutlineEyeOff className={css.passwordIcon} />
-                    )}
-                  </button>
-                )}
-              </div>
-              <ErrorMessage
-                className={css.errorMessage}
-                name="repeatNewPassword"
-                component="span"
-              />
+              {["outdatedPassword", "newPassword", "repeatNewPassword"].map(
+                (field) => (
+                  <div key={field}>
+                    <label className={css.passwordLabel} htmlFor={field}>
+                      {field === "outdatedPassword"
+                        ? "Outdated password:"
+                        : field === "newPassword"
+                        ? "New password:"
+                        : "Repeat new password:"}
+                    </label>
+                    <div className={css.passwordInputWrap}>
+                      <Field
+                        className={css.passwordInput}
+                        type={showPassword[field] ? "text" : "password"}
+                        name={field}
+                        placeholder="Password"
+                        id={field}
+                      />
+                      <button
+                        className={css.showPasswordEyeBtn}
+                        type="button"
+                        onClick={() => handleToggleShowPassword(field)}
+                      >
+                        {showPassword[field] ? (
+                          <HiOutlineEye className={css.passwordIcon} />
+                        ) : (
+                          <HiOutlineEyeOff className={css.passwordIcon} />
+                        )}
+                      </button>
+                    </div>
+                    <ErrorMessage
+                      className={css.errorMessage}
+                      name={field}
+                      component="span"
+                    />
+                  </div>
+                )
+              )}
             </div>
 
             <button className={css.saveBtn} type="submit">
