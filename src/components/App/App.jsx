@@ -27,7 +27,6 @@ export const App = () => {
 
   return isRefreshing ? (
     <>
-      <b>Please wait, updating user info...</b>
       <Loader />
     </>
   ) : (

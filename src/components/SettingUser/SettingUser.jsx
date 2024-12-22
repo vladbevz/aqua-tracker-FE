@@ -12,6 +12,7 @@ import { HiOutlineArrowUpTray } from "react-icons/hi2";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 
 import css from "./SettingUser.module.css";
+import toast from "react-hot-toast";
 
 const SettingSchema = Yup.object()
   .shape({
@@ -54,7 +55,7 @@ export const SettingUser = ({ onCancel }) => {
 
   const initialValues = {
     avatar: user.avatarUrl || "",
-    gender: user?.gender || "female",
+    gender: user.gender,
     username: user.name || "",
     email: user.email || "",
     outdatedPassword: "",
@@ -78,8 +79,9 @@ export const SettingUser = ({ onCancel }) => {
 
       try {
         await dispatch(updateUser(formData)).unwrap();
+        toast.success("Avatar successfully changed!");
       } catch (error) {
-        console.error("Error updating avatar: ", error);
+        toast.error(error);
       }
     }
   };
@@ -132,13 +134,14 @@ export const SettingUser = ({ onCancel }) => {
 
     try {
       await dispatch(updateUser(formData)).unwrap();
+      toast.success("Your data has been successfully changed");
       actions.resetForm();
       onCancel();
     } catch (error) {
-      console.error("Failed to update user: ", error);
+      toast.error(error);
     }
   };
-
+  console.log(initialValues);
   return (
     <div className={css.container}>
       <div className={css.headerWrap}>
@@ -178,148 +181,165 @@ export const SettingUser = ({ onCancel }) => {
                 />
               </div>
             </div>
+            <div className={css.flexContainer1}>
+              <div>
+                <div className={css.genderWrap}>
+                  <h2 className={css.title}>Your gender identity</h2>
+                  <div className={css.genderRadioWrap}>
+                    <label
+                      className={css.genderLabelWrap}
+                      htmlFor="pickedWoman"
+                    >
+                      <Field
+                        type="radio"
+                        name="gender"
+                        value="woman"
+                        id="pickedWoman"
+                      />
+                      <p className={css.genderText}>Woman</p>
+                    </label>
+                    <label className={css.genderLabelWrap} htmlFor="pickedMan">
+                      <Field
+                        type="radio"
+                        name="gender"
+                        value="male"
+                        id="pickedMan"
+                      />
+                      <p className={css.genderText}>Man</p>
+                    </label>
+                  </div>
+                </div>
 
-            <div className={css.genderWrap}>
-              <h2 className={css.title}>Your gender identity</h2>
-              <div className={css.genderRadioWrap}>
-                <label className={css.genderLabelWrap} htmlFor="pickedWoman">
+                <div className={css.credentialsWrap}>
+                  <label
+                    className={css.credentialsLabel}
+                    htmlFor={usernameFieldId}
+                  >
+                    Your name
+                  </label>
                   <Field
-                    type="radio"
-                    name="gender"
-                    value="female"
-                    id="pickedWoman"
+                    className={css.credentialsInput}
+                    type="text"
+                    name="username"
+                    id={usernameFieldId}
                   />
-                  <p className={css.genderText}>Woman</p>
-                </label>
-                <label className={css.genderLabelWrap} htmlFor="pickedMan">
+
+                  <label
+                    className={css.credentialsLabel}
+                    htmlFor={emailFieldId}
+                  >
+                    E-mail
+                  </label>
                   <Field
-                    type="radio"
-                    name="gender"
-                    value="male"
-                    id="pickedMan"
+                    className={css.credentialsInput}
+                    type="email"
+                    name="email"
+                    id={emailFieldId}
                   />
-                  <p className={css.genderText}>Man</p>
-                </label>
+                </div>
               </div>
-            </div>
 
-            <div className={css.credentialsWrap}>
-              <label className={css.credentialsLabel} htmlFor={usernameFieldId}>
-                Your name
-              </label>
-              <Field
-                className={css.credentialsInput}
-                type="text"
-                name="username"
-                id={usernameFieldId}
-              />
+              <div className={css.passwordWrap}>
+                <h2 className={css.title}>Password</h2>
 
-              <label className={css.credentialsLabel} htmlFor={emailFieldId}>
-                E-mail
-              </label>
-              <Field
-                className={css.credentialsInput}
-                type="email"
-                name="email"
-                id={emailFieldId}
-              />
-            </div>
-
-            <div className={css.passwordWrap}>
-              <h2 className={css.title}>Password</h2>
-
-              <label
-                className={css.passwordLabel}
-                htmlFor={outdatedPasswordFieldId}
-              >
-                Outdated password:
-              </label>
-              <div className={css.passwordInputWrap}>
-                <Field
-                  className={css.passwordInput}
-                  type={showPassword.outdatedPassword ? "text" : "password"}
+                <label
+                  className={css.passwordLabel}
+                  htmlFor={outdatedPasswordFieldId}
+                >
+                  Outdated password:
+                </label>
+                <div className={css.passwordInputWrap}>
+                  <Field
+                    className={css.passwordInput}
+                    type={showPassword.outdatedPassword ? "text" : "password"}
+                    name="outdatedPassword"
+                    placeholder="Password"
+                    id={outdatedPasswordFieldId}
+                  />
+                  <button
+                    className={css.showPasswordEyeBtn}
+                    type="button"
+                    onClick={() => handleToggleShowPassword("outdatedPassword")}
+                  >
+                    {showPassword.outdatedPassword ? (
+                      <HiOutlineEye className={css.passwordIcon} />
+                    ) : (
+                      <HiOutlineEyeOff className={css.passwordIcon} />
+                    )}
+                  </button>
+                </div>
+                <ErrorMessage
+                  className={css.errorMessage}
                   name="outdatedPassword"
-                  placeholder="Password"
-                  id={outdatedPasswordFieldId}
+                  component="span"
                 />
-                <button
-                  className={css.showPasswordEyeBtn}
-                  type="button"
-                  onClick={() => handleToggleShowPassword("outdatedPassword")}
-                >
-                  {showPassword.outdatedPassword ? (
-                    <HiOutlineEye className={css.passwordIcon} />
-                  ) : (
-                    <HiOutlineEyeOff className={css.passwordIcon} />
-                  )}
-                </button>
-              </div>
-              <ErrorMessage
-                className={css.errorMessage}
-                name="outdatedPassword"
-                component="span"
-              />
 
-              <label className={css.passwordLabel} htmlFor={newPasswordFieldId}>
-                New password:
-              </label>
-              <div className={css.passwordInputWrap}>
-                <Field
-                  className={css.passwordInput}
-                  type={showPassword.newPassword ? "text" : "password"}
+                <label
+                  className={css.passwordLabel}
+                  htmlFor={newPasswordFieldId}
+                >
+                  New password:
+                </label>
+                <div className={css.passwordInputWrap}>
+                  <Field
+                    className={css.passwordInput}
+                    type={showPassword.newPassword ? "text" : "password"}
+                    name="newPassword"
+                    placeholder="Password"
+                    id={newPasswordFieldId}
+                  />
+                  <button
+                    className={css.showPasswordEyeBtn}
+                    type="button"
+                    onClick={() => handleToggleShowPassword("newPassword")}
+                  >
+                    {showPassword.newPassword ? (
+                      <HiOutlineEye className={css.passwordIcon} />
+                    ) : (
+                      <HiOutlineEyeOff className={css.passwordIcon} />
+                    )}
+                  </button>
+                </div>
+                <ErrorMessage
+                  className={css.errorMessage}
                   name="newPassword"
-                  placeholder="Password"
-                  id={newPasswordFieldId}
+                  component="span"
                 />
-                <button
-                  className={css.showPasswordEyeBtn}
-                  type="button"
-                  onClick={() => handleToggleShowPassword("newPassword")}
-                >
-                  {showPassword.newPassword ? (
-                    <HiOutlineEye className={css.passwordIcon} />
-                  ) : (
-                    <HiOutlineEyeOff className={css.passwordIcon} />
-                  )}
-                </button>
-              </div>
-              <ErrorMessage
-                className={css.errorMessage}
-                name="newPassword"
-                component="span"
-              />
 
-              <label
-                className={css.passwordLabel}
-                htmlFor={repeatNewPasswordFieldId}
-              >
-                Repeat new password:
-              </label>
-              <div className={css.passwordInputWrap}>
-                <Field
-                  className={css.passwordInput}
-                  type={showPassword.repeatNewPassword ? "text" : "password"}
-                  name="repeatNewPassword"
-                  placeholder="Password"
-                  id={repeatNewPasswordFieldId}
-                />
-                <button
-                  className={css.showPasswordEyeBtn}
-                  type="button"
-                  onClick={() => handleToggleShowPassword("repeatNewPassword")}
+                <label
+                  className={css.passwordLabel}
+                  htmlFor={repeatNewPasswordFieldId}
                 >
-                  {showPassword.repeatNewPassword ? (
-                    <HiOutlineEye className={css.passwordIcon} />
-                  ) : (
-                    <HiOutlineEyeOff className={css.passwordIcon} />
-                  )}
-                </button>
+                  Repeat new password:
+                </label>
+                <div className={css.passwordInputWrap}>
+                  <Field
+                    className={css.passwordInput}
+                    type={showPassword.repeatNewPassword ? "text" : "password"}
+                    name="repeatNewPassword"
+                    placeholder="Password"
+                    id={repeatNewPasswordFieldId}
+                  />
+                  <button
+                    className={css.showPasswordEyeBtn}
+                    type="button"
+                    onClick={() =>
+                      handleToggleShowPassword("repeatNewPassword")
+                    }
+                  >
+                    {showPassword.repeatNewPassword ? (
+                      <HiOutlineEye className={css.passwordIcon} />
+                    ) : (
+                      <HiOutlineEyeOff className={css.passwordIcon} />
+                    )}
+                  </button>
+                </div>
+                <ErrorMessage
+                  className={css.errorMessage}
+                  name="repeatNewPassword"
+                  component="span"
+                />
               </div>
-              <ErrorMessage
-                className={css.errorMessage}
-                name="repeatNewPassword"
-                component="span"
-              />
             </div>
 
             <button className={css.saveBtn} type="submit">
