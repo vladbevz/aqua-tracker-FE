@@ -4,6 +4,8 @@ import css from "./MonthOneDay.module.css";
 
 export const MonthOneDay = ({ day, month }) => {
   const { date, servings, amountWaterPerDay, daylyNorm, percent } = { ...day };
+  const dailyNormInMl = daylyNorm * 1000;
+
   const [dayInfoShowed, setDayInfoShowed] = useState({
     status: false,
     left: true,
@@ -12,6 +14,7 @@ export const MonthOneDay = ({ day, month }) => {
   const hideDayInfo = () => {
     setDayInfoShowed({ status: false, left: true });
   };
+
   const showDayInfo = (e) => {
     const elementCoordinate = e.currentTarget.getBoundingClientRect();
     const parentCoordinate =
@@ -45,7 +48,7 @@ export const MonthOneDay = ({ day, month }) => {
       )}
       <div
         className={`${css.day} ${
-          amountWaterPerDay < daylyNorm
+          amountWaterPerDay < dailyNormInMl
             ? `${css.completed}`
             : `${css.uncompleted}`
         }`}

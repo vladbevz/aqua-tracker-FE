@@ -190,6 +190,10 @@ input[type="number"] {
   justify-self: end;
 }
 
+.saveButton:hover {
+  box-shadow: 0px 4px 14px 0px #407BFF8A;
+}
+
 @media screen and (max-width: 1439px) {
   .modal {
     border-radius: 10px;
