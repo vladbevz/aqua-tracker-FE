@@ -70,12 +70,15 @@ export const MonthStatsTable = ({
       }
 
       for (const element of fetchData) {
-        data[element.date.split("-")[2] - 1] = element;
+        data[element.date.split("-")[2] - 1] = {
+          ...element,
+          daylyNorm: element.daylyNorm / 1000,
+        };
       }
       return data;
     };
     setFullMonthData(createDataFullMonth(monthData));
-  }, [monthData, year, monthNumber]);
+  }, [monthData, year, monthNumber, user.daylyNorm]);
 
   const capitalizeMonth = capitalizeFirstLetter(month);
 
