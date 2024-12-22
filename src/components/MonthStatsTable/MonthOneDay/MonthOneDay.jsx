@@ -48,7 +48,7 @@ export const MonthOneDay = ({ day, month }) => {
       )}
       <div
         className={`${css.day} ${
-          amountWaterPerDay < dailyNormInMl
+          amountWaterPerDay > dailyNormInMl
             ? `${css.completed}`
             : `${css.uncompleted}`
         }`}
