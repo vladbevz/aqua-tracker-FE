@@ -31,7 +31,6 @@
 }
 
 .bottle {
-  height: 100px;
   animation: float 2s infinite ease-in-out;
   will-change: transform;
 }
@@ -95,10 +94,6 @@ a {
     letter-spacing: 6px;
   }
 
-  .bottle {
-    height: 140px;
-  }
-
   .imageWrapper {
     top: -100px;
   }
@@ -131,12 +126,8 @@ a {
     letter-spacing: 8px;
   }
 
-  .bottle {
-    height: 180px;
-  }
-
   .imageWrapper {
-    top: -140px;
+    top: -110px;
   }
 
   .title {
