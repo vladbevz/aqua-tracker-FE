@@ -13,34 +13,37 @@ import { selectMonthWaterList } from "../../redux/monthWaterList/selector.js";
 import { selectTodayWaterList } from "../../redux/todayWaterList/selectors.js";
 
 export const MonthStatsTable = () => {
+  const dispatch = useDispatch();
+  const [year, setYear] = useState(2024);
+  const [monthNumber, setMonthNumber] = useState(11);
 
-    const dispatch = useDispatch();
-    const [year, setYear] = useState(2024);
-    const [monthNumber, setMonthNumber] = useState(11);
-    
-    const month = getMonthName(monthNumber);
-    const monthData = useSelector(selectMonthWaterList);
-    const waterList = useSelector(selectTodayWaterList);
-  
-    useEffect(() => {
-      dispatch(fetchTodayWater());
-    }, [dispatch]);
-  
-    const getMonthData = (year, month) => {
-      dispatch(
-        fetchMonthWater({
-          year,
-          month,
-        })
-      );
-    };
-  
-    useEffect(() => {
-      getMonthData(year, month);
-    }, [monthNumber, waterList]);
-  
-
+  const month = getMonthName(monthNumber);
+  const monthData = useSelector(selectMonthWaterList);
+  const waterList = useSelector(selectTodayWaterList);
   const user = useSelector(selectUser);
+
+  useEffect(() => {
+    dispatch(fetchTodayWater());
+  }, [dispatch]);
+
+  // const getMonthData = (year, month) => {
+  //   dispatch(
+  //     fetchMonthWater({
+  //       year,
+  //       month,
+  //     })
+  //   );
+  // };
+
+  useEffect(() => {
+    dispatch(
+      fetchMonthWater({
+        year,
+        month,
+      })
+    );
+  }, [monthNumber, waterList, user.daylyNorm, year, month, dispatch]);
+
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   const disableNextMonthButton =

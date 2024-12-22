@@ -17,9 +17,18 @@ const initialValues = {
 export const SignInForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
-    actions.resetForm();
-    dispatch(logIn(values));
+  const handleSubmit = async (values, actions) => {
+    try {
+      actions.resetForm();
+      const response = await dispatch(logIn(values)).unwrap();
+      console.log(response);
+      toast.success(`Welcome back, ${response.data.user.name}!`, {
+        position: "top-center",
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error();
+    }
   };
   const [showPassword, setShowPassword] = useState(false);
 
