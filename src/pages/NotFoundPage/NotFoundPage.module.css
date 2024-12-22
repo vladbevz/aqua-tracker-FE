@@ -1,12 +1,46 @@
+.container {
+  height: 680px;
+  background-image: url("/public/images/NotFound/mob-notfound-back-1x.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: 200px 25px 155px;
+}
+
+@media only screen and (min-resolution: 192dpi) {
+  .container {
+    background-image: url("/public/images/NotFound/mob-notfound-back-2x.png");
+  }
+}
+
+.errorCode {
+  font-size: 120px;
+  font-family: var(--font-bold);
+  color: var(--primary-color-black);
+  position: relative;
+  display: inline-block;
+  letter-spacing: 5px;
+}
+
+.imageWrapper {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottle {
+  height: 100px;
+  animation: float 2s infinite ease-in-out;
+  will-change: transform;
+}
+
 .title {
   text-align: center;
   font-family: var(--font-bold);
-  color: var(-primary-color-black);
+  color: var(--primary-color-black);
   font-size: 30px;
-}
-
-.container {
-  padding: 200px 25px 155px;
 }
 
 a {
@@ -27,17 +61,52 @@ a {
   display: block;
   margin: 0 auto;
   margin-top: 40px;
-  transition: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 @media only screen and (min-width: 768px) {
   .container {
+    background-image: url("/public/images/NotFound/tab-notfound-back-1x.png");
     padding: 320px 50px 225px;
+  }
+
+  @media only screen and (min-resolution: 192dpi) {
+    .container {
+      background-image: url("/public/images/NotFound/tab-notfound-back-2x.png");
+    }
+  }
+
+  .errorCode {
+    font-size: 150px;
+    letter-spacing: 6px;
+  }
+
+  .bottle {
+    height: 140px;
+  }
+
+  .imageWrapper {
+    top: -100px;
   }
 
   .title {
     font-size: 32px;
   }
+
   .btn {
     padding: 18px 40px;
     font-size: 16px;
@@ -47,8 +116,29 @@ a {
 
 @media only screen and (min-width: 1440px) {
   .container {
+    background-image: url("/public/images/NotFound/lap-notfound-back-1x.png");
     padding: 300px 50px 140px;
   }
+
+  @media only screen and (min-resolution: 192dpi) {
+    .container {
+      background-image: url("/public/images/NotFound/lap-notfound-back-2x.png");
+    }
+  }
+
+  .errorCode {
+    font-size: 180px;
+    letter-spacing: 8px;
+  }
+
+  .bottle {
+    height: 180px;
+  }
+
+  .imageWrapper {
+    top: -140px;
+  }
+
   .title {
     font-size: 36px;
   }
