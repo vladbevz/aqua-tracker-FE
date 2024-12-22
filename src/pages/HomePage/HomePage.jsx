@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMonthWater } from "../../redux/monthWaterList/operations.js";
 import { getMonthName } from "../../Utilits/getMonth.js";
 import { selectMonthWaterList } from "../../redux/monthWaterList/selector.js";
+import { selectTodayWaterList } from "../../redux/todayWaterList/selectors.js";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function HomePage() {
   
   const month = getMonthName(monthNumber);
   const monthData = useSelector(selectMonthWaterList);
+  const waterList = useSelector(selectTodayWaterList);
 
   useEffect(() => {
     dispatch(fetchTodayWater());
@@ -33,7 +35,7 @@ export default function HomePage() {
 
   useEffect(() => {
     getMonthData(year, month);
-  }, [monthNumber]);
+  }, [monthNumber, waterList]);
 
   return (
     <section className={css.home}>
