@@ -27,7 +27,7 @@ export const SignInForm = () => {
       });
     } catch (error) {
       console.log(error);
-      toast.error();
+      toast.error(error);
     }
   };
   const [showPassword, setShowPassword] = useState(false);
