@@ -8,7 +8,7 @@ export default function NotFoundPage() {
         404
         <span className={css.imageWrapper}>
           <img
-            src="/public/images/NotFound/notfound-boutle.png"
+            src="/images/NotFound/notfound-boutle.png"
             alt="bottle"
             className={css.bottle}
           />
