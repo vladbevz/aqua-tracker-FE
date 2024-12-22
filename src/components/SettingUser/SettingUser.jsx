@@ -128,7 +128,6 @@ export const SettingUser = ({ onCancel }) => {
       formData.append("outdatedPassword", outdatedPassword);
       formData.append("newPassword", newPassword);
     } else if (newPassword && !outdatedPassword) {
-      console.error("Outdated password is required to set a new password.");
       return;
     }
 
@@ -141,7 +140,6 @@ export const SettingUser = ({ onCancel }) => {
       toast.error(error);
     }
   };
-  console.log(initialValues);
   return (
     <div className={css.container}>
       <div className={css.headerWrap}>

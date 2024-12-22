@@ -10,7 +10,6 @@ export const fetchMonthWater = createAsyncThunk(
   async ({ year, month }, thunkAPI) => {
     try {
       const authHeader = "Bearer " + thunkAPI.getState().auth.accessToken;
-      console.log("fetchMonthWater");
       const res = await axios.get(URL + "/water/" + year + "/" + month, {
         headers: {
           Authorization: authHeader,
