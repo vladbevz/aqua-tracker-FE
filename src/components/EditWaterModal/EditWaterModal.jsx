@@ -23,25 +23,24 @@ export const EditWaterModal = ({ closeModal, item }) => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const water = counter;
     if (water < 50 || water > 5000) {
       toast.error("The water intake must be between 50 and 5000 milliliters.");
       return;
     }
-
-    // const formattedTime = values.time.toLocaleTimeString("en-GB", {
-    //   hour: "2-digit",
-    //   minute: "2-digit",
-    //   hour12: false,
-    // });
     const payload = {
       waterId: item._id,
       amount: counter,
       date: createDateAsUTC(values.time),
     };
-    dispatch(updateTodayWater(payload));
-    closeModal();
+    try {
+      await dispatch(updateTodayWater(payload)).unwrap();
+      toast.success("Changes saved successfully!");
+      closeModal();
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const handleWoterChange = (e) => {

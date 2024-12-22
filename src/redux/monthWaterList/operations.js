@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axiosToast from "../../Utilits/toast";
+import axios from "axios";
 
 const URL = "https://aqua-tracker-be.onrender.com";
 
@@ -11,14 +11,14 @@ export const fetchMonthWater = createAsyncThunk(
     try {
       const authHeader = "Bearer " + thunkAPI.getState().auth.accessToken;
       console.log("fetchMonthWater");
-      const res = await axiosToast.get(URL + "/water/" + year + "/" + month, {
+      const res = await axios.get(URL + "/water/" + year + "/" + month, {
         headers: {
           Authorization: authHeader,
         },
       });
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.data.message);
     }
   },
   {

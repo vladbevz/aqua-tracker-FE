@@ -15,7 +15,7 @@ export const AddWaterModal = ({ closeModal }) => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const water = counter;
     if (water < 50 || water > 5000) {
       toast.error("The water intake must be between 50 and 5000 milliliters.");
@@ -31,8 +31,14 @@ export const AddWaterModal = ({ closeModal }) => {
       amount: counter,
       time: formattedTime,
     };
-    dispatch(addTodayWater(payload));
-    closeModal();
+
+    try {
+      await dispatch(addTodayWater(payload)).unwrap();
+      toast.success("Information about drinking water, successfully saved!");
+      closeModal();
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const handleWoterChange = (e) => {

@@ -1,18 +1,17 @@
 // import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axiosToast from "../../Utilits/toast";
 import axios from "axios";
 
 const URL = "https://aqua-tracker-be.onrender.com";
 
 // Utility to add JWT
 const setAuthHeader = (accessToken) => {
-  axiosToast.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+  axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 };
 
 // Utility to remove JWT
 const clearAuthHeader = () => {
-  axiosToast.defaults.headers.common.Authorization = "";
+  axios.defaults.headers.common.Authorization = "";
 };
 
 /*
@@ -57,8 +56,7 @@ export const logIn = createAsyncThunk(
  */
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    await axiosToast.post(URL + "/auth/logout");
-    // After a successful logout, remove the token from the HTTP header
+    await axios.post(URL + "/auth/logout");
     clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -84,10 +82,10 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const res = await axiosToast.get(URL + "/users/current"); //Get information about the current user
+      const res = await axios.get(URL + "/users/current"); //Get information about the current user
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.data.message);
     }
   }
 );
@@ -101,19 +99,15 @@ export const updateUser = createAsyncThunk(
   async (multipartFormData, thunkAPI) => {
     const authHeader = "Bearer " + thunkAPI.getState().auth.accessToken;
     try {
-      const res = await axiosToast.patch(
-        URL + "/users/update",
-        multipartFormData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: authHeader, //CHECK: Is it need?
-          },
-        }
-      );
+      const res = await axios.patch(URL + "/users/update", multipartFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: authHeader, //CHECK: Is it need?
+        },
+      });
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.data.message);
     }
   }
 );

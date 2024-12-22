@@ -2,14 +2,19 @@ import css from "./DeleteEntryModal.module.css";
 import { useDispatch } from "react-redux";
 import { IoCloseOutline } from "react-icons/io5";
 import { deleteTodayWater } from "../../redux/todayWaterList/operations";
+import { toast } from "react-hot-toast";
 
 export const DeleteEntryModal = ({ closeModal, id }) => {
   const dispath = useDispatch();
 
-  const handleClick = () => {
-    console.log(id);
-    dispath(deleteTodayWater(id));
-    closeModal();
+  const handleClick = async () => {
+    try {
+      await dispath(deleteTodayWater(id)).unwrap();
+      toast.success("Information about drinking water, successfully deleted!");
+      closeModal();
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (

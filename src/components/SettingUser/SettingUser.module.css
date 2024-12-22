@@ -8,6 +8,10 @@
   background-color: #fff;
 }
 
+.container::-webkit-scrollbar {
+  display: none;
+}
+
 .headerWrap {
   display: flex;
   justify-content: space-between;
@@ -20,7 +24,6 @@
   font-size: 26px;
   line-height: 123%;
 }
-
 .closeBtn {
   background-color: transparent;
   border: none;
@@ -201,7 +204,7 @@
   padding: 8px 30px;
   width: 256px;
   height: 36px;
-  box-shadow: 0px 4px 8px 0px #407BFF57;
+  box-shadow: 0px 4px 8px 0px #407bff57;
   background: #407bff;
   color: #fff;
   font-family: "Roboto", sans-serif;
@@ -212,13 +215,20 @@
 }
 
 .saveBtn:hover {
-  box-shadow: 0px 4px 14px 0px #407BFF8A;
+  box-shadow: 0px 4px 14px 0px #407bff8a;
 }
 
 @media only screen and (min-width: 768px) {
   .container {
     width: 768px;
     padding: 24px 32px;
+  }
+
+  .saveBtn {
+    padding: 10px 30px;
+    width: 160px;
+    height: 44px;
+    justify-self: end;
   }
 
   .credentialsInput {
@@ -236,6 +246,15 @@
 
 @media (min-width: 1440px) {
   .container {
-    width: 1216px;
+    width: 1008px;
+  }
+
+  .flexContainer1 {
+    display: flex;
+    gap: 24px;
+  }
+
+  .credentialsWrap {
+    margin-top: 52px;
   }
 }

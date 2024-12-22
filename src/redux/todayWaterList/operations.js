@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axiosToast from "../../Utilits/toast";
+import axios from "axios";
 
 const URL = "https://aqua-tracker-be.onrender.com";
 
@@ -9,14 +9,14 @@ export const fetchTodayWater = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const authHeader = "Bearer " + thunkAPI.getState().auth.accessToken;
-      const res = await axiosToast.get(URL + "/water", {
+      const res = await axios.get(URL + "/water", {
         headers: {
           Authorization: authHeader,
         },
       });
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.data.message);
     }
   }
 );
@@ -27,14 +27,14 @@ export const addTodayWater = createAsyncThunk(
   async (water, thunkAPI) => {
     try {
       const authHeader = "Bearer " + thunkAPI.getState().auth.accessToken;
-      const response = await axiosToast.post(URL + "/water", water, {
+      const response = await axios.post(URL + "/water", water, {
         headers: {
           Authorization: authHeader,
         },
       });
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.data.message);
     }
   }
 );
@@ -45,14 +45,14 @@ export const deleteTodayWater = createAsyncThunk(
   async (waterId, thunkAPI) => {
     try {
       const authHeader = "Bearer " + thunkAPI.getState().auth.accessToken;
-      const response = await axiosToast.delete(`${URL}/water/${waterId}`, {
+      const res = await axios.delete(`${URL}/water/${waterId}`, {
         headers: {
           Authorization: authHeader,
         },
       });
-      return waterId;
+      return res.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.response.data.data.message);
     }
   }
 );
@@ -66,7 +66,7 @@ export const updateTodayWater = createAsyncThunk(
   async (water, thunkAPI) => {
     try {
       const authHeader = "Bearer " + thunkAPI.getState().auth.accessToken;
-      const res = await axiosToast.patch(
+      const res = await axios.patch(
         `${URL}/water/${water.waterId}`,
         {
           date: water.date,
@@ -80,7 +80,7 @@ export const updateTodayWater = createAsyncThunk(
       );
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.data.message);
     }
   }
 );

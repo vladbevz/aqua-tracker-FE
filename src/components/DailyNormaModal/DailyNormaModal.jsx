@@ -50,15 +50,11 @@ export const DailyNormaModal = ({ closeModal }) => {
       return;
     }
     try {
-      await dispatch(updateUser({ daylyNorm: waterAmount }));
+      await dispatch(updateUser({ daylyNorm: waterAmount })).unwrap();
       toast.success("Successfully daily intake saved!");
       closeModal();
     } catch (error) {
-      if (error.response?.status === 500) {
-        toast.error("Server error. Please try again later.");
-      } else {
-        toast.error("An unexpected error occurred. Please try again.");
-      }
+      toast.error(error);
     }
   };
 
