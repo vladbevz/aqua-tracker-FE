@@ -1,4 +1,4 @@
-.progressWrapper {
+.container {
     margin-bottom: 16px;
     width: 280px;
     background-color: #fff;
@@ -41,12 +41,12 @@
 }
 
 .progressBar {
+    position: relative;
     width: 256px;
-    height: 10px;
+    height: 8px;
     background: var(--secondary-color-5);
     border-radius: 10px;
-    /* margin: 10px 10px 0 10px; */
-    margin: 0px 10px 0px 10px;
+    margin: 10px auto 4px auto;
 }
 
 .progress {
@@ -56,28 +56,53 @@
     border-radius: 5px;
 }
 
+.thumb {
+    position: absolute;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border: 1px solid var(--primary-color-blue);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .number {
-    margin-top: 6px;
+    position: absolute;
+    top: 0px;
     font-size: 16px;
     font-weight: var(--font-medium);
     line-height: 125%;
-    color: var(--primary-color-blue)
+    color: var(--primary-color-blue);
+    transform: translateX(+20%);
 }
 
-.progressHolder {
-    display: flex;
-    justify-content: space-between;
+.progressView {
+    position: relative;
 }
+
 .spanBox{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    width: 256px;
+    margin: 0px auto 0px auto;
 }
 
 .span {
-    height: 6px;
+    height: 8px;
     border: 0.5px solid #D7E3FF;
-    /* margin-left: 0px; */
+}
+
+.holderBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 6px;
+    margin-top: 4px;
 }
 
 .holder {
@@ -85,9 +110,15 @@
     line-height: 16px;
     color: var(--primary-color-blue)
 }
+
+.holder.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 @media only screen and (min-width: 768px) {
 
-    .progressWrapper {
+    .container {
         margin: 0px;
         width: 356px;
     }
@@ -95,6 +126,14 @@
     .box {
         display: flex;
         margin-top: 16px;
+    }
+
+    .holderBox {
+        padding-left: 10px;
+    }
+
+    .spanBox {
+        width: 325px;
     }
 
     .btnBox {
@@ -114,7 +153,7 @@
 
     .progressBar {
         width: 325px;
-        margin: 0px 10px 0px 10px;
+        margin-top: 16px;
     }
 
     .progress {
@@ -122,8 +161,9 @@
     }
 
     .number {
-        margin-bottom: 10px;
+        transform: translateX(+50%);
     }
+
 }
 
 @media (min-width: 1440px) {
@@ -133,7 +173,10 @@
         align-items:center;
         width:592px;
         height: 90px;
-        
+    }
+
+    .spanBox {
+        width: 360px;
     }
 
     .btnBox {
@@ -149,18 +192,16 @@
         line-height: 133%;
     }
 
-    .progressWrapper {
+    .container {
         margin: 0px;
         width: 391px;
     }
 
     .progressBar {
         width: 360px;
-        margin: 0px 10px 0px 10px;
     }
 
     .progress {
         max-width: 360px;
     }
-
 }

@@ -10,7 +10,6 @@ export const WaterRatioPanel = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const progress = useSelector(selectTodayWaterPercent);
-
   const changedProgress = progress > 100 ? 100 : progress;
 
   const openModal = () => {
@@ -22,24 +21,28 @@ export const WaterRatioPanel = () => {
 
   return (
     <div className={css.box}>
-      <div className={css.progressWrapper}>
+      <div className={css.container}>
         <p className={css.textBar}>Today</p>
-          <div className={css.progressHolder}>
-            <div className={css.spanBox}>
-              <p className={css.holder}>0%</p>
-              <span className={css.span}></span>
-            </div>
-          <div className={css.spanBox}>
-            <p className={css.holder}>100%</p>
-            <span className={css.span}></span>
-          </div>
-        </div>
-        
         <div className={css.progressBar}>
           <div className={css.progress} style={{ width: `${progress}%` }}></div>
+          <div className={css.thumb} style={{ left: `${changedProgress}%` }}></div>
+          
         </div>
-        <div className={css.number} style={{ marginLeft: `${changedProgress/1.16}%` }}>{progress}%</div>
+        <div className={css.spanBox}>
+            <span className={css.span}></span>
+            <span className={css.span}></span>
+            <span className={css.span}></span>
+          </div>
+        <div className={css.progressView}>
+          <div className={css.holderBox}>
+            <span className={`${css.holder} ${progress < 10 ? `${css.hidden}` : ``}`}>0%</span>
+            <span className={`${css.holder} ${progress > 32 && progress < 60 ? `${css.hidden}` : ``}`}>50%</span>
+            <span className={`${css.holder} ${progress > 84 ? `${css.hidden}` : ``}`}>100%</span>
+          </div>
+          <span className={css.number} style={{ left: `${changedProgress/1.16}%` }}>{progress}%</span>
+        </div>
       </div>
+
       <div className={css.btnBox}>
         <button type="button" className={css.addBtn} onClick={openModal}>
           <PiPlusCircleBold className={css.imgBtn} />
