@@ -20,6 +20,10 @@
     width: 32px;
 }
 
+.day:hover {
+    box-shadow: 0px 2px 4px 0px #407BFF4D;
+}
+
 .progress {
     font-size: 10px;
     line-height: 160%;
