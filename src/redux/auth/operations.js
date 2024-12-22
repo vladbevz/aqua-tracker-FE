@@ -1,6 +1,7 @@
 // import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosToast from "../../Utilits/toast";
+import axios from "axios";
 
 const URL = "https://aqua-tracker-be.onrender.com";
 
@@ -22,12 +23,12 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axiosToast.post(URL + "/auth/signup", credentials);
+      const res = await axios.post(URL + "/auth/signup", credentials);
       // After successful registration, add the token to the HTTP header
       setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.data.message);
     }
   }
 );
@@ -40,12 +41,12 @@ export const logIn = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axiosToast.post(URL + "/auth/signin", credentials);
+      const res = await axios.post(URL + "/auth/signin", credentials);
       // After successful login, add the token to the HTTP header
       setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.data.message);
     }
   }
 );

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 import styles from "./SignUpForm.module.css";
@@ -26,14 +27,32 @@ export const SignUpForm = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleSubmit = (values, actions) => {
-    dispatch(
-      register({
-        email: values.email,
-        password: values.password,
-      })
-    );
-    actions.resetForm();
+  // const handleSubmit = (values, actions) => {
+  //   dispatch(
+  //     register({
+  //       email: values.email,
+  //       password: values.password,
+  //     })
+  //   );
+  //   actions.resetForm();
+  // };
+  const handleSubmit = async (values, actions) => {
+    try {
+      actions.resetForm();
+      const response = await dispatch(
+        register({
+          email: values.email,
+          password: values.password,
+        })
+      ).unwrap();
+      toast.success(`Welcome, ${response.data.user.email}!`, {
+        position: "top-center",
+      });
+    } catch (error) {
+      toast.error(error, {
+        position: "top-center",
+      });
+    }
   };
 
   const inputSchema = Yup.object().shape({

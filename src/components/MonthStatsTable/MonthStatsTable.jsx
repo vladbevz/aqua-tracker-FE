@@ -4,18 +4,46 @@ import { HiOutlineChevronRight } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { MonthOneDay } from "./MonthOneDay/MonthOneDay";
 import { capitalizeFirstLetter } from "../../Utilits/capitalize";
-import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
+import { fetchTodayWater } from "../../redux/todayWaterList/operations.js";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMonthWater } from "../../redux/monthWaterList/operations.js";
+import { getMonthName } from "../../Utilits/getMonth.js";
+import { selectMonthWaterList } from "../../redux/monthWaterList/selector.js";
+import { selectTodayWaterList } from "../../redux/todayWaterList/selectors.js";
 
-export const MonthStatsTable = ({
-  monthData,
-  month,
-  year,
-  setMonthNumber,
-  monthNumber,
-  setYear,
-}) => {
+export const MonthStatsTable = () => {
+  const dispatch = useDispatch();
+  const [year, setYear] = useState(2024);
+  const [monthNumber, setMonthNumber] = useState(11);
+
+  const month = getMonthName(monthNumber);
+  const monthData = useSelector(selectMonthWaterList);
+  const waterList = useSelector(selectTodayWaterList);
   const user = useSelector(selectUser);
+
+  useEffect(() => {
+    dispatch(fetchTodayWater());
+  }, [dispatch]);
+
+  // const getMonthData = (year, month) => {
+  //   dispatch(
+  //     fetchMonthWater({
+  //       year,
+  //       month,
+  //     })
+  //   );
+  // };
+
+  useEffect(() => {
+    dispatch(
+      fetchMonthWater({
+        year,
+        month,
+      })
+    );
+  }, [monthNumber, waterList, user.daylyNorm, year, month, dispatch]);
+
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   const disableNextMonthButton =
