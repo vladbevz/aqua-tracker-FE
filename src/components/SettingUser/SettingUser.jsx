@@ -13,25 +13,40 @@ import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 
 import css from "./SettingUser.module.css";
 
-const SettingSchema = Yup.object().shape({
-  email: Yup.string().email("Must be a valid email!").required("Required"),
-  outdatedPassword: Yup.string(),
-  newPassword: Yup.string()
-    .min(8, "Password must be at least 8 characters!")
-    .when("outdatedPassword", {
-      is: (outdatedPassword) => !!outdatedPassword,
-      then: (schema) =>
-        schema.required(
-          "New password is required if outdated password is provided!"
-        ),
-    }),
-  repeatNewPassword: Yup.string()
-    .oneOf([Yup.ref("newPassword"), null], "Passwords must match!")
-    .when("newPassword", {
-      is: (newPassword) => !!newPassword,
-      then: (schema) => schema.required("Please confirm your new password!"),
-    }),
-});
+const SettingSchema = Yup.object()
+  .shape({
+    email: Yup.string().email("Must be a valid email!").required("Required"),
+    outdatedPassword: Yup.string(),
+    newPassword: Yup.string()
+      .min(8, "Password must be at least 8 characters!")
+      .when("outdatedPassword", {
+        is: (outdatedPassword) => !!outdatedPassword,
+        then: (schema) =>
+          schema.required(
+            "New password is required if outdated password is provided!"
+          ),
+      }),
+    repeatNewPassword: Yup.string()
+      .oneOf([Yup.ref("newPassword"), null], "Passwords must match!")
+      .when("newPassword", {
+        is: (newPassword) => !!newPassword,
+        then: (schema) => schema.required("Please confirm your new password!"),
+      }),
+  })
+  .test(
+    "passwords-set-without-outdated",
+    "Outdated password is required to set a new password.",
+    function (values) {
+      const { outdatedPassword, newPassword, repeatNewPassword } = values;
+      if ((newPassword || repeatNewPassword) && !outdatedPassword) {
+        return this.createError({
+          path: "outdatedPassword",
+          message: "Outdated password is required to set a new password.",
+        });
+      }
+      return true;
+    }
+  );
 
 export const SettingUser = ({ onCancel }) => {
   const user = useSelector(selectUser);
@@ -39,7 +54,7 @@ export const SettingUser = ({ onCancel }) => {
 
   const initialValues = {
     avatar: user.avatarUrl || "",
-    gender: user.gender || "woman",
+    gender: user?.gender || "female",
     username: user.name || "",
     email: user.email || "",
     outdatedPassword: "",
@@ -89,9 +104,9 @@ export const SettingUser = ({ onCancel }) => {
 
   const usernameFieldId = useId();
   const emailFieldId = useId();
-  // const outdatedPasswordFieldId = useId();
-  // const newPasswordFieldId = useId();
-  // const repeatNewPasswordFieldId = useId();
+  const outdatedPasswordFieldId = useId();
+  const newPasswordFieldId = useId();
+  const repeatNewPasswordFieldId = useId();
 
   const handleSubmit = async (values, actions) => {
     const { avatar, gender, username, email, outdatedPassword, newPassword } =
@@ -213,44 +228,98 @@ export const SettingUser = ({ onCancel }) => {
             <div className={css.passwordWrap}>
               <h2 className={css.title}>Password</h2>
 
-              {["outdatedPassword", "newPassword", "repeatNewPassword"].map(
-                (field) => (
-                  <div key={field}>
-                    <label className={css.passwordLabel} htmlFor={field}>
-                      {field === "outdatedPassword"
-                        ? "Outdated password:"
-                        : field === "newPassword"
-                        ? "New password:"
-                        : "Repeat new password:"}
-                    </label>
-                    <div className={css.passwordInputWrap}>
-                      <Field
-                        className={css.passwordInput}
-                        type={showPassword[field] ? "text" : "password"}
-                        name={field}
-                        placeholder="Password"
-                        id={field}
-                      />
-                      <button
-                        className={css.showPasswordEyeBtn}
-                        type="button"
-                        onClick={() => handleToggleShowPassword(field)}
-                      >
-                        {showPassword[field] ? (
-                          <HiOutlineEye className={css.passwordIcon} />
-                        ) : (
-                          <HiOutlineEyeOff className={css.passwordIcon} />
-                        )}
-                      </button>
-                    </div>
-                    <ErrorMessage
-                      className={css.errorMessage}
-                      name={field}
-                      component="span"
-                    />
-                  </div>
-                )
-              )}
+              <label
+                className={css.passwordLabel}
+                htmlFor={outdatedPasswordFieldId}
+              >
+                Outdated password:
+              </label>
+              <div className={css.passwordInputWrap}>
+                <Field
+                  className={css.passwordInput}
+                  type={showPassword.outdatedPassword ? "text" : "password"}
+                  name="outdatedPassword"
+                  placeholder="Password"
+                  id={outdatedPasswordFieldId}
+                />
+                <button
+                  className={css.showPasswordEyeBtn}
+                  type="button"
+                  onClick={() => handleToggleShowPassword("outdatedPassword")}
+                >
+                  {showPassword.outdatedPassword ? (
+                    <HiOutlineEye className={css.passwordIcon} />
+                  ) : (
+                    <HiOutlineEyeOff className={css.passwordIcon} />
+                  )}
+                </button>
+              </div>
+              <ErrorMessage
+                className={css.errorMessage}
+                name="outdatedPassword"
+                component="span"
+              />
+
+              <label className={css.passwordLabel} htmlFor={newPasswordFieldId}>
+                New password:
+              </label>
+              <div className={css.passwordInputWrap}>
+                <Field
+                  className={css.passwordInput}
+                  type={showPassword.newPassword ? "text" : "password"}
+                  name="newPassword"
+                  placeholder="Password"
+                  id={newPasswordFieldId}
+                />
+                <button
+                  className={css.showPasswordEyeBtn}
+                  type="button"
+                  onClick={() => handleToggleShowPassword("newPassword")}
+                >
+                  {showPassword.newPassword ? (
+                    <HiOutlineEye className={css.passwordIcon} />
+                  ) : (
+                    <HiOutlineEyeOff className={css.passwordIcon} />
+                  )}
+                </button>
+              </div>
+              <ErrorMessage
+                className={css.errorMessage}
+                name="newPassword"
+                component="span"
+              />
+
+              <label
+                className={css.passwordLabel}
+                htmlFor={repeatNewPasswordFieldId}
+              >
+                Repeat new password:
+              </label>
+              <div className={css.passwordInputWrap}>
+                <Field
+                  className={css.passwordInput}
+                  type={showPassword.repeatNewPassword ? "text" : "password"}
+                  name="repeatNewPassword"
+                  placeholder="Password"
+                  id={repeatNewPasswordFieldId}
+                />
+                <button
+                  className={css.showPasswordEyeBtn}
+                  type="button"
+                  onClick={() => handleToggleShowPassword("repeatNewPassword")}
+                >
+                  {showPassword.repeatNewPassword ? (
+                    <HiOutlineEye className={css.passwordIcon} />
+                  ) : (
+                    <HiOutlineEyeOff className={css.passwordIcon} />
+                  )}
+                </button>
+              </div>
+              <ErrorMessage
+                className={css.errorMessage}
+                name="repeatNewPassword"
+                component="span"
+              />
             </div>
 
             <button className={css.saveBtn} type="submit">
