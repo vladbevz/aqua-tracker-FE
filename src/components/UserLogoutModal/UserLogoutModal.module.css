@@ -42,7 +42,7 @@
    }
  }
  
- @media (max-width: 768px){
+ @media (max-width: 767px){
  
    .btnContainer{
      justify-content: flex-end;
@@ -99,7 +99,7 @@
    font-size: 44px;
  }
  
- @media (max-width: 768px){
+ @media (max-width: 767px){
  
    .cancelBtn{
      margin-right: 0;
