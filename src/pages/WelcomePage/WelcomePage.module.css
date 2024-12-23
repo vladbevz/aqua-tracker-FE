@@ -221,6 +221,7 @@
     height: 850px;
     flex-direction: row;
     padding: 80px 150px;
+    padding-top: 150px;
   }
 
   .main-paige-info {
