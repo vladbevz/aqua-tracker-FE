@@ -21,7 +21,6 @@ export const SignInForm = () => {
     try {
       actions.resetForm();
       const response = await dispatch(logIn(values)).unwrap();
-      console.log(response);
       toast.success(
         `Welcome back, ${response.data.user.name || response.data.user.email}!`,
         {
@@ -29,7 +28,6 @@ export const SignInForm = () => {
         }
       );
     } catch (error) {
-      console.log(error);
       toast.error(error);
     }
   };

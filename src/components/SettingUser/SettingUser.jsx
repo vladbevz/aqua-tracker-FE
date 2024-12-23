@@ -201,7 +201,7 @@ export const SettingUser = ({ onCancel }) => {
                       <Field
                         type="radio"
                         name="gender"
-                        value="male"
+                        value="man"
                         id="pickedMan"
                       />
                       <p className={css.genderText}>Man</p>
