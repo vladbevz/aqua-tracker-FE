@@ -7,7 +7,9 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { SettingUser } from "../SettingUser/SettingUser.jsx";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors.js";
+import useWindowDimensions from "../../hooks/useWindowDimensions.js";
 const UserLogo = () => {
+  const { width } = useWindowDimensions();
   const [isBackdropOpen, setIsBackdropOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const user = useSelector(selectUser);
@@ -25,10 +27,18 @@ const UserLogo = () => {
     return letter.toUpperCase();
   };
 
+  const userIdentity = () => {
+    let usrEmail =
+      width < 768
+        ? user.email.substring(0, user.email.indexOf("@"))
+        : user.email;
+    return user.name || usrEmail;
+  };
+
   return (
     <div className={css.profileDropdown}>
       <div className={css.profileInfo}>
-        <span className={css.username}>{user.name || user.email}</span>
+        <span className={css.username}>{userIdentity()}</span>
         {user.avatarUrl ? (
           <img src={user.avatarUrl} alt="User Avatar" className={css.avatar} />
         ) : (

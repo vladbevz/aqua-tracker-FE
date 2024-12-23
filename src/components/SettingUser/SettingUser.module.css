@@ -142,17 +142,13 @@
   font-size: 14px;
   line-height: 129%;
   color: var(--secondary-color-2);
+  margin-top: 4px;
 }
 
 .passwordWrap {
   display: flex;
   flex-direction: column;
-  /* gap: 12px; */
   margin-bottom: 24px;
-}
-
-.passwordWrap .title {
-  margin-bottom: 12px;
 }
 
 .passwordLabel {
@@ -160,6 +156,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 125%;
+  margin-top: 12px;
   margin-bottom: 8px;
 }
 
@@ -170,7 +167,16 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  /* color: #407bff; */
+  -webkit-text-security: disc;
+}
+
+/* .passwordInput[type="password"] {
+  -webkit-text-security: disc;
+} */
+
+.passwordInput[type="password"] {
+  -webkit-text-security: square;
+  -moz-text-security: square;
 }
 
 .passwordInputWrap {
@@ -182,7 +188,10 @@
   padding: 12px 10px;
   width: 256px;
   height: 44px;
-  margin-bottom: 12px;
+}
+
+.errorBorder {
+  border: 1px solid var(--secondary-color-2);
 }
 
 .showPasswordEyeBtn {

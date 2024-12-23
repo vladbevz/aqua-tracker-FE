@@ -22,9 +22,12 @@ export const SignInForm = () => {
       actions.resetForm();
       const response = await dispatch(logIn(values)).unwrap();
       console.log(response);
-      toast.success(`Welcome back, ${response.data.user.name}!`, {
-        position: "top-center",
-      });
+      toast.success(
+        `Welcome back, ${response.data.user.name || response.data.user.email}!`,
+        {
+          position: "top-center",
+        }
+      );
     } catch (error) {
       console.log(error);
       toast.error(error);
