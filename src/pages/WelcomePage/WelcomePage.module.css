@@ -13,7 +13,7 @@
 }
 
 .main-page {
-  padding: 4px 20px;
+  padding: 24px 20px;
   width: 320px;
   height: 680px;
   display: flex;
@@ -139,7 +139,7 @@
     width: 768px;
     height: 800px;
     align-items: flex-start;
-    padding: 0 32px;
+    padding: 40px 32px;
   }
 
   .main-paige-info {
