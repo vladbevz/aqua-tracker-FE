@@ -140,6 +140,7 @@ export const SettingUser = ({ onCancel }) => {
       toast.error(error);
     }
   };
+
   return (
     <div className={css.container}>
       <div className={css.headerWrap}>
@@ -155,7 +156,7 @@ export const SettingUser = ({ onCancel }) => {
         validationSchema={SettingSchema}
         enableReinitialize
       >
-        {({ setFieldValue }) => (
+        {({ setFieldValue, errors, touched }) => (
           <Form>
             <div className={css.photoWrap}>
               <h2 className={css.title}>Your photo</h2>
@@ -246,7 +247,13 @@ export const SettingUser = ({ onCancel }) => {
                 >
                   Outdated password:
                 </label>
-                <div className={css.passwordInputWrap}>
+                <div
+                  className={`${css.passwordInputWrap} ${
+                    errors.outdatedPassword && touched.outdatedPassword
+                      ? css.errorBorder
+                      : ""
+                  }`}
+                >
                   <Field
                     className={css.passwordInput}
                     type={showPassword.outdatedPassword ? "text" : "password"}
@@ -278,7 +285,13 @@ export const SettingUser = ({ onCancel }) => {
                 >
                   New password:
                 </label>
-                <div className={css.passwordInputWrap}>
+                <div
+                  className={`${css.passwordInputWrap} ${
+                    errors.newPassword && touched.newPassword
+                      ? css.errorBorder
+                      : ""
+                  }`}
+                >
                   <Field
                     className={css.passwordInput}
                     type={showPassword.newPassword ? "text" : "password"}
@@ -310,7 +323,13 @@ export const SettingUser = ({ onCancel }) => {
                 >
                   Repeat new password:
                 </label>
-                <div className={css.passwordInputWrap}>
+                <div
+                  className={`${css.passwordInputWrap} ${
+                    errors.repeatNewPassword && touched.repeatNewPassword
+                      ? css.errorBorder
+                      : ""
+                  }`}
+                >
                   <Field
                     className={css.passwordInput}
                     type={showPassword.repeatNewPassword ? "text" : "password"}
