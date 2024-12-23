@@ -9,10 +9,6 @@ export const MonthOneDay = ({ day, month }) => {
   const today = new Date().toISOString().split("T")[0];
   const isToday = date === today;
 
-  console.log(today)
-  console.log("date", date)
-
-
   const [dayInfoShowed, setDayInfoShowed] = useState({
     status: false,
     left: true,
