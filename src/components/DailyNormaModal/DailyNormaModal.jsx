@@ -21,10 +21,13 @@ export const DailyNormaModal = ({ closeModal }) => {
   const toLiters = (milliliters) => milliliters / 1000;
 
   const calculateWaterRate = () => {
-    const weightNumber = parseFloat(weight);
-    const activitiTimeNumber = parseFloat(activityTime);
+    const weightNumber = parseFloat(weight) || 0;
+    const activitiTimeNumber = parseFloat(activityTime) || 0;
 
-    if (isNaN(weightNumber) || isNaN(activitiTimeNumber)) return;
+    if (weightNumber < 0 || activitiTimeNumber < 0) {
+      toast.error("Weight and activity time must be non-negative numbers.");
+      return;
+    }
 
     let water = 0;
     if (gender === "girl") {
@@ -123,9 +126,12 @@ export const DailyNormaModal = ({ closeModal }) => {
             type="number"
             placeholder="Enter your weight"
             value={weight}
-            onChange={(e) => setWeight(e.target.value)}
+            onChange={(e) => {
+              setWeight(e.target.value);
+              calculateWaterRate();
+            }}
             className={css.input}
-            min={1}
+            min={0}
           />
         </label>
 
@@ -136,9 +142,12 @@ export const DailyNormaModal = ({ closeModal }) => {
             type="number"
             placeholder="Enter activity time"
             value={activityTime}
-            onChange={(e) => setActivityTime(e.target.value)}
+            onChange={(e) => {
+              setActivityTime(e.target.value);
+              calculateWaterRate();
+            }}
             className={css.input}
-            min={1}
+            min={0}
           />
         </label>
         <div className={css.resultContainer}>
