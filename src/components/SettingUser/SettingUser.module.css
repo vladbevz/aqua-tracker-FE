@@ -167,10 +167,16 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 125%;
+  -webkit-text-security: disc;
 }
 
-.passwordInput[type="password"] {
+/* .passwordInput[type="password"] {
   -webkit-text-security: disc;
+} */
+
+.passwordInput[type="password"] {
+  -webkit-text-security: square;
+  -moz-text-security: square;
 }
 
 .passwordInputWrap {
@@ -182,6 +188,10 @@
   padding: 12px 10px;
   width: 256px;
   height: 44px;
+}
+
+.errorBorder {
+  border: 1px solid var(--secondary-color-2);
 }
 
 .showPasswordEyeBtn {
