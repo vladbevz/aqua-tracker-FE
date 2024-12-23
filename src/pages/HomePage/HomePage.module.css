@@ -78,7 +78,7 @@
   .home {
     height: 800px;
     background-image: url("/images/home/desk-home-back-1x.png");
-    margin-top: 150px;
+    padding-top: 150px;
   }
 
   .container {
