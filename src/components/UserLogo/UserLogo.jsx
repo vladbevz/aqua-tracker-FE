@@ -37,14 +37,14 @@ const UserLogo = () => {
 
   return (
     <div className={css.profileDropdown}>
-      <div className={css.profileInfo}>
+      <div className={css.profileInfo} onClick={toggleBackdrop}>
         <span className={css.username}>{userIdentity()}</span>
         {user.avatarUrl ? (
           <img src={user.avatarUrl} alt="User Avatar" className={css.avatar} />
         ) : (
           <div className={css.fallbackAvatar}>{getFallbackAvatar()}</div>
         )}
-        <button className={css.arrowButton} onClick={toggleBackdrop}>
+        <button className={css.arrowButton} >
           {isBackdropOpen ? (
             <IoIosArrowUp className={css.arrow} />
           ) : (
