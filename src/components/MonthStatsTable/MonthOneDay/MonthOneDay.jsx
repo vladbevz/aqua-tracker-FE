@@ -6,6 +6,13 @@ export const MonthOneDay = ({ day, month }) => {
   const { date, servings, amountWaterPerDay, daylyNorm, percent } = { ...day };
   const dailyNormInMl = daylyNorm * 1000;
 
+  const today = new Date().toISOString().split("T")[0];
+  const isToday = date === today;
+
+  console.log(today)
+  console.log("date", date)
+
+
   const [dayInfoShowed, setDayInfoShowed] = useState({
     status: false,
     left: true,
@@ -51,7 +58,7 @@ export const MonthOneDay = ({ day, month }) => {
           amountWaterPerDay >= dailyNormInMl
             ? `${css.completed}`
             : `${css.uncompleted}`
-        }`}
+        } ${isToday ? `${css.currentDay}` : ""}`}
       >
         <p className={css.date}>{currentDay}</p>
       </div>
