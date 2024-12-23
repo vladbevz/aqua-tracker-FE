@@ -27,18 +27,8 @@ export const SignUpForm = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  // const handleSubmit = (values, actions) => {
-  //   dispatch(
-  //     register({
-  //       email: values.email,
-  //       password: values.password,
-  //     })
-  //   );
-  //   actions.resetForm();
-  // };
   const handleSubmit = async (values, actions) => {
     try {
-      actions.resetForm();
       const response = await dispatch(
         register({
           email: values.email,
@@ -48,6 +38,7 @@ export const SignUpForm = () => {
       toast.success(`Welcome, ${response.data.user.email}!`, {
         position: "top-center",
       });
+      actions.resetForm();
     } catch (error) {
       toast.error(error, {
         position: "top-center",
