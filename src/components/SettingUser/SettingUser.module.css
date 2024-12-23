@@ -147,7 +147,6 @@
 .passwordWrap {
   display: flex;
   flex-direction: column;
-  /* gap: 12px; */
   margin-bottom: 24px;
 }
 
@@ -170,7 +169,6 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  /* color: #407bff; */
 }
 
 .passwordInputWrap {
