@@ -19,7 +19,6 @@ export const SignInForm = () => {
 
   const handleSubmit = async (values, actions) => {
     try {
-      actions.resetForm();
       const response = await dispatch(logIn(values)).unwrap();
       toast.success(
         `Welcome back, ${response.data.user.name || response.data.user.email}!`,
@@ -27,6 +26,7 @@ export const SignInForm = () => {
           position: "top-center",
         }
       );
+      actions.resetForm();
     } catch (error) {
       toast.error(error);
     }

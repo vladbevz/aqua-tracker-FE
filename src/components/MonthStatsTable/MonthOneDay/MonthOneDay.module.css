@@ -21,7 +21,10 @@
 }
 
 .day:hover {
-    box-shadow: 0px 2px 4px 0px #407BFF4D;
+    /* box-shadow: 0px 2px 4px 0px #407BFF4D; */
+    box-shadow: 0px 4px 14px 0px #407BFF8A;
+    /* background-color: var(--secondary-color-3);
+    color: white; */
 }
 
 .progress {
