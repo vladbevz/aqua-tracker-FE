@@ -50,7 +50,7 @@ export const deleteTodayWater = createAsyncThunk(
           Authorization: authHeader,
         },
       });
-      return res.data;
+      return waterId;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response.data.data.message);
     }

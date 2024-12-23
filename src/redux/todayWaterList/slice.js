@@ -74,8 +74,6 @@ const todayWaterListSlice = createSlice({
       .addCase(updateTodayWater.pending)
       .addCase(updateTodayWater.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log("action.payload: ", action.payload);
-
         for (const water of state.items) {
           if (water._id === action.payload.data._id) {
             water.amount = action.payload.data.amount;
