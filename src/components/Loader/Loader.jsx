@@ -11,7 +11,6 @@ export const Loader = () => {
         color="#407bff"
         ariaLabel="puff-loading"
       />
-      ;
     </div>
   );
 };
