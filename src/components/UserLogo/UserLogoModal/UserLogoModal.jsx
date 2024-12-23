@@ -2,10 +2,11 @@
 import css from "./UserLogoModal.module.css";
 import { RiSettings3Line } from "react-icons/ri";
 import { TbLogout } from "react-icons/tb";
-export const UserLogoModal = ({ onSettingsClick, onLogoutClick, onClose }) => {
+export const UserLogoModal = ({ onSettingsClick, onLogoutClick}) => {
+  
   return (
-    <div className={css.backdrop} onClick={onClose}>
-      <div className={css.dropdownMenu} onClick={(e) => e.stopPropagation()}>
+    <div  className={css.backdrop}>
+      <div  className={css.dropdownMenu} >
         <button className={css.menuBtn} onClick={onSettingsClick}>
           <RiSettings3Line className={css.icons}/>
           <p className={css.text}>Settings</p> 

@@ -7,15 +7,31 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { SettingUser } from "../SettingUser/SettingUser.jsx";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors.js";
+import { useEffect } from "react";
 import useWindowDimensions from "../../hooks/useWindowDimensions.js";
 const UserLogo = () => {
   const { width } = useWindowDimensions();
   const [isBackdropOpen, setIsBackdropOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const user = useSelector(selectUser);
-  const toggleBackdrop = () => {
+  const toggleBackdrop = (e) => {
+    e.stopPropagation()
+
     setIsBackdropOpen((prev) => !prev);
   };
+  
+  useEffect(() => {
+    const handleOutterClick = (e) => {
+      if (!e.target.closest(`.${css.profileDropdown}`)) {
+        setIsBackdropOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutterClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutterClick);
+    };
+  }, []);
 
   const toggleModal = (modalType) => {
     setActiveModal((prev) => (prev === modalType ? null : modalType));
@@ -57,7 +73,7 @@ const UserLogo = () => {
         <UserLogoModal
           onSettingsClick={() => toggleModal("settings")}
           onLogoutClick={() => toggleModal("logout")}
-          onClose={toggleBackdrop}
+          onClose={() => setIsBackdropOpen(false)}
         />
       )}
 

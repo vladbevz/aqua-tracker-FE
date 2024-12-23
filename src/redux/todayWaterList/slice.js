@@ -5,7 +5,7 @@ import {
   updateTodayWater,
   deleteTodayWater,
 } from "./operations";
-import { logOut } from "../auth/operations";
+import { updateUser, logOut } from "../auth/operations";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -90,6 +90,15 @@ const todayWaterListSlice = createSlice({
         );
       })
       .addCase(updateTodayWater.rejected, handleRejected)
+      .addCase(updateUser.fulfilled, (state, action) => {
+        const newDayliNorm = action.payload.data.user.daylyNorm;
+        if (state.daylyNorm !== newDayliNorm) {
+          state.daylyNorm = newDayliNorm;
+          state.percent = Math.trunc(
+            (state.amountWaterPerDay * 100) / state.daylyNorm
+          );
+        }
+      })
       .addCase(logOut.fulfilled, (state) => {
         state.daylyNorm = null;
         state.amountWaterPerDay = null;
