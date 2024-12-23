@@ -8,13 +8,13 @@ export const ModalWrap = ({ children, isOpen, handleClose }) => {
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={handleClose}
+      onRequestClose={handleClose}      
       shouldCloseOnEsc={true}
-      shouldCloseOnOverlayClick={true}
+      shouldCloseOnOverlayClick={true}      
       overlayClassName={css.modalBackdrop}
       className={css.modalContent}
     >
-      {children}
+      {children}     
     </Modal>
   );
 };
