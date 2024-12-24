@@ -59,7 +59,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .btnContainer {
     justify-content: flex-end;
     flex-direction: column;
@@ -111,7 +111,7 @@
   font-size: 44px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .cancelBtn {
     margin-right: 0;
     width: 232px;
@@ -123,5 +123,13 @@
 
   .closeBtn {
     font-size: 34px;
+  }
+}
+
+@media (min-width: 768px) {
+  .deleteEntryContainer {
+    width: 592px;
+    height: 208px;
+    padding: 32px 24px;
   }
 }

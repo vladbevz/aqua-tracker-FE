@@ -8,12 +8,12 @@ import "../../index.css";
 import { updateUser } from "../../redux/auth/operations";
 
 export const DailyNormaModal = ({ closeModal }) => {
-  const user = useSelector(selectUser);
+  const { daylyNorm } = useSelector(selectUser);
 
   const [gender, setGender] = useState("girl");
   const [weight, setWeight] = useState("");
   const [activityTime, setActivityTime] = useState("");
-  const [waterAmount, setWaterAmount] = useState(user.daylyNorm || 0);
+  const [waterAmount, setWaterAmount] = useState(daylyNorm || 0);
   const [woterAmountForCalculet, setWoterAmountForCalculet] = useState(0);
 
   const toMilliliters = (liters) => liters * 1000;
@@ -62,11 +62,11 @@ export const DailyNormaModal = ({ closeModal }) => {
   };
 
   const handleWaterChange = (e) => {
-    let value = e.target.value;
-    if (value === "") {
-      setWaterAmount("");
-    } else {
+    const value = parseFloat(e.target.value);
+    if (!isNaN(value)) {
       setWaterAmount(toMilliliters(value));
+    } else {
+      setWaterAmount("");
     }
   };
   return (
@@ -148,6 +148,7 @@ export const DailyNormaModal = ({ closeModal }) => {
             }}
             className={css.input}
             min={0}
+            max={24}
           />
         </label>
         <div className={css.resultContainer}>
@@ -167,7 +168,7 @@ export const DailyNormaModal = ({ closeModal }) => {
             name="dailyIntake"
             placeholder="Enter amount in liters"
             className={css.input}
-            value={toLiters(waterAmount) || ""}
+            value={waterAmount ? toLiters(waterAmount) : ""}
             onChange={handleWaterChange}
             min={0.5}
             step={0.01}
