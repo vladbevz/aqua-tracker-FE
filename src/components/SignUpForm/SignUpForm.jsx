@@ -27,6 +27,27 @@ export const SignUpForm = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  // const handleSubmit = async (values, actions) => {
+  //   try {
+  //     const response = await dispatch(
+  //       register({
+  //         email: values.email,
+  //         password: values.password,
+  //       })
+  //     ).unwrap();
+  //     toast.success(`Welcome, ${response.data.user.email}!`, {
+  //       position: "top-center",
+  //     });
+  //     actions.resetForm();
+  //   } catch (error) {
+  //     if (error === "Bad Request") {
+  //       toast.error("Email format is invalid");
+  //     }
+  //     toast.error(error, {
+  //       position: "top-center",
+  //     });
+  //   }
+  // };
   const handleSubmit = async (values, actions) => {
     try {
       const response = await dispatch(
@@ -35,20 +56,36 @@ export const SignUpForm = () => {
           password: values.password,
         })
       ).unwrap();
+
       toast.success(`Welcome, ${response.data.user.email}!`, {
         position: "top-center",
       });
+
       actions.resetForm();
     } catch (error) {
-      toast.error(error, {
-        position: "top-center",
-      });
+      if (error.includes("Bad Request")) {
+        toast.error("Invalid email format", {
+          position: "top-center",
+        });
+      } else if (error.includes("Conflict")) {
+        toast.error("Email already exists", {
+          position: "top-center",
+        });
+      } else {
+        toast.error(error, {
+          position: "top-center",
+        });
+      }
     }
   };
 
   const inputSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email format")
+      .matches(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        "Invalid email format"
+      )
       .required("Email is required"),
 
     password: Yup.string()

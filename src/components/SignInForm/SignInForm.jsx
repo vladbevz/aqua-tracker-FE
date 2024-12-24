@@ -16,19 +16,28 @@ const initialValues = {
 
 export const SignInForm = () => {
   const dispatch = useDispatch();
-
   const handleSubmit = async (values, actions) => {
     try {
       const response = await dispatch(logIn(values)).unwrap();
+
       toast.success(
         `Welcome back, ${response.data.user.name || response.data.user.email}!`,
         {
           position: "top-center",
         }
       );
+
       actions.resetForm();
     } catch (error) {
-      toast.error(error);
+      if (error === "Bad Request") {
+        toast.error("Invalid email format. Please check your input.", {
+          position: "top-center",
+        });
+      } else {
+        toast.error(error, {
+          position: "top-center",
+        });
+      }
     }
   };
   const [showPassword, setShowPassword] = useState(false);
@@ -40,6 +49,10 @@ export const SignInForm = () => {
   const inputSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email format")
+      .matches(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        "Invalid email format"
+      )
       .required("Email is required"),
 
     password: Yup.string()
