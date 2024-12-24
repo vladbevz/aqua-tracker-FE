@@ -42,7 +42,7 @@ export default function WelcomePage() {
               </li>
             </ul>
           </div>
-          <Link to="/signin">
+          <Link to="/signup">
             <button className={css["try-main-button"]}>Try tracker</button>
           </Link>
         </section>
