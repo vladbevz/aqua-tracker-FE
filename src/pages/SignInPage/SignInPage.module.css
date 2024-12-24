@@ -1,9 +1,10 @@
 .signIn {
   height: 680px;
-  background-image: url("/images/SignIn/Mobile-Sign-In.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: url("/images/SignIn/Mobile-Sign-In.png"),
+    url("/images/SignIn/Bottle/Bottle-Mob-Sign-In.png");
+  background-size: cover, auto;
+  background-position: center, center 360px;
+  background-repeat: no-repeat, no-repeat;
   padding: 4px 20px;
   margin-top: 20px;
   display: flex;
@@ -11,23 +12,21 @@
   align-items: center;
 }
 
-@media only screen and (min-resolution: 192dpi) {
-  .signIn {
-    background-image: url("/images/SignIn/Mobile-Sign-In-x2.png");
-  }
-}
-
 @media only screen and (min-width: 768px) {
   .signIn {
-    background-image: url("/images/SignIn/Tablet-Sign-In.png");
-    /* padding-top: 40px; */
+    background-image: url("/images/SignIn/Bottle/Bottle-Tab-Sign-In.png"),
+      url("/images/SignIn/Tablet-Sign-In.png");
+    background-size: 736px 548px, cover;
+    background-position: 140px 10px, center;
+    background-repeat: no-repeat, no-repeat;
     padding: 0 32px;
     display: block;
   }
 
   @media only screen and (min-resolution: 192dpi) {
     .signIn {
-      background-image: url("/images/SignIn/Tablet-Sign-In-x2.png");
+      background-image: url("/images/SignIn/Bottle/Bottle-Tab-Sign-In-x2.png"),
+        url("/images/SignIn/Tablet-Sign-In-x2.png");
     }
   }
 }
@@ -36,14 +35,19 @@
   .signIn {
     height: 800px;
     margin-top: 0;
-    background-image: url("/images/SignIn/Desc-Sign-In.png");
+    background-image: url("/images/SignIn/Bottle/Bottle-Desc-Sign-In.png"),
+      url("/images/SignIn/Desc-Sign-In.png");
+    background-size: 916px 680px, cover;
+    background-position: 10px 50px, center;
+    background-repeat: no-repeat, no-repeat;
     padding-top: 40px;
     display: block;
   }
 
   @media only screen and (min-resolution: 192dpi) {
     .signIn {
-      background-image: url("/images/SignIn/Desc-Sign-In-x2.png");
+      background-image: url("/images/SignIn/Bottle/Bottle-Desc-Sign-In-x2.png"),
+        url("/images/SignIn/Desc-Sign-In-x2.png");
     }
   }
 }
