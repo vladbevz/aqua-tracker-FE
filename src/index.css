@@ -79,3 +79,7 @@ button {
 .is-hidden {
   display: none;
 }
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
