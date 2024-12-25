@@ -1,11 +1,10 @@
-
 .item {
+    position: static;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    position: relative;
 }
 
 .day {
@@ -39,7 +38,6 @@
 .date {
     font-size: 14px;
     line-height: 129%;
-    border-radius: 50%;
 }
 
 .completed {
@@ -50,15 +48,10 @@
     border: 1px solid var(--secondary-color-4);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
 
     .item {
-        position: static;
-    }
-
-    .date {
-        font-size: 16px;
-        line-height: 125%;
+        position: relative;
     }
 
     .day {
@@ -67,9 +60,13 @@
         width: 34px;
     }
 
+    .date {
+        font-size: 16px;
+        line-height: 125%;
+    }
+
     .progress {
         font-size: 13px;
         line-height: 153%;
     }
-
 }

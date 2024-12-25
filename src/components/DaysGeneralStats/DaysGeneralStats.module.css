@@ -1,9 +1,10 @@
 .container {
+  width: 280px;
+  height: 188px;
+  max-width: 100%;
   border-radius: 10px;
   padding: 24px 12px;
-  width: 292px;
-  height: 192px;
-  box-shadow: 0 4px 4px 0 rgba(64, 123, 255, 0.3);
+  box-shadow: 0px 4px 4px 0px #407BFF4D;
   background: var(--primary-color-white);
   position: absolute;
   bottom: 100%;
@@ -12,12 +13,12 @@
 }
 
 .showedRight {
-  right: 50%;
-}
+    left: 0;
+  }
 
 .showedLeft {
-  left: 50%;
-}
+  right: 0;
+  }
 
 .currentDate {
   font-family: var(--font-regular);
@@ -45,16 +46,19 @@
   margin-left: 6px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
+
   .container {
-    width: 280px;
-    max-width: 100%;
+    max-width: 292px;
+    height: 192px;
+    padding: 24px 16px;
   }
+
   .showedRight {
-    left: 0;
+    left: 50%;
   }
 
   .showedLeft {
-    left: 0;
+    right: 50%;
   }
 }
