@@ -1,53 +1,58 @@
 .text {
-    font-size: 24px;
-    line-height: 125%;
-    font-family: var(--font-medium);
-    margin-bottom: 16px;
+  font-size: 24px;
+  line-height: 125%;
+  font-family: var(--font-medium);
+  margin-bottom: 16px;
 }
 
 .addBtn {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    border: none;
-    font-size: 16px;
-    line-height: 125%;
-    background-color: var(--secondary-color-1);
-    color: var(--primary-color-blue);
-    font-family: var(--font-medium);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  font-size: 16px;
+  line-height: 125%;
+  background-color: var(--secondary-color-1);
+  color: var(--primary-color-blue);
+  font-family: var(--font-medium);
 }
 
 .addBtn:hover {
-    color: var(--secondary-color-4);
+  color: var(--secondary-color-4);
 }
 
 .plusIcon {
-    margin-right: 8px;
+  margin-right: 8px;
 }
-
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
 .list {
-    max-height: 188px;
-    overflow-y: auto;
-    margin-bottom: 12px;
+  max-height: 188px;
+  overflow-y: auto;
+  margin-bottom: 12px;
 }
 
 .list::-webkit-scrollbar {
-    width: 4px;
+  width: 4px;
 }
 
 .list::-webkit-scrollbar-thumb {
-    background: var(--secondary-color-3);
-    border-radius: 8px;
+  background: var(--secondary-color-3);
+  border-radius: 8px;
 }
 
 @media only screen and (min-width: 768px) {
-    .text {
-        font-size: 26px;
-        line-height: 123%;
-    }
+  .text {
+    font-size: 26px;
+    line-height: 123%;
+  }
 
-    .addBtn {
-        font-size: 18px;
-        line-height: 133%;
-    }
+  .addBtn {
+    font-size: 18px;
+    line-height: 133%;
+  }
 }
