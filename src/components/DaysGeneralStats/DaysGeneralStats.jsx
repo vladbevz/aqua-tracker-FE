@@ -1,5 +1,5 @@
 import css from "./DaysGeneralStats.module.css";
-import { capitalizeFirstLetter } from "../../Utilits/capitalize";
+import { capitalizeFirstLetter } from "../../Utilits/capitalize.jsx";
 
 export const DaysGeneralStats = ({
   month,
