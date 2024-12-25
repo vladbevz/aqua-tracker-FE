@@ -1,5 +1,5 @@
 import css from "./DaysGeneralStats.module.css";
-import { capitalizeFirstLetter } from "../../Utilits/capitalize.jsx";
+import { useTranslation } from "react-i18next";
 
 export const DaysGeneralStats = ({
   month,
@@ -9,7 +9,8 @@ export const DaysGeneralStats = ({
   servings,
   showedLeft,
 }) => {
-  const capitalizeMonth = capitalizeFirstLetter(month);
+  const { t } = useTranslation();
+  const translatedMonth = t(`months.${month}`);
 
   return (
     <div
@@ -17,17 +18,20 @@ export const DaysGeneralStats = ({
         showedLeft ? `${css.showedLeft}` : `${css.showedRight}`
       }`}
     >
-      <p className={css.currentDate}>{`${currentDay}, ${capitalizeMonth} `}</p>
+      <p className={css.currentDate}>{`${currentDay}, ${translatedMonth} `}</p>
       <p className={css.descriptionText}>
-        Daily norma:
-        <span className={css.stateText}>{daylyNorm}L</span>
+        {t("stats.dailyNorma")}:
+        <span className={css.stateText}>
+          {daylyNorm}
+          {t("stats.l")}
+        </span>
       </p>
       <p className={css.descriptionText}>
-        Fulfillment of the daily norm:
+        {t("stats.fulfillmentDailyNorma")}:
         <span className={css.stateText}>{percent}%</span>
       </p>
       <p className={css.descriptionText}>
-        How many servings of water:
+        {t("stats.servingsWater")}:
         <span className={css.stateText}>{servings}</span>
       </p>
     </div>

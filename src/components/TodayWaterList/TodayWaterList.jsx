@@ -6,9 +6,11 @@ import { HiPlusSmall } from "react-icons/hi2";
 import { AddWaterModal } from "../AddWaterModal/AddWaterModal.jsx";
 import { useSelector } from "react-redux";
 import { selectTodayWaterList } from "../../redux/todayWaterList/selectors.js";
+import { useTranslation } from "react-i18next";
 
 export const TodayWaterList = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const waterList = useSelector(selectTodayWaterList);
 
@@ -22,7 +24,7 @@ export const TodayWaterList = () => {
   return (
     <>
       <div className="today-section">
-        <p className={css.text}>Today</p>
+        <p className={css.text}>{t("homePage.today")}</p>
         <ul className={css.list}>
           {waterList.map((item) => (
             <WaterEntry key={item._id} {...item} />
@@ -30,7 +32,7 @@ export const TodayWaterList = () => {
         </ul>
         <button className={css.addBtn} onClick={openModal}>
           <HiPlusSmall className={css.plusIcon} />
-          Add water
+          {t("homePage.addWater")}
         </button>
       </div>
       {modalIsOpen && (

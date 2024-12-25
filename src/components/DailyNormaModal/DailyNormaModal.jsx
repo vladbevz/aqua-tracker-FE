@@ -6,9 +6,10 @@ import { selectUser } from "../../redux/auth/selectors";
 import css from "./DailyNormaModal.module.css";
 import "../../index.css";
 import { updateUser } from "../../redux/auth/operations";
-
+import { useTranslation } from "react-i18next";
 export const DailyNormaModal = ({ closeModal }) => {
   const { daylyNorm } = useSelector(selectUser);
+  const { t } = useTranslation();
 
   const [gender, setGender] = useState("girl");
   const [weight, setWeight] = useState("");
@@ -25,7 +26,7 @@ export const DailyNormaModal = ({ closeModal }) => {
     const activitiTimeNumber = parseFloat(activityTime) || 0;
 
     if (weightNumber < 0 || activitiTimeNumber < 0) {
-      toast.error("Weight and activity time must be non-negative numbers.");
+      toast.error(t("error.daylyNorm"));
       return;
     }
 
@@ -49,12 +50,12 @@ export const DailyNormaModal = ({ closeModal }) => {
     e.preventDefault();
     const water = parseFloat(waterAmount);
     if (water < toMilliliters(0.5) || water > toMilliliters(15)) {
-      toast.error("The water intake must be between 0.5 and 15 liters.");
+      toast.error(t("error.daylyNormEdit"));
       return;
     }
     try {
       await dispatch(updateUser({ daylyNorm: waterAmount })).unwrap();
-      toast.success("Successfully daily intake saved!");
+      toast.success(t("notification.intake"));
       closeModal();
     } catch (error) {
       toast.error(error);
@@ -72,7 +73,7 @@ export const DailyNormaModal = ({ closeModal }) => {
   return (
     <div className={css.modal}>
       <div className={css.head}>
-        <h1 className={css.title}>My daily norma</h1>
+        <h1 className={css.title}>{t("modals.myDailyNorma")}</h1>
         <button onClick={closeModal} className={css.closeButton}>
           <IoCloseOutline className={css.closeButton} />
         </button>
@@ -80,24 +81,28 @@ export const DailyNormaModal = ({ closeModal }) => {
 
       <ul className={css.normaList}>
         <li className={css.normaItem}>
-          For girl:
+          {t("modals.forGirl")}
           <span className={css.normaSpan}> V=(M*0.03) + (T*0.4)</span>
         </li>
         <li className={css.normaItem}>
-          For man:
+          {t("modals.forMan")}
           <span className={css.normaSpan}> V=(M*0.04) + (T*0.6)</span>
         </li>
       </ul>
 
-      <p className={css.explanation}>
+      {/* <p className={css.explanation}>
         <span className={css.explanation1}>*</span>
         <strong>V</strong> is the volume of the water norm in liters per day,{" "}
         <strong>M</strong> is your body weight, <strong>T</strong> is the time
         of active sports, or another type of activity commensurate in terms of
         loads (in the absence of these, you must set 0).
+      </p> */}
+      <p className={css.explanation}>
+        <span className={css.explanation1}>*</span>
+        {t("modals.countVolume")}
       </p>
 
-      <h2 className={css.subheading}>Calculate your rate:</h2>
+      <h2 className={css.subheading}>{t("modals.calculate")}</h2>
       <form className={css.form} onSubmit={handleSubmit}>
         <fieldset className={css.fieldset}>
           <label className={css.labelRadio}>
@@ -108,7 +113,7 @@ export const DailyNormaModal = ({ closeModal }) => {
               onChange={() => setGender("girl")}
               defaultChecked
             />{" "}
-            For women
+            {t("modals.forWoman")}
           </label>
           <label className={css.labelRadio}>
             <input
@@ -117,14 +122,14 @@ export const DailyNormaModal = ({ closeModal }) => {
               value="man"
               onChange={() => setGender("man")}
             />{" "}
-            For men
+            {t("modals.forMan")}
           </label>
         </fieldset>
         <label className={css.label}>
-          Your weight in kilograms:
+          {t("modals.yourWeight")}:
           <input
             type="number"
-            placeholder="Enter your weight"
+            placeholder={t("modals.weight")}
             value={weight}
             onChange={(e) => {
               setWeight(e.target.value);
@@ -136,11 +141,10 @@ export const DailyNormaModal = ({ closeModal }) => {
         </label>
 
         <label className={css.label}>
-          The time of active participation in sports or other activities with a
-          high physical. load in hours:
+          {t("modals.yourActivities")}:
           <input
             type="number"
-            placeholder="Enter activity time"
+            placeholder={t("modals.activity")}
             value={activityTime}
             onChange={(e) => {
               setActivityTime(e.target.value);
@@ -152,21 +156,17 @@ export const DailyNormaModal = ({ closeModal }) => {
           />
         </label>
         <div className={css.resultContainer}>
-          <p className={css.result}>
-            The required amount of water in liters per day:
-          </p>
+          <p className={css.result}>{t("modals.require")}:</p>
           <span className={css.waterAmount}>
-            {toLiters(woterAmountForCalculet)} L
+            {toLiters(woterAmountForCalculet)} {t("stats.l")}
           </span>
         </div>
-        <h2 className={css.subheading1}>
-          Write down how much water you will drink:
-        </h2>
+        <h2 className={css.subheading1}>{t("modals.writeDown")}</h2>
         <label className={css.label}>
           <input
             type="number"
             name="dailyIntake"
-            placeholder="Enter amount in liters"
+            placeholder={t("modals.waterIn")}
             className={css.input}
             defaultValue={toLiters(waterAmount)}
             onChange={handleWaterChange}
@@ -175,7 +175,7 @@ export const DailyNormaModal = ({ closeModal }) => {
           />
         </label>
         <button type="submit" className={css.saveButton}>
-          Save
+          {t("modals.save")}
         </button>
       </form>
     </div>

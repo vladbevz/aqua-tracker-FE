@@ -7,7 +7,7 @@ import { refreshUser } from "../../redux/auth/operations.js";
 import { selectIsRefreshing } from "../../redux/auth/selectors.js";
 import { RestrictedRoute } from "../RestrictedRoute/RestrictedRoute";
 import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
-import { SharedLayout } from "../SharedLayout/SharedLayout.jsx";
+import SharedLayout from "../SharedLayout/SharedLayout.jsx";
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const SignInPage = lazy(() => import("../../pages/SignInPage/SignInPage.jsx"));
 const SignUpPage = lazy(() => import("../../pages/SignUpPage/SignUpPage.jsx"));
