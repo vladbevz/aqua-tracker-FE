@@ -24,7 +24,7 @@ export const MonthOneDay = ({ day, month }) => {
       e.currentTarget.parentElement.getBoundingClientRect();
 
     const positionLeft =
-      elementCoordinate.left <
+      elementCoordinate.left >
       parentCoordinate.left + parentCoordinate.width / 2;
     setDayInfoShowed({ status: true, left: positionLeft });
   };
