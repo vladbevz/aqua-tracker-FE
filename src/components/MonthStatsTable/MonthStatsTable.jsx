@@ -3,7 +3,6 @@ import { HiOutlineChevronLeft } from "react-icons/hi";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { MonthOneDay } from "./MonthOneDay/MonthOneDay";
-import { capitalizeFirstLetter } from "../../Utilits/capitalize";
 import { selectUser } from "../../redux/auth/selectors";
 import { fetchTodayWater } from "../../redux/todayWaterList/operations.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,13 +10,17 @@ import { fetchMonthWater } from "../../redux/monthWaterList/operations.js";
 import { getMonthName } from "../../Utilits/getMonth.js";
 import { selectMonthWaterList } from "../../redux/monthWaterList/selector.js";
 import { selectTodayWaterList } from "../../redux/todayWaterList/selectors.js";
+import { useTranslation } from "react-i18next";
 
 export const MonthStatsTable = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const [year, setYear] = useState(2024);
   const [monthNumber, setMonthNumber] = useState(11);
 
   const month = getMonthName(monthNumber);
+  const translatedMonth = t(`months.${month}`);
   const monthData = useSelector(selectMonthWaterList);
   const waterList = useSelector(selectTodayWaterList);
   const user = useSelector(selectUser);
@@ -25,15 +28,6 @@ export const MonthStatsTable = () => {
   useEffect(() => {
     dispatch(fetchTodayWater());
   }, [dispatch]);
-
-  // const getMonthData = (year, month) => {
-  //   dispatch(
-  //     fetchMonthWater({
-  //       year,
-  //       month,
-  //     })
-  //   );
-  // };
 
   useEffect(() => {
     dispatch(
@@ -108,18 +102,18 @@ export const MonthStatsTable = () => {
     setFullMonthData(createDataFullMonth(monthData));
   }, [monthData, year, monthNumber, user.daylyNorm]);
 
-  const capitalizeMonth = capitalizeFirstLetter(month);
+  // const capitalizeMonth = capitalizeFirstLetter(month);
 
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
-        <h2 className={css.title}>Month</h2>
+        <h2 className={css.title}>{t("homePage.month")}</h2>
         <div className={css.pagination}>
           <button className={css.paginationBtn} onClick={setPrevMonth}>
             <HiOutlineChevronLeft />
           </button>
           <p className={css.paginationMonth}>
-            {capitalizeMonth}, {year}
+            {translatedMonth}, {year}
           </p>
           <button
             className={css.paginationBtn}

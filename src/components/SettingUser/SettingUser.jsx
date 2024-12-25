@@ -1,55 +1,57 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState, useId } from "react";
-
-import { selectUser } from "../../redux/auth/selectors";
-
 import { useSelector, useDispatch } from "react-redux";
-import { updateUser } from "../../redux/auth/operations";
-
 import { IoCloseOutline } from "react-icons/io5";
 import { HiOutlineArrowUpTray } from "react-icons/hi2";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
-
+import { useTranslation } from "react-i18next";
+import { selectUser } from "../../redux/auth/selectors";
+import { updateUser } from "../../redux/auth/operations";
 import css from "./SettingUser.module.css";
 import toast from "react-hot-toast";
 
-const SettingSchema = Yup.object()
-  .shape({
-    email: Yup.string().email("Must be a valid email!").required("Required"),
-    outdatedPassword: Yup.string(),
-    newPassword: Yup.string()
-      .min(8, "Password must be at least 8 characters!")
-      .when("outdatedPassword", {
-        is: (outdatedPassword) => !!outdatedPassword,
-        then: (schema) =>
-          schema.required(
-            "New password is required if outdated password is provided!"
-          ),
-      }),
-    repeatNewPassword: Yup.string()
-      .oneOf([Yup.ref("newPassword"), null], "Passwords must match!")
-      .when("newPassword", {
-        is: (newPassword) => !!newPassword,
-        then: (schema) => schema.required("Please confirm your new password!"),
-      }),
-  })
-  .test(
-    "passwords-set-without-outdated",
-    "Outdated password is required to set a new password.",
-    function (values) {
-      const { outdatedPassword, newPassword, repeatNewPassword } = values;
-      if ((newPassword || repeatNewPassword) && !outdatedPassword) {
-        return this.createError({
-          path: "outdatedPassword",
-          message: "Outdated password is required to set a new password.",
-        });
-      }
-      return true;
-    }
-  );
-
 export const SettingUser = ({ onCancel }) => {
+  const { t } = useTranslation();
+  const SettingSchema = Yup.object()
+    .shape({
+      email: Yup.string()
+        .email(t("validationMessages.email"))
+        .required(t("validationMessages.required")),
+      outdatedPassword: Yup.string(),
+      newPassword: Yup.string()
+        .min(8, t("validationMessages.newPassword"))
+        .when("outdatedPassword", {
+          is: (outdatedPassword) => !!outdatedPassword,
+          then: (schema) =>
+            schema.required(t("validationMessages.newPasswordRequired")),
+        }),
+      repeatNewPassword: Yup.string()
+        .oneOf(
+          [Yup.ref("newPassword"), null],
+          t("validationMessages.repeatNewPassword")
+        )
+        .when("newPassword", {
+          is: (newPassword) => !!newPassword,
+          then: (schema) =>
+            schema.required(t("validationMessages.repeatNewPasswordRequired")),
+        }),
+    })
+    .test(
+      "passwords-set-without-outdated",
+      t("validationMessages.outdatedPassword"),
+      function (values) {
+        const { outdatedPassword, newPassword, repeatNewPassword } = values;
+        if ((newPassword || repeatNewPassword) && !outdatedPassword) {
+          return this.createError({
+            path: "outdatedPassword",
+            message: t("validationMessages.outdatedPassword"),
+          });
+        }
+        return true;
+      }
+    );
+
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
@@ -63,7 +65,6 @@ export const SettingUser = ({ onCancel }) => {
     repeatNewPassword: "",
   };
 
-  // Avatar
   const [avatarPreview, setAvatarPreview] = useState(
     user.avatarUrl || "images/noAvatar/no-avatar.png"
   );
@@ -79,7 +80,7 @@ export const SettingUser = ({ onCancel }) => {
 
       try {
         await dispatch(updateUser(formData)).unwrap();
-        toast.success("Avatar successfully changed!");
+        toast.success(t("notification.avatar"));
       } catch (error) {
         toast.error(error);
       }
@@ -90,7 +91,6 @@ export const SettingUser = ({ onCancel }) => {
     document.getElementById("avatarInput").click();
   };
 
-  // Password management
   const [showPassword, setShowPassword] = useState({
     outdatedPassword: false,
     newPassword: false,
@@ -111,13 +111,8 @@ export const SettingUser = ({ onCancel }) => {
   const repeatNewPasswordFieldId = useId();
 
   const handleSubmit = async (values, actions) => {
-    const { avatar, gender, username, email, outdatedPassword, newPassword } =
-      values;
-
+    const { gender, username, email, outdatedPassword, newPassword } = values;
     const formData = new FormData();
-    if (avatar && typeof avatar !== "string") {
-      formData.append("avatarUrl", avatar);
-    }
     if (gender !== initialValues.gender) {
       formData.append("gender", gender);
     }
@@ -133,7 +128,7 @@ export const SettingUser = ({ onCancel }) => {
 
     try {
       await dispatch(updateUser(formData)).unwrap();
-      toast.success("Your data has been successfully changed");
+      toast.success(t("notification.update"));
       actions.resetForm();
       onCancel();
     } catch (error) {
@@ -144,7 +139,7 @@ export const SettingUser = ({ onCancel }) => {
   return (
     <div className={css.container}>
       <div className={css.headerWrap}>
-        <h1 className={css.header}>Setting</h1>
+        <h1 className={css.header}>{t("modals.setting")}</h1>
         <button className={css.closeBtn} onClick={onCancel}>
           <IoCloseOutline className={css.closeIcon} />
         </button>
@@ -159,7 +154,7 @@ export const SettingUser = ({ onCancel }) => {
         {({ setFieldValue, errors, touched }) => (
           <Form>
             <div className={css.photoWrap}>
-              <h2 className={css.title}>Your photo</h2>
+              <h2 className={css.title}>{t("modals.uploadPhoto")}</h2>
               <div className={css.avatarWrap} onClick={handleClick}>
                 <img
                   className={css.avatar}
@@ -167,7 +162,9 @@ export const SettingUser = ({ onCancel }) => {
                   alt="User avatar"
                 />
                 <HiOutlineArrowUpTray className={css.arrowUpIcon} />
-                <span className={css.avatarUploadText}>Upload a photo</span>
+                <span className={css.avatarUploadText}>
+                  {t("modals.uploadPhoto")}
+                </span>
                 <input
                   type="file"
                   id="avatarInput"
@@ -183,7 +180,7 @@ export const SettingUser = ({ onCancel }) => {
             <div className={css.flexContainer1}>
               <div>
                 <div className={css.genderWrap}>
-                  <h2 className={css.title}>Your gender identity</h2>
+                  <h2 className={css.title}>{t("modals.gender")}</h2>
                   <div className={css.genderRadioWrap}>
                     <label
                       className={css.genderLabelWrap}
@@ -195,7 +192,7 @@ export const SettingUser = ({ onCancel }) => {
                         value="woman"
                         id="pickedWoman"
                       />
-                      <p className={css.genderText}>Woman</p>
+                      <p className={css.genderText}>{t("modals.woman")}</p>
                     </label>
                     <label className={css.genderLabelWrap} htmlFor="pickedMan">
                       <Field
@@ -204,7 +201,7 @@ export const SettingUser = ({ onCancel }) => {
                         value="man"
                         id="pickedMan"
                       />
-                      <p className={css.genderText}>Man</p>
+                      <p className={css.genderText}>{t("modals.man")}</p>
                     </label>
                   </div>
                 </div>
@@ -214,7 +211,7 @@ export const SettingUser = ({ onCancel }) => {
                     className={css.credentialsLabel}
                     htmlFor={usernameFieldId}
                   >
-                    Your name
+                    {t("modals.name")}
                   </label>
                   <Field
                     className={css.credentialsInput}
@@ -227,7 +224,7 @@ export const SettingUser = ({ onCancel }) => {
                     className={css.credentialsLabel}
                     htmlFor={emailFieldId}
                   >
-                    E-mail
+                    {t("modals.email")}
                   </label>
                   <Field
                     className={css.credentialsInput}
@@ -239,13 +236,13 @@ export const SettingUser = ({ onCancel }) => {
               </div>
 
               <div className={css.passwordWrap}>
-                <h2 className={css.title}>Password</h2>
+                <h2 className={css.title}>{t("modals.pass")}</h2>
 
                 <label
                   className={css.passwordLabel}
                   htmlFor={outdatedPasswordFieldId}
                 >
-                  Outdated password:
+                  {t("modals.outDatePass")}:
                 </label>
                 <div
                   className={`${css.passwordInputWrap} ${
@@ -258,7 +255,7 @@ export const SettingUser = ({ onCancel }) => {
                     className={css.passwordInput}
                     type={showPassword.outdatedPassword ? "text" : "password"}
                     name="outdatedPassword"
-                    placeholder="Password"
+                    placeholder={t("modals.outDatePass")}
                     id={outdatedPasswordFieldId}
                   />
                   <button
@@ -283,7 +280,7 @@ export const SettingUser = ({ onCancel }) => {
                   className={css.passwordLabel}
                   htmlFor={newPasswordFieldId}
                 >
-                  New password:
+                  {t("modals.newPass")}:
                 </label>
                 <div
                   className={`${css.passwordInputWrap} ${
@@ -296,7 +293,7 @@ export const SettingUser = ({ onCancel }) => {
                     className={css.passwordInput}
                     type={showPassword.newPassword ? "text" : "password"}
                     name="newPassword"
-                    placeholder="Password"
+                    placeholder={t("modals.newPass")}
                     id={newPasswordFieldId}
                   />
                   <button
@@ -321,7 +318,7 @@ export const SettingUser = ({ onCancel }) => {
                   className={css.passwordLabel}
                   htmlFor={repeatNewPasswordFieldId}
                 >
-                  Repeat new password:
+                  {t("modals.repNewPass")}:
                 </label>
                 <div
                   className={`${css.passwordInputWrap} ${
@@ -334,7 +331,7 @@ export const SettingUser = ({ onCancel }) => {
                     className={css.passwordInput}
                     type={showPassword.repeatNewPassword ? "text" : "password"}
                     name="repeatNewPassword"
-                    placeholder="Password"
+                    placeholder={t("modals.repNewPass")}
                     id={repeatNewPasswordFieldId}
                   />
                   <button
@@ -360,7 +357,7 @@ export const SettingUser = ({ onCancel }) => {
             </div>
 
             <button className={css.saveBtn} type="submit">
-              Save
+              {t("modals.save")}
             </button>
           </Form>
         )}

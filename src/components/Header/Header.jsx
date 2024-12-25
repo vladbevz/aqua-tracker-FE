@@ -3,7 +3,7 @@ import { Logo } from "../Logo/Logo.jsx";
 import { UserAuth } from "../UserAuth/UserAuth.jsx";
 import "../../index.css";
 
-export const Header = () => {
+export default function Header() {
   return (
     <div className={css.container}>
       <header className={css.header}>
@@ -12,4 +12,4 @@ export const Header = () => {
       </header>
     </div>
   );
-};
+}

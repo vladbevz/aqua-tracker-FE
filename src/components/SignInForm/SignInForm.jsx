@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import css from "./SignInForm.module.css";
+import { useTranslation } from "react-i18next";
 
 const initialValues = {
   email: "",
@@ -15,13 +16,16 @@ const initialValues = {
 };
 
 export const SignInForm = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleSubmit = async (values, actions) => {
     try {
       const response = await dispatch(logIn(values)).unwrap();
 
       toast.success(
-        `Welcome back, ${response.data.user.name || response.data.user.email}!`,
+        `${t("signInForm.successMessage")} ${
+          response.data.user.name || response.data.user.email
+        }`,
         {
           position: "top-center",
         }
@@ -29,12 +33,13 @@ export const SignInForm = () => {
 
       actions.resetForm();
     } catch (error) {
-      if (error === "Bad Request") {
-        toast.error("Invalid email format. Please check your input.", {
+      console.log(error);
+      if (error === "Email or password invalid") {
+        toast.error(t("signInForm.invalidEmail"), {
           position: "top-center",
         });
       } else {
-        toast.error(error, {
+        toast.error(t("signInForm.serverError"), {
           position: "top-center",
         });
       }
@@ -48,22 +53,22 @@ export const SignInForm = () => {
 
   const inputSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Invalid email format")
+      .email(t("signInForm.emailError"))
       .matches(
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        "Invalid email format"
+        t("signInForm.emailError")
       )
-      .required("Email is required"),
+      .required(t("signInForm.emailError")),
 
     password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .max(20, "Password must be at most 20 characters")
-      .required("Password is required"),
+      .min(8, t("signInForm.passwordError"))
+      .max(20, t("signInForm.passwordError"))
+      .required(t("signInForm.passwordError")),
   });
 
   return (
     <div className={css.container}>
-      <h3 className={css.title}>Sign In</h3>
+      <h3 className={css.title}>{t("signInForm.title")}</h3>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -72,11 +77,11 @@ export const SignInForm = () => {
         {({ errors, touched }) => (
           <Form className={css.form} autoComplete="off">
             <label className={css.label}>
-              Enter your email
+              {t("signInForm.emailLabel")}
               <Field
                 type="email"
                 name="email"
-                placeholder="E-mail"
+                placeholder={t("signInForm.emailPlaceholder")}
                 className={`${css.field} ${
                   errors.email && touched.email ? css.errorField : ""
                 }`}
@@ -88,11 +93,11 @@ export const SignInForm = () => {
               />
             </label>
             <label className={css.label}>
-              Enter your password
+              {t("signInForm.passwordLabel")}
               <Field
                 type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder="Password"
+                placeholder={t("signInForm.passwordPlaceholder")}
                 className={`${css.field} ${
                   errors.password && touched.password ? css.errorField : ""
                 }`}
@@ -115,10 +120,10 @@ export const SignInForm = () => {
               />
             </label>
             <button className={css.btn} type="submit">
-              Sign In
+              {t("signInForm.signInButton")}
             </button>
             <Link to="/signup" className={css.link}>
-              Sign Up
+              {t("signInForm.signUpLink")}
             </Link>
           </Form>
         )}

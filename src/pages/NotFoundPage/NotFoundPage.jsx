@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import css from "./NotFoundPage.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function NotFoundPage() {
+  const { t } = useTranslation();
   return (
     <div className={css.container}>
       <h1 className={css.errorCode}>
@@ -14,9 +16,9 @@ export default function NotFoundPage() {
           />
         </span>
       </h1>
-      <h2 className={css.title}>The page you requested could not be found.</h2>
+      <h2 className={css.title}>{t("notFoundPage.title")}</h2>
       <button className={css.btn}>
-        <Link to="/">Back to home</Link>
+        <Link to="/">{t("notFoundPage.backToHome")}</Link>
       </button>
     </div>
   );
