@@ -88,7 +88,8 @@
     "passwordRequired": "Пароль є обов'язковим",
     "emailRequired": "Електронна пошта є обов'язковою",
     "passwordsMustMatch": "Паролі повинні співпадати",
-    "confirmPasswordRequired": "Підтвердження паролю є обов'язковим"
+    "confirmPasswordRequired": "Підтвердження паролю є обов'язковим",
+    "welcomeMessage": "Ласкаво просимо "
   },
 
   "signInForm": {

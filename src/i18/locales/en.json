@@ -88,7 +88,8 @@
     "passwordRequired": "Password is required",
     "emailRequired": "Email is required",
     "passwordsMustMatch": "Passwords must match",
-    "confirmPasswordRequired": "Confirm Password is required"
+    "confirmPasswordRequired": "Confirm Password is required",
+    "welcomeMessage": "Welcome "
   },
 
   "signInForm": {

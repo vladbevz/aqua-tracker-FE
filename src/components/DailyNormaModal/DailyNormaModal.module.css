@@ -191,7 +191,7 @@ input[type="number"] {
 }
 
 .saveButton:hover {
-  box-shadow: 0px 4px 14px 0px #407BFF8A;
+  box-shadow: 0px 4px 14px 0px #407bff8a;
 }
 
 @media screen and (max-width: 1439px) {
@@ -241,4 +241,9 @@ input[type="number"] {
     width: 256px;
     height: 36px;
   }
+}
+
+.saveButton:disabled {
+  background-color: #8f8f8f;
+  box-shadow: 0px 4px 14px 0px #8f8f8f;
 }

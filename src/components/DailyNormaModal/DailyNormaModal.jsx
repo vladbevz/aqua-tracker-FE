@@ -7,6 +7,7 @@ import css from "./DailyNormaModal.module.css";
 import "../../index.css";
 import { updateUser } from "../../redux/auth/operations";
 import { useTranslation } from "react-i18next";
+
 export const DailyNormaModal = ({ closeModal }) => {
   const { daylyNorm } = useSelector(selectUser);
   const { t } = useTranslation();
@@ -16,9 +17,9 @@ export const DailyNormaModal = ({ closeModal }) => {
   const [activityTime, setActivityTime] = useState("");
   const [waterAmount, setWaterAmount] = useState(daylyNorm);
   const [woterAmountForCalculet, setWoterAmountForCalculet] = useState(0);
+  const [isChanged, setIsChanged] = useState(false);
 
   const toMilliliters = (liters) => liters * 1000;
-
   const toLiters = (milliliters) => milliliters / 1000;
 
   const calculateWaterRate = () => {
@@ -46,6 +47,7 @@ export const DailyNormaModal = ({ closeModal }) => {
   }, [gender, weight, activityTime]);
 
   const dispatch = useDispatch();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const water = parseFloat(waterAmount);
@@ -66,10 +68,13 @@ export const DailyNormaModal = ({ closeModal }) => {
     const value = parseFloat(e.target.value);
     if (!isNaN(value)) {
       setWaterAmount(toMilliliters(value));
+      setIsChanged(value !== toLiters(daylyNorm));
     } else {
       setWaterAmount("");
+      setIsChanged(false);
     }
   };
+
   return (
     <div className={css.modal}>
       <div className={css.head}>
@@ -89,14 +94,6 @@ export const DailyNormaModal = ({ closeModal }) => {
           <span className={css.normaSpan}> V=(M*0.04) + (T*0.6)</span>
         </li>
       </ul>
-
-      {/* <p className={css.explanation}>
-        <span className={css.explanation1}>*</span>
-        <strong>V</strong> is the volume of the water norm in liters per day,{" "}
-        <strong>M</strong> is your body weight, <strong>T</strong> is the time
-        of active sports, or another type of activity commensurate in terms of
-        loads (in the absence of these, you must set 0).
-      </p> */}
       <p className={css.explanation}>
         <span className={css.explanation1}>*</span>
         {t("modals.countVolume")}
@@ -168,13 +165,13 @@ export const DailyNormaModal = ({ closeModal }) => {
             name="dailyIntake"
             placeholder={t("modals.waterIn")}
             className={css.input}
-            defaultValue={toLiters(waterAmount)}
+            defaultValue={toLiters(waterAmount) || ""}
             onChange={handleWaterChange}
             min={0.5}
             step={0.01}
           />
         </label>
-        <button type="submit" className={css.saveButton}>
+        <button type="submit" className={css.saveButton} disabled={!isChanged}>
           {t("modals.save")}
         </button>
       </form>

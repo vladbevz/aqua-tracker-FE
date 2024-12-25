@@ -81,7 +81,7 @@
 .amount {
   display: flex;
   align-items: center;
-  min-width: 160px;
+  min-width: 164px;
 }
 
 .number {

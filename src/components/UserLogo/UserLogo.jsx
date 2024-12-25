@@ -15,11 +15,11 @@ const UserLogo = () => {
   const [activeModal, setActiveModal] = useState(null);
   const user = useSelector(selectUser);
   const toggleBackdrop = (e) => {
-    e.stopPropagation()
+    e.stopPropagation();
 
     setIsBackdropOpen((prev) => !prev);
   };
-  
+
   useEffect(() => {
     const handleOutterClick = (e) => {
       if (!e.target.closest(`.${css.profileDropdown}`)) {
@@ -60,7 +60,7 @@ const UserLogo = () => {
         ) : (
           <div className={css.fallbackAvatar}>{getFallbackAvatar()}</div>
         )}
-        <button className={css.arrowButton} >
+        <button className={css.arrowButton}>
           {isBackdropOpen ? (
             <IoIosArrowUp className={css.arrow} />
           ) : (

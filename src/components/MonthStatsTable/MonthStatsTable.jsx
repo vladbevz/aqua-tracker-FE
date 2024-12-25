@@ -29,15 +29,6 @@ export const MonthStatsTable = () => {
     dispatch(fetchTodayWater());
   }, [dispatch]);
 
-  // const getMonthData = (year, month) => {
-  //   dispatch(
-  //     fetchMonthWater({
-  //       year,
-  //       month,
-  //     })
-  //   );
-  // };
-
   useEffect(() => {
     dispatch(
       fetchMonthWater({
