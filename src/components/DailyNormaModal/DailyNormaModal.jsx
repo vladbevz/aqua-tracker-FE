@@ -13,7 +13,7 @@ export const DailyNormaModal = ({ closeModal }) => {
   const [gender, setGender] = useState("girl");
   const [weight, setWeight] = useState("");
   const [activityTime, setActivityTime] = useState("");
-  const [waterAmount, setWaterAmount] = useState(daylyNorm || 0);
+  const [waterAmount, setWaterAmount] = useState(daylyNorm);
   const [woterAmountForCalculet, setWoterAmountForCalculet] = useState(0);
 
   const toMilliliters = (liters) => liters * 1000;
@@ -168,7 +168,7 @@ export const DailyNormaModal = ({ closeModal }) => {
             name="dailyIntake"
             placeholder="Enter amount in liters"
             className={css.input}
-            value={waterAmount ? toLiters(waterAmount) : ""}
+            defaultValue={toLiters(waterAmount)}
             onChange={handleWaterChange}
             min={0.5}
             step={0.01}
