@@ -12,6 +12,7 @@ const initialState = {
   accessToken: null,
   isLoggedIn: false,
   isRefreshing: false,
+  isLoading: false,
   error: null,
 };
 
@@ -24,11 +25,15 @@ const authSlice = createSlice({
         state.user = action.payload.data.user;
         state.accessToken = action.payload.data.accessToken;
         state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.data.user;
         state.accessToken = action.payload.data.accessToken;
         state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
       })
       .addCase(logOut.fulfilled, () => {
         return initialState;
@@ -37,6 +42,7 @@ const authSlice = createSlice({
         state.user = action.payload.data.user;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+        state.error = null;
       })
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
@@ -46,15 +52,22 @@ const authSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.user = action.payload.data.user;
+        state.error = null;
       })
       .addMatcher(
-        isAnyOf(register.rejected, logIn.rejected),
+        isAnyOf(register.rejected, logIn.rejected, logOut.rejected),
         (state, action) => {
-          state.isLoggedIn = false;
+          state.isLoading = false;
           state.error = action.payload;
+        }
+      )
+      .addMatcher(
+        isAnyOf(register.pending, logIn.pending, logOut.pending),
+        (state) => {
+          state.isLoading = true;
+          state.error = null;
         }
       );
   },
 });
-
 export const authReducer = authSlice.reducer;

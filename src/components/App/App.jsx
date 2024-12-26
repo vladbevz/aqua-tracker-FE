@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { Loader } from "../Loader/Loader.jsx";
 import { refreshUser } from "../../redux/auth/operations.js";
-import { selectIsRefreshing } from "../../redux/auth/selectors.js";
+import {
+  selectIsLoading,
+  selectIsRefreshing,
+} from "../../redux/auth/selectors.js";
 import { RestrictedRoute } from "../RestrictedRoute/RestrictedRoute";
 import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
 import SharedLayout from "../SharedLayout/SharedLayout.jsx";
@@ -20,18 +23,19 @@ const NotFoundPage = lazy(() =>
 export const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
+  return isRefreshing || isLoading ? (
     <>
       <Loader />
     </>
   ) : (
     <SharedLayout>
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Toaster reverseOrder={false} />
         <Routes>
           <Route path="/" element={<WelcomePage />} />

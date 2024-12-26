@@ -5,3 +5,5 @@ export const selectUser = (state) => state.auth.user;
 export const selectIsRefreshing = (state) => state.auth.isRefreshing;
 
 export const selectDailyNorm = (state) => state.auth.user.daylyNorm;
+
+export const selectIsLoading = (state) => state.auth.isLoading;
