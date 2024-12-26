@@ -72,6 +72,10 @@ export const SettingUser = ({ onCancel }) => {
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
+      if (!file.type.startsWith("image/")) {
+        toast.error(t("validationMessages.onlyImagesAllowed"));
+        return;
+      }
       const previewUrl = URL.createObjectURL(file);
       setAvatarPreview(previewUrl);
 

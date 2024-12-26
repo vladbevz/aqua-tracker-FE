@@ -195,6 +195,7 @@
     "newPassword": "Пароль має бути не менше 8 символів!",
     "newPasswordRequired": "Новий пароль необхідний, якщо вказаний старий пароль!",
     "repeatNewPassword": "Паролі повинні співпадати!",
-    "repeatNewPasswordRequired": "Будь ласка, підтвердьте новий пароль!"
+    "repeatNewPasswordRequired": "Будь ласка, підтвердьте новий пароль!",
+    "onlyImagesAllowed": "Можна завантажувати лише зображення!"
   }
 }
