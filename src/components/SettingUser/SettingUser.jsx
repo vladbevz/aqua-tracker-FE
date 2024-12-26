@@ -155,7 +155,7 @@ export const SettingUser = ({ onCancel }) => {
         validationSchema={SettingSchema}
         enableReinitialize
       >
-        {({ setFieldValue, errors, touched }) => (
+        {({ errors, touched }) => (
           <Form>
             <div className={css.photoWrap}>
               <h2 className={css.title}>{t("modals.uploadPhoto")}</h2>
@@ -174,10 +174,7 @@ export const SettingUser = ({ onCancel }) => {
                   id="avatarInput"
                   className={css.avatarHiddenInput}
                   accept="image/*"
-                  onChange={(e) => {
-                    setFieldValue("avatar", e.target.files[0]);
-                    handleFileChange(e);
-                  }}
+                  onChange={handleFileChange}
                 />
               </div>
             </div>
