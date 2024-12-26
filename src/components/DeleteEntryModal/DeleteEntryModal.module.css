@@ -1,5 +1,5 @@
 .deleteEntryContainer {
-  background: #fff;
+  background-color: var(--primary-color-background);
   border-radius: 10px;
   padding: 32px 24px;
   width: 280px;
@@ -24,14 +24,14 @@
   font-weight: 500;
   font-size: 26px;
   line-height: 1.23077;
-  color: #2f2f2f;
+  color: var(--primary-color-black);
 }
 
 .closeBtn {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #407bff;
+  color: var(--primary-color-blue);
   display: flex;
   align-items: center;
 }
@@ -74,12 +74,15 @@
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
-  background: #e4e9f2;
-  color: #407bff;
+  background-color: var(--secondary-color-5);
+  color: var(--primary-color-blue);
   padding: 10px 30px 10px 30px;
 }
+
 .cancelBtn:hover {
-  background: #d0d8e9;
+  /* background-color: #d0d8e9; */
+  background-color: var(--secondary-color-6);
+  box-shadow: var(--box-shadow-hover);
 }
 
 .deleteEntryBtn {
@@ -89,22 +92,22 @@
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
-  background: #ef5050;
-  color: #ffff;
+  background-color: var(--secondary-color-2);
+  color: var(--primary-color-background);
   padding: 10px 30px 10px 30px;
   margin-right: 24px;
   width: 160px;
 }
 
-.deleteEntry:hover {
-  background: #ef5050;
+.deleteEntryBtn:hover {
+  box-shadow: var(--box-shadow-hover);
 }
 
 .closeBtn {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #407bff;
+  color: var(--primary-color-blue);
   top: 22px;
   right: 16px;
   padding: 0;

@@ -24,12 +24,14 @@
 .plusIcon {
   margin-right: 8px;
 }
+
 .loader {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50px;
 }
+
 .list {
   max-height: 188px;
   overflow-y: auto;

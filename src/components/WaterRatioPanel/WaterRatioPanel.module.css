@@ -1,7 +1,7 @@
 .container {
     margin-bottom: 16px;
     width: 280px;
-    background-color: #fff;
+    background-color: var(--primary-color-background);
 }
 
 .textBar {
@@ -23,11 +23,11 @@
     font-size: 16px;
     line-height: 125%;
     border: none;
-    box-shadow: 0px 4px 8px 0px #407BFF57;
+    box-shadow: var(--box-shadow-normal);
 }
 
 .addBtn:hover {
-    box-shadow: 0px 4px 14px 0px #407BFF8A;
+    box-shadow: var(--box-shadow-hover);
 }
 
 .imgBtn {
@@ -61,7 +61,7 @@
     top: 50%;
     width: 14px;
     height: 14px;
-    background: white;
+    background-color: var(--primary-color-background);
     border: 1px solid var(--primary-color-blue);
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -92,7 +92,7 @@
 
 .span {
     height: 8px;
-    border: 0.5px solid #D7E3FF;
+    border: 0.5px solid var(--secondary-color-5);
 }
 
 .holderBox {

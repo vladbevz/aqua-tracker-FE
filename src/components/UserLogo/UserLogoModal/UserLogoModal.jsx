@@ -2,7 +2,8 @@ import css from "./UserLogoModal.module.css";
 import { RiSettings3Line } from "react-icons/ri";
 import { TbLogout } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
-import LangSwitcher from "../../LangSwicher/LangSwitcher";
+import LangSwitcher from "../../LangSwicher/LangSwitcher.jsx";
+import ThemeToggleButton from "../../ThemeToggleButton/ThemeToggleButton.jsx";
 
 export const UserLogoModal = ({ onSettingsClick, onLogoutClick }) => {
   const { t } = useTranslation();
@@ -17,7 +18,10 @@ export const UserLogoModal = ({ onSettingsClick, onLogoutClick }) => {
           <TbLogout className={css.icons} />
           <p className={css.text}>{t("modals.logout")}</p>{" "}
         </button>
-        <LangSwitcher />
+        <div className={css.btnWrapper}>
+          <LangSwitcher />
+          <ThemeToggleButton />
+        </div>
       </div>
     </div>
   );

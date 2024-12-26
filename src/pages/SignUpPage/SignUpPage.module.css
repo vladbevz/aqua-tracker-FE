@@ -1,5 +1,5 @@
 .signUp {
-  background-image: url("/images/SignUp/mob-back-1x.png");
+  background-image: var(--signUp-mob-back-1x);
   background-size: cover;
   background-position: inherit;
   background-repeat: no-repeat;
@@ -11,6 +11,7 @@
 }
 
 .bottle {
+  content: var(--signUp-mob-bottle-1x);
   margin-left: auto;
   margin-right: auto;
   height: 210px;
@@ -20,23 +21,23 @@
 
 @media only screen and (min-resolution: 192dpi) {
   .signUp {
-    background-image: url("/images/SignUp/mob-back-2x.png");
+    background-image: var(--signUp-mob-back-2x);
   }
   .bottle {
-    content: url("/images/SignUp/mpb-bottle-2x.png");
+    content: var(--signUp-mob-bottle-2x);
   }
 }
 
 @media only screen and (min-width: 768px) {
   .signUp {
-    background-image: url("/images/SignUp/tab-back-1x.png");
+    background-image: var(--signUp-tab-back-1x);
 
     padding: 0 32px;
     display: block;
   }
 
   .bottle {
-    content: url("/images/SignUp/tab-bottle-1x.png");
+    content: var(--signUp-tab-bottle-1x);
     max-width: 734px;
     height: 548px;
     margin-left: 60px;
@@ -45,10 +46,10 @@
 
   @media only screen and (min-resolution: 192dpi) {
     .signUp {
-      background-image: url("/images/SignUp/tab-back-2x.png");
+      background-image: var(--signUp-tab-back-2x);
     }
     .bottle {
-      content: url("/images/SignUp/tab-bottle-wx.png");
+      content: var(--signUp-tab-bottle-2x);
     }
   }
 }
@@ -59,11 +60,11 @@
     margin-top: 0;
     padding-top: 40px;
     display: block;
-    background-image: url("/images/SignUp/lap-background-1x.png");
+    background-image: var(--signUp-desk-back-1x);
   }
 
   .bottle {
-    content: url("/images/SignUp/lap-bottle-1x.png");
+    content: var(--signUp-desk-bottle-1x);
     max-width: 916px;
     height: 680px;
     margin-top: -360px;
@@ -72,10 +73,10 @@
 
   @media only screen and (min-resolution: 192dpi) {
     .signUp {
-      background-image: url("/images/SignUp/lap-background-2x.png");
+      background-image: var(--signUp-desk-back-1x);
     }
     .bottle {
-      content: url("/images/SignUp/lap-bottle-2x.png");
+      content: var(--signUp-desk-bottle-2x);
     }
   }
 }
