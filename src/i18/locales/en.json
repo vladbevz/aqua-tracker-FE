@@ -195,6 +195,7 @@
     "newPassword": "Password must be at least 8 characters!",
     "newPasswordRequired": "New password is required if outdated password is provided!",
     "repeatNewPassword": "Passwords must match!",
-    "repeatNewPasswordRequired": "Please confirm your new password!"
+    "repeatNewPasswordRequired": "Please confirm your new password!",
+    "onlyImagesAllowed": "Only images can be uploaded!"
   }
 }
