@@ -1,7 +1,7 @@
 .signIn {
   height: 680px;
-  background-image: url("/images/SignIn/Mobile-Sign-In.png"),
-    url("/images/SignIn/Bottle/Bottle-Mob-Sign-In.png");
+  background-image: var(--signIn-mob-back-1x),
+    var(--signIn-mob-bottle-1x);
   background-size: cover, auto;
   background-position: center, center 360px;
   background-repeat: no-repeat, no-repeat;
@@ -14,8 +14,8 @@
 
 @media only screen and (min-width: 768px) {
   .signIn {
-    background-image: url("/images/SignIn/Bottle/Bottle-Tab-Sign-In.png"),
-      url("/images/SignIn/Tablet-Sign-In.png");
+    background-image: var(--signIn-tab-bottle-1x),
+      var(--signIn-tab-back-1x);
     background-size: 736px 548px, cover;
     background-position: 140px 10px, center;
     background-repeat: no-repeat, no-repeat;
@@ -25,8 +25,8 @@
 
   @media only screen and (min-resolution: 192dpi) {
     .signIn {
-      background-image: url("/images/SignIn/Bottle/Bottle-Tab-Sign-In-x2.png"),
-        url("/images/SignIn/Tablet-Sign-In-x2.png");
+      background-image: var(--signIn-tab-bottle-2x),
+          var(--signIn-tab-back-2x);
     }
   }
 }
@@ -35,8 +35,8 @@
   .signIn {
     height: 800px;
     margin-top: 0;
-    background-image: url("/images/SignIn/Bottle/Bottle-Desc-Sign-In.png"),
-      url("/images/SignIn/Desc-Sign-In.png");
+    background-image: var(--signIn-desk-bottle-1x),
+        var(--signIn-desk-back-1x);
     background-size: 916px 680px, cover;
     background-position: 10px 50px, center;
     background-repeat: no-repeat, no-repeat;
@@ -46,8 +46,8 @@
 
   @media only screen and (min-resolution: 192dpi) {
     .signIn {
-      background-image: url("/images/SignIn/Bottle/Bottle-Desc-Sign-In-x2.png"),
-        url("/images/SignIn/Desc-Sign-In-x2.png");
+      background-image: var(--signIn-desk-bottle-2x),
+          var(--signIn-desk-back-2x);
     }
   }
 }

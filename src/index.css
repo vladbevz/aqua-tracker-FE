@@ -6,6 +6,7 @@
   --font-medium: "Roboto Medium", sans-serif; /* 500 */
   --font-bold: "Roboto Bold", sans-serif; /* 700 */
 
+  --primary-color-background: #FFFFFF;
   --primary-color-black: #2f2f2f;
   --primary-color-white: #fff;
   --primary-color-blue: #407bff;
@@ -14,6 +15,131 @@
   --secondary-color-3: #9ebbff;
   --secondary-color-4: #ff9d43;
   --secondary-color-5: #d7e3ff;
+  --secondary-color-6: #C6D7FF;
+  --secondary-color-7: #F5F5F5;
+  --secondary-color-8: #8BAEFF;
+  --box-shadow-counter-btn: 0px 2px 4px 0px #407BFF33;
+  --box-shadow-normal: 0px 4px 8px 0px #407BFF57;
+  --box-shadow-hover: 0px 4px 14px 0px #407BFF8A;
+  --modal-wrap-background-color: #000000CC;
+
+  --home-mob-bottle-1x: url("/images/home/mob-home-bottle-1x.png");
+  --home-mob-bottle-2x: url("/images/home/mob-home-bottle-2x.png");
+  --home-tab-bottle-1x: url("/images/home/tab-home-bottle-1x.png");
+  --home-tab-bottle-2x: url("/images/home/tab-home-bottle-2x.png");
+  --home-desk-bottle-1x: url("/images/home/desk-home-bottle-1x.png");
+  --home-desk-bottle-2x: url("/images/home/desk-home-bottle-2x.png");
+  --home-mob-back-1x: url("/images/home/mob-home-back-1x.png");
+  --home-mob-back-2x: url("/images/home/mob-home-back-2x.png");
+  --home-tab-back-1x: url("/images/home/tab-home-back-1x.png");
+  --home-tab-back-2x: url("/images/home/tab-home-back-2x.png");
+  --home-desk-back-1x: url("/images/home/desk-home-back-1x.png");
+  --home-desk-back-2x: url("/images/home/desk-home-back-2x.png");
+
+  --signIn-mob-bottle-1x: url("/images/SignIn/Bottle/Bottle-Mob-Sign-In.png");
+  --signIn-mob-bottle-2x: url("/images/SignIn/Bottle/Bottle-Mob-Sign-In-x2.png");
+  --signIn-tab-bottle-1x: url("/images/SignIn/Bottle/Bottle-Tab-Sign-In.png");
+  --signIn-tab-bottle-2x: url("/images/SignIn/Bottle/Bottle-Tab-Sign-In-x2.png");
+  --signIn-desk-bottle-1x: url("/images/SignIn/Bottle/Bottle-Desc-Sign-In.png");
+  --signIn-desk-bottle-2x: url("/images/SignIn/Bottle/Bottle-Desc-Sign-In-x2.png");
+  --signIn-mob-back-1x: url("/images/SignIn/Mobile-Sign-In.png");
+  --signIn-mob-back-2x: url("/images/SignIn/Mobile-Sign-In-x2.png");
+  --signIn-tab-back-1x: url("/images/SignIn/Tablet-Sign-In.png");
+  --signIn-tab-back-2x: url("/images/SignIn/Tablet-Sign-In-x2.png");
+  --signIn-desk-back-1x: url("/images/SignIn/Desc-Sign-In.png");
+  --signIn-desk-back-2x: url("/images/SignIn/Desc-Sign-In-x2.png");
+
+  --signUp-mob-bottle-1x: url("/images/SignUp/mob-bottle-1x.png");
+  --signUp-mob-bottle-2x: url("/images/SignUp/mpb-bottle-2x.png");
+  --signUp-tab-bottle-1x: url("/images/SignUp/tab-bottle-1x.png");
+  --signUp-tab-bottle-2x: url("/images/SignUp/tab-bottle-wx.png");
+  --signUp-desk-bottle-1x: url("/images/SignUp/lap-bottle-1x.png");
+  --signUp-desk-bottle-2x: url("/images/SignUp/lap-bottle-2x.png");
+  --signUp-mob-back-1x: url("/images/SignUp/mob-back-1x.png");
+  --signUp-mob-back-2x: url("/images/SignUp/mob-back-2x.png");
+  --signUp-tab-back-1x: url("/images/SignUp/tab-back-1x.png");
+  --signUp-tab-back-2x: url("/images/SignUp/tab-back-2x.png");
+  --signUp-desk-back-1x: url("/images/SignUp/lap-background-1x.png");
+  --signUp-desk-back-2x: url("/images/SignUp/lap-background-2x.png");
+
+  --welcome-mob-back-1x: url("/images/MainPage/mob-1x.png");
+  --welcome-mob-back-2x: url("/images/MainPage/mob-2x.png");
+  --welcome-tab-back-1x: url("/images/MainPage/tab-1x.png");
+  --welcome-tab-back-2x: url("/images/MainPage/tab-2x.png");
+  --welcome-desk-back-1x: url("/images/MainPage/desk-1x.png");
+  --welcome-desk-back-2x: url("/images/MainPage/desk-2x.png");
+}
+
+body.light {
+  background-color: var(--primary-color-background);
+  color: var(--primary-color-black);
+}
+
+body.dark {
+  --primary-color-background: #1C1D26;
+  --primary-color-black: #D5DFF5;
+  --primary-color-white: #2F2F2F;
+  --primary-color-blue: #5082F2;
+  --secondary-color-1: #1F2438;
+  --secondary-color-2: #F16161;
+  --secondary-color-3: #2F3875;
+  --secondary-color-4: #FFA756;
+  --secondary-color-5: #2A3052;
+  --secondary-color-6: #272E59;
+  --secondary-color-7: #1B1B21;
+  --box-shadow-counter-btn: 0px 2px 4px 0px #00000033;
+  --box-shadow-normal: 0px 4px 8px 0px #00000057;
+  --box-shadow-hover: 0px 4px 14px 0px #0000008A;
+  --modal-wrap-background-color: #000000CC;
+
+  background-color: var(--primary-color-background);
+  color: var(--primary-color-black);
+
+  --home-mob-bottle-1x: url("/images/home/dark/mob-home-bottle-dark-1x.png");
+  --home-mob-bottle-2x: url("/images/home/dark/mob-home-bottle-dark-2x.png");
+  --home-tab-bottle-1x: url("/images/home/dark/tab-home-bottle-dark-1x.png");
+  --home-tab-bottle-2x: url("/images/home/dark/tab-home-bottle-dark-2x.png");
+  --home-desk-bottle-1x: url("/images/home/dark/desk-home-bottle-dark-1x.png");
+  --home-desk-bottle-2x: url("/images/home/dark/desk-home-bottle-dark-2x.png");
+  --home-mob-back-1x: url("/images/home/dark/mob-home-back-dark-1x.png");
+  --home-mob-back-2x: url("/images/home/dark/mob-home-back-2x.png");
+  --home-tab-back-1x: url("/images/home/dark/tab-home-back-1x.png");
+  --home-tab-back-2x: url("/images/home/dark/tab-home-back-2x.png");
+  --home-desk-back-1x: url("/images/home/dark/desk-home-back-1x.png");
+  --home-desk-back-2x: url("/images/home/dark/desk-home-back-2x.png");
+
+  --signIn-mob-bottle-1x: url("/images/SignIn/dark/mob-sign-bottle-dark-1x.png");
+  --signIn-mob-bottle-2x: url("/images/SignIn/dark/mob-sign-bottle-dark-2x.png");
+  --signIn-tab-bottle-1x: url("/images/SignIn/dark/tab-sign-bottle-dark-1x.png");
+  --signIn-tab-bottle-2x: url("/images/SignIn/dark/tab-sign-bottle-dark-2x.png");
+  --signIn-desk-bottle-1x: url("/images/SignIn/dark/desk-sign-bottle-dark-1x.png");
+  --signIn-desk-bottle-2x: url("/images/SignIn/dark/desk-sign-bottle-dark-2x.png");
+  --signIn-mob-back-1x: url("/images/SignIn/dark/mob-sign-back-dark-1x.png");
+  --signIn-mob-back-2x: url("/images/SignIn/dark/mob-sign-back-dark-2x.png");
+  --signIn-tab-back-1x: url("/images/SignIn/dark/tab-sign-back-dark-1x.png");
+  --signIn-tab-back-2x: url("/images/SignIn/dark/tab-sign-back-dark-2x.png");
+  --signIn-desk-back-1x: url("/images/SignIn/dark/desk-sign-back-dark-1x.png");
+  --signIn-desk-back-2x: url("/images/SignIn/dark/desk-sign-back-dark-2x.png");
+
+  --signUp-mob-bottle-1x: url("/images/SignIn/dark/mob-sign-bottle-dark-1x.png");
+  --signUp-mob-bottle-2x: url("/images/SignIn/dark/mob-sign-bottle-dark-2x.png");
+  --signUp-tab-bottle-1x: url("/images/SignIn/dark/tab-sign-bottle-dark-1x.png");
+  --signUp-tab-bottle-2x: url("/images/SignIn/dark/tab-sign-bottle-dark-2x.png");
+  --signUp-desk-bottle-1x: url("/images/SignIn/dark/desk-sign-bottle-dark-1x.png");
+  --signUp-desk-bottle-2x: url("/images/SignIn/dark/desk-sign-bottle-dark-2x.png");
+  --signUp-mob-back-1x: url("/images/SignIn/dark/mob-sign-back-dark-1x.png");
+  --signUp-mob-back-2x: url("/images/SignIn/dark/mob-sign-back-dark-2x.png");
+  --signUp-tab-back-1x: url("/images/SignIn/dark/tab-sign-back-dark-1x.png");
+  --signUp-tab-back-2x: url("/images/SignIn/dark/tab-sign-back-dark-2x.png");
+  --signUp-desk-back-1x: url("/images/SignIn/dark/desk-sign-back-dark-1x.png");
+  --signUp-desk-back-2x: url("/images/SignIn/dark/desk-sign-back-dark-2x.png");
+
+  --welcome-mob-back-1x: url("/images/MainPage/dark/mob-dark-1x.png");
+  --welcome-mob-back-2x: url("/images/MainPage/dark/mob-dark-2x.png");
+  --welcome-tab-back-1x: url("/images/MainPage/dark/tab-dark-1x.png");
+  --welcome-tab-back-2x: url("/images/MainPage/dark/tab-dark-2x.png");
+  --welcome-desk-back-1x: url("/images/MainPage/dark/desk-dark-1x.png");
+  --welcome-desk-back-2x: url("/images/MainPage/dark/desk-dark-2x.png");
 }
 
 .container {

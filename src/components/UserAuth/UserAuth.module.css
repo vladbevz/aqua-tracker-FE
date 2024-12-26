@@ -4,19 +4,22 @@
   justify-content: center;
   gap: 8px;
 }
+
 .link {
   font-size: 16px;
   font-weight: 400;
-  color: #407bff;
+  color: var(--primary-color-blue);
 }
+
 .avatar {
   width: 28px;
   height: 28px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px;
-  color: #2f2f2f;
+  color: var(--primary-color-black);
 }
+
 .link:hover {
   color: var(--secondary-color-4);
 }

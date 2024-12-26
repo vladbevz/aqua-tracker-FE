@@ -21,12 +21,12 @@
 .username {
   font-size: 16px;
   font-weight: 500;
-  color: #333;
+  color: var(--primary-color-black);
 }
 
 .arrow {
   font-size: 18px;
-  color: #407bff;
+  color: var(--primary-color-blue);
   padding: 0;
 }
 .arrowButton {
@@ -38,7 +38,7 @@
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  color: #407bff;
+  color: var(--primary-color-blue);
 }
 .modalBackdrop {
   position: fixed;

@@ -8,7 +8,7 @@ input {
   width: 280px;
   max-height: 85vh;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: var(--primary-color-background);
 }
 
 .head {
@@ -23,7 +23,7 @@ input {
   font-weight: 500;
   font-size: 26px;
   line-height: 1.23077;
-  color: #2f2f2f;
+  color: var(--primary-color-black);
 }
 
 .closeBtn {
@@ -37,7 +37,7 @@ input {
 .closeBtnIcon {
   width: 24px;
   height: 24px;
-  color: #3366ff;
+  color: var(--primary-color-blue);
 }
 
 .flex {
@@ -45,9 +45,10 @@ input {
   align-items: center;
   border-radius: 10px;
   padding: 8px 24px;
+  margin-bottom: 24px;
   width: 254px;
   height: 52px;
-  background: #ecf2ff;
+  background: var(--secondary-color-1);
 }
 
 .amountBox {
@@ -68,7 +69,7 @@ input {
   font-weight: 400;
   font-size: 18px;
   line-height: 1.33333;
-  color: #407bff;
+  color: var(--primary-color-blue);
 }
 
 .time {
@@ -76,7 +77,7 @@ input {
   font-weight: 400;
   font-size: 12px;
   line-height: 2;
-  color: #2f2f2f;
+  color: var(--primary-color-black);
 }
 
 .subtitle {
@@ -84,7 +85,7 @@ input {
   font-weight: 500;
   font-size: 18px;
   line-height: 1.11111;
-  color: #2f2f2f;
+  color: var(--primary-color-black);
   margin-bottom: 16px;
 }
 
@@ -93,7 +94,7 @@ input {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;
-  color: #2f2f2f;
+  color: var(--primary-color-black);
   margin-bottom: 12px;
 }
 
@@ -106,20 +107,20 @@ input {
 }
 
 .counterBtn {
-  border: 1px solid #9ebbff;
+  border: 1px solid var(--secondary-color-3);
   border-radius: 30px;
   padding: 10px;
   width: 44px;
   height: 44px;
   box-shadow: 0 2px 4px 0 rgba(64, 123, 255, 0.2);
-  background: #fff;
+  background: var(--primary-color-background);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .counterBtnIcon {
-  color: #3366ff;
+  color: var(--primary-color-blue);
   width: 24px;
   height: 24px;
 }
@@ -129,14 +130,14 @@ input {
   padding: 6px 10px;
   width: 92px;
   height: 36px;
-  background: #d7e3ff;
+  background: var(--secondary-color-5);
   border: none;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 1.33333;
   text-align: center;
-  color: #407bff;
+  color: var(--primary-color-blue);
 }
 
 .label {
@@ -144,14 +145,14 @@ input {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;
-  color: #2f2f2f;
+  color: var(--primary-color-black);
   display: flex;
   flex-direction: column;
 }
 
 .inputTime {
   margin-top: 12px;
-  border: 1px solid #d7e3ff;
+  border: 1px solid var(--secondary-color-5);
   border-radius: 6px;
   padding: 12px 10px;
   width: 120px;
@@ -160,8 +161,9 @@ input {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;
-  color: #407bff;
+  color: var(--primary-color-blue);
   cursor: pointer;
+  background-color: var(--primary-color-background);
 }
 
 .inputTime::-webkit-calendar-picker-indicator {
@@ -175,13 +177,13 @@ input {
   font-weight: 500;
   font-size: 18px;
   line-height: 1.11111;
-  color: #2f2f2f;
+  color: var(--primary-color-black);
   margin-top: 24px;
   margin-bottom: 16px;
 }
 
 .inputValue {
-  border: 1px solid #d7e3ff;
+  border: 1px solid var(--secondary-color-5);
   border-radius: 6px;
   padding: 12px 10px;
   width: 120px;
@@ -190,7 +192,8 @@ input {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;
-  color: #407bff;
+  color: var(--primary-color-blue);
+  background-color: var(--primary-color-background);
 }
 
 .inputValue::placeholder {
@@ -198,7 +201,7 @@ input {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;
-  color: #407bff;
+  color: var(--primary-color-blue);
 }
 
 .containerBottom {
@@ -212,7 +215,7 @@ input {
   font-size: 18px;
   line-height: 1.33333;
   text-align: center;
-  color: #407bff;
+  color: var(--primary-color-blue);
 }
 
 .saveBtn {
@@ -220,14 +223,14 @@ input {
   padding: 8px 30px;
   width: 256px;
   height: 36px;
-  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
-  background: #407bff;
+  box-shadow: var(--box-shadow-normal);
+  background-color: var(--primary-color-blue);
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.25;
   text-align: center;
-  color: #fff;
+  color: var(--primary-color-background);
   border: none;
 }
 
