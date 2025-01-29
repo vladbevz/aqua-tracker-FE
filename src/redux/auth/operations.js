@@ -2,7 +2,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL = "https://aqua-tracker-be.onrender.com";
+const URL = "https://aqua-tracker-be-8vv2.onrender.com";
 
 // Utility to add JWT
 const setAuthHeader = (accessToken) => {
